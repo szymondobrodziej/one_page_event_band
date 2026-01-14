@@ -10,7 +10,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-20 md:py-32 bg-[#1a1a2e]">
+    <section id="faq" className="py-16 md:py-32 bg-[#1a1a2e]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -18,10 +18,10 @@ export function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
-          <h2 className="section-heading">{faqContent.headline}</h2>
-          <p className="section-subheading mx-auto">{faqContent.lead}</p>
+          <h2 className="section-heading text-2xl md:text-4xl lg:text-5xl">{faqContent.headline}</h2>
+          <p className="section-subheading mx-auto text-base md:text-xl">{faqContent.lead}</p>
         </motion.div>
 
         {/* FAQ Items */}

@@ -29,7 +29,7 @@ export function Gallery() {
   };
 
   return (
-    <section id="gallery" className="py-20 md:py-32 bg-[#0f0f1a]">
+    <section id="gallery" className="py-16 md:py-32 bg-[#0f0f1a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -37,10 +37,10 @@ export function Gallery() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
-          <h2 className="section-heading">Galeria z realizacji</h2>
-          <p className="section-subheading mx-auto">
+          <h2 className="section-heading text-2xl md:text-4xl lg:text-5xl">Galeria z realizacji</h2>
+          <p className="section-subheading mx-auto text-base md:text-xl">
             Scena, światła, energia — zobacz, jak to wygląda na żywo.
           </p>
         </motion.div>
@@ -77,7 +77,7 @@ export function Gallery() {
               <div
                 key={index}
                 onClick={() => setSelectedImage(index)}
-                className="flex-shrink-0 w-72 md:w-80 aspect-[4/3] rounded-xl overflow-hidden relative group cursor-pointer snap-start"
+                className="flex-shrink-0 w-64 sm:w-72 md:w-80 aspect-[4/3] rounded-xl overflow-hidden relative group cursor-pointer snap-start"
               >
                 <Image
                   src={image.src}

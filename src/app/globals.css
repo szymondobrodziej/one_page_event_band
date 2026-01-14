@@ -181,11 +181,20 @@ select.form-input {
   background-repeat: no-repeat;
   background-position: right 1rem center;
   padding-right: 2.5rem;
+  cursor: pointer;
 }
 
 select.form-input option {
   background-color: #1a1a2e;
   color: white;
+  padding: 12px 16px;
+}
+
+select.form-input option:hover,
+select.form-input option:focus,
+select.form-input option:checked {
+  background-color: #c9a227;
+  color: #1a1a2e;
 }
 
 /* Dark DatePicker */
@@ -196,8 +205,14 @@ select.form-input option {
 .react-datepicker-popper {
   z-index: 50 !important;
   width: 100% !important;
-  max-width: 23rem !important;
+  max-width: 20rem !important;
   padding-top: 8px !important;
+}
+
+@media (min-width: 640px) {
+  .react-datepicker-popper {
+    max-width: 23rem !important;
+  }
 }
 
 .dark-datepicker {

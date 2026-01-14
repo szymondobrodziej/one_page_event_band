@@ -37,12 +37,12 @@ export const trustContent = {
     company: "Firma XYZ",
   },
   logos: [
-    { name: "Firma 1", placeholder: true },
-    { name: "Firma 2", placeholder: true },
-    { name: "Firma 3", placeholder: true },
-    { name: "Firma 4", placeholder: true },
-    { name: "Firma 5", placeholder: true },
-    { name: "Firma 6", placeholder: true },
+    { name: "Deloitte", logo: "/images/logos/deloitte.svg" },
+    { name: "PWC", logo: "/images/logos/pwc.svg" },
+    { name: "KPMG", logo: "/images/logos/kpmg.svg" },
+    { name: "McKinsey", logo: "/images/logos/mckinsey.svg" },
+    { name: "Accenture", logo: "/images/logos/accenture.svg" },
+    { name: "EY", logo: "/images/logos/ey.svg" },
   ],
 };
 

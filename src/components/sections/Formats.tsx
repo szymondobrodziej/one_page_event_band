@@ -29,7 +29,7 @@ const archetypeStyles = {
 
 export function Formats() {
   return (
-    <section id="formats" className="py-20 md:py-32 bg-[#0f0f1a]">
+    <section id="formats" className="py-16 md:py-32 bg-[#0f0f1a]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -37,14 +37,14 @@ export function Formats() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <h2 className="section-heading">{formatsContent.headline}</h2>
-          <p className="section-subheading mx-auto">{formatsContent.description}</p>
+          <h2 className="section-heading text-2xl md:text-4xl lg:text-5xl">{formatsContent.headline}</h2>
+          <p className="section-subheading mx-auto text-base md:text-xl">{formatsContent.description}</p>
         </motion.div>
 
         {/* Format Cards */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
           {formatsContent.formats.map((format, index) => {
             const style = archetypeStyles[format.archetype as keyof typeof archetypeStyles];
             const Icon = style.icon;

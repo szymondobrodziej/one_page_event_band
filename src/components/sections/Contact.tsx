@@ -32,7 +32,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32 bg-[#0f0f1a]">
+    <section id="contact" className="py-16 md:py-32 bg-[#0f0f1a]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -40,10 +40,10 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
-          <h2 className="section-heading">{contactContent.headline}</h2>
-          <p className="section-subheading mx-auto">{contactContent.description}</p>
+          <h2 className="section-heading text-2xl md:text-4xl lg:text-5xl">{contactContent.headline}</h2>
+          <p className="section-subheading mx-auto text-base md:text-xl">{contactContent.description}</p>
         </motion.div>
 
         {isSubmitted ? (
@@ -132,9 +132,9 @@ export function Contact() {
             </div>
 
             {/* Submit */}
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p className="text-sm text-[#a0a0b0]">{contactContent.microcopy}</p>
-              <Button type="submit" variant="primary" size="lg">
+            <div className="mt-6 md:mt-8 flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
+              <p className="text-xs md:text-sm text-[#a0a0b0] text-center sm:text-left">{contactContent.microcopy}</p>
+              <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto">
                 Wyślij zapytanie
                 <Send className="w-5 h-5" />
               </Button>

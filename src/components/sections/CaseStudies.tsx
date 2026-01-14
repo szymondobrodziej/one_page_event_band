@@ -6,7 +6,7 @@ import { caseStudiesContent } from "@/data/content";
 
 export function CaseStudies() {
   return (
-    <section id="cases" className="py-20 md:py-32 bg-[#1a1a2e]">
+    <section id="cases" className="py-16 md:py-32 bg-[#1a1a2e]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -14,13 +14,13 @@ export function CaseStudies() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
-          <h2 className="section-heading">{caseStudiesContent.headline}</h2>
+          <h2 className="section-heading text-2xl md:text-4xl lg:text-5xl">{caseStudiesContent.headline}</h2>
         </motion.div>
 
         {/* Cases Grid */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
           {caseStudiesContent.cases.map((caseItem, index) => (
             <motion.div
               key={index}
