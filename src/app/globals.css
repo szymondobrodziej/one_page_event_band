@@ -1,0 +1,316 @@
+@import "tailwindcss";
+
+/* Brand Colors - Premium Event Band (Władca + Bohater) */
+:root {
+  /* Core palette */
+  --color-primary: #1a1a2e;      /* Deep navy - Władca */
+  --color-secondary: #c9a227;    /* Gold accent - Premium */
+  --color-accent: #e63946;       /* Energy red - Bohater */
+
+  /* Backgrounds */
+  --background: #0f0f1a;
+  --background-elevated: #1a1a2e;
+  --background-card: #242438;
+
+  /* Text */
+  --foreground: #f8f8f8;
+  --foreground-muted: #a0a0b0;
+
+  /* Borders */
+  --border: #2a2a3e;
+  --border-accent: #c9a227;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Custom colors for Tailwind */
+  --color-primary: #1a1a2e;
+  --color-secondary: #c9a227;
+  --color-accent: #e63946;
+  --color-muted: #a0a0b0;
+  --color-card: #242438;
+  --color-border: #2a2a3e;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-secondary);
+  border-radius: 4px;
+}
+
+/* Gold gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #c9a227 0%, #f4d03f 50%, #c9a227 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero gradient overlay */
+.hero-gradient {
+  background: linear-gradient(
+    180deg,
+    rgba(15, 15, 26, 0.7) 0%,
+    rgba(15, 15, 26, 0.85) 50%,
+    rgba(15, 15, 26, 0.95) 100%
+  );
+}
+
+/* Proof pill style */
+.proof-pill {
+  @apply inline-flex items-center gap-2 px-4 py-2 rounded-full
+         bg-white/5 border border-white/10 text-sm text-white/80
+         backdrop-blur-sm;
+}
+
+/* CTA Button primary */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4
+         bg-[#c9a227] text-[#1a1a2e] font-semibold rounded-lg
+         hover:bg-[#d4af37] transition-all duration-300
+         shadow-lg shadow-[#c9a227]/20 hover:shadow-[#c9a227]/40
+         hover:scale-105;
+}
+
+/* CTA Button secondary */
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4
+         bg-transparent border-2 border-white/20 text-white font-medium rounded-lg
+         hover:border-white/40 hover:bg-white/5 transition-all duration-300;
+}
+
+/* Section container */
+.section-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+}
+
+/* Section heading */
+.section-heading {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4;
+}
+
+.section-subheading {
+  @apply text-lg md:text-xl text-[#a0a0b0] max-w-3xl;
+}
+
+/* Card style */
+.card {
+  @apply bg-[#242438] border border-[#2a2a3e] rounded-2xl p-6 md:p-8
+         hover:border-[#c9a227]/30 transition-all duration-300;
+}
+
+/* Accordion styles */
+.accordion-item {
+  @apply border-b border-[#2a2a3e] last:border-b-0;
+}
+
+.accordion-trigger {
+  @apply flex justify-between items-center w-full py-5 text-left text-white
+         hover:text-[#c9a227] transition-colors;
+}
+
+.accordion-content {
+  @apply overflow-hidden text-[#a0a0b0] pb-5;
+}
+
+/* Form input */
+.form-input {
+  @apply w-full px-4 py-3 bg-[#1a1a2e] border border-[#2a2a3e] rounded-lg
+         text-white placeholder:text-[#a0a0b0]/50
+         focus:border-[#c9a227] focus:ring-1 focus:ring-[#c9a227] focus:outline-none
+         transition-colors;
+}
+
+/* Date picker styling */
+input[type="date"].form-input {
+  color-scheme: dark;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type="date"].form-input::-webkit-calendar-picker-indicator {
+  filter: invert(0.7) sepia(1) saturate(3) hue-rotate(10deg);
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+input[type="date"].form-input::-webkit-datetime-edit {
+  padding: 0;
+}
+
+input[type="date"].form-input::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+}
+
+input[type="date"].form-input::-webkit-datetime-edit-text,
+input[type="date"].form-input::-webkit-datetime-edit-month-field,
+input[type="date"].form-input::-webkit-datetime-edit-day-field,
+input[type="date"].form-input::-webkit-datetime-edit-year-field {
+  color: white;
+}
+
+/* Select styling */
+select.form-input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c9a227' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+select.form-input option {
+  background-color: #1a1a2e;
+  color: white;
+}
+
+/* Dark DatePicker */
+.react-datepicker-wrapper {
+  width: 100% !important;
+}
+
+.react-datepicker-popper {
+  z-index: 50 !important;
+  width: 100% !important;
+  max-width: 23rem !important;
+  padding-top: 8px !important;
+}
+
+.dark-datepicker {
+  background-color: #1a1a2e !important;
+  border: 1px solid #2a2a3e !important;
+  border-radius: 0.75rem !important;
+  font-family: inherit !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5) !important;
+  width: 100% !important;
+  max-width: 35rem !important;
+}
+
+.dark-datepicker .react-datepicker__month-container {
+  background-color: #1a1a2e !important;
+  width: 100% !important;
+}
+
+.dark-datepicker .react-datepicker__header {
+  background-color: #242438 !important;
+  border-bottom: 1px solid #2a2a3e !important;
+  border-radius: 0.75rem 0.75rem 0 0 !important;
+  padding: 16px 16px 12px !important;
+}
+
+.dark-datepicker .react-datepicker__current-month {
+  color: white !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 8px !important;
+}
+
+.dark-datepicker .react-datepicker__day-names {
+  display: flex !important;
+  justify-content: space-around !important;
+  padding: 0 8px !important;
+}
+
+.dark-datepicker .react-datepicker__day-name {
+  color: #a0a0b0 !important;
+  font-size: 0.875rem !important;
+  width: 2.5rem !important;
+  line-height: 2.5rem !important;
+  margin: 0 !important;
+}
+
+.dark-datepicker .react-datepicker__month {
+  padding: 8px 8px 16px !important;
+  margin: 0 !important;
+}
+
+.dark-datepicker .react-datepicker__week {
+  display: flex !important;
+  justify-content: space-around !important;
+}
+
+.dark-datepicker .react-datepicker__day {
+  color: white !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.95rem !important;
+  width: 2.5rem !important;
+  line-height: 2.5rem !important;
+  margin: 2px 0 !important;
+  transition: all 0.15s ease !important;
+}
+
+.dark-datepicker .react-datepicker__day:hover {
+  background-color: #c9a227 !important;
+  color: #1a1a2e !important;
+}
+
+.dark-datepicker .react-datepicker__day--selected,
+.dark-datepicker .react-datepicker__day--keyboard-selected {
+  background-color: #c9a227 !important;
+  color: #1a1a2e !important;
+  font-weight: 600 !important;
+}
+
+.dark-datepicker .react-datepicker__day--today {
+  border: 2px solid #c9a227 !important;
+  background-color: transparent !important;
+  color: #c9a227 !important;
+  font-weight: 600 !important;
+}
+
+.dark-datepicker .react-datepicker__day--today.react-datepicker__day--selected {
+  background-color: #c9a227 !important;
+  color: #1a1a2e !important;
+  border: none !important;
+}
+
+.dark-datepicker .react-datepicker__day--disabled {
+  color: #4a4a5a !important;
+}
+
+.dark-datepicker .react-datepicker__day--outside-month {
+  color: #4a4a5a !important;
+}
+
+.dark-datepicker .react-datepicker__navigation {
+  top: 16px !important;
+}
+
+.dark-datepicker .react-datepicker__navigation-icon::before {
+  border-color: #c9a227 !important;
+  border-width: 2px 2px 0 0 !important;
+}
+
+.dark-datepicker .react-datepicker__navigation:hover *::before {
+  border-color: white !important;
+}
+
+/* Sticky CTA mobile */
+.sticky-cta-mobile {
+  @apply fixed bottom-0 left-0 right-0 p-4 bg-[#0f0f1a]/95 backdrop-blur-lg
+         border-t border-[#2a2a3e] z-50 md:hidden;
+}
