@@ -1,101 +1,60 @@
-"use client";
-
-import { Instagram, Youtube, Facebook, Music2, Mail, Phone, MapPin } from "lucide-react";
-import { footerContent } from "@/data/content";
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Instagram,
-  Youtube,
-  Facebook,
-  Music2,
-};
+import { site } from "@/content/site";
+import { Lockup } from "../Logo";
 
 export function Footer() {
   return (
-    <footer className="bg-[#1a1a2e] border-t border-[#2a2a3e] pb-24 md:pb-0">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="col-span-2">
-            <a href="#" className="inline-block mb-3 md:mb-4">
-              <span className="text-xl md:text-2xl font-bold text-white">
-                <span className="text-[#c9a227]">Premium</span> Live Band
-              </span>
-            </a>
-            <p className="text-[#a0a0b0] mb-4 max-w-md text-sm md:text-base">
-              Profesjonalny zespół live na eventy firmowe. Pełna obsługa techniczna, faktura VAT, repertuar PL/EN.
-            </p>
-            {/* Social Links */}
-            <div className="flex gap-3 md:gap-4">
-              {footerContent.social.map((social) => {
-                const Icon = iconMap[social.icon];
-                return (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-[#c9a227] hover:bg-white/10 transition-colors"
-                    aria-label={social.name}
-                  >
-                    {Icon && <Icon className="w-4 h-4 md:w-5 md:h-5" />}
-                  </a>
-                );
-              })}
-            </div>
-          </div>
+    <footer className="border-t border-rule-ink bg-ink pt-[clamp(72px,8vw,120px)] pb-[calc(40px+env(safe-area-inset-bottom))] max-md:pb-32">
+      <div className="shell">
+        <p className="font-display text-[clamp(2.375rem,5.2vw,5rem)] font-light leading-[0.98] tracking-[-0.04em]">
+          <span className="block">Eleven musicians.</span>
+          <span className="block">One signature sound.</span>
+        </p>
 
-          {/* Contact */}
-          <div>
-            <h4 className="text-white font-semibold mb-3 md:mb-4 text-sm md:text-base">Kontakt</h4>
-            <div className="space-y-2 md:space-y-3">
-              <a
-                href={`mailto:${footerContent.contact.email}`}
-                className="flex items-center gap-2 text-[#a0a0b0] hover:text-[#c9a227] transition-colors text-xs md:text-sm"
-              >
-                <Mail className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0" />
-                <span className="break-all">{footerContent.contact.email}</span>
-              </a>
-              <a
-                href={`tel:${footerContent.contact.phone.replace(/\s/g, "")}`}
-                className="flex items-center gap-2 text-[#a0a0b0] hover:text-[#c9a227] transition-colors text-xs md:text-sm"
-              >
-                <Phone className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0" />
-                {footerContent.contact.phone}
-              </a>
-              <div className="flex items-start gap-2 text-[#a0a0b0] text-xs md:text-sm">
-                <MapPin className="w-3.5 h-3.5 md:w-4 md:h-4 flex-shrink-0 mt-0.5" />
-                <span>{footerContent.company.address}</span>
-              </div>
+        <div className="mt-[clamp(56px,7vw,104px)] flex flex-wrap items-start justify-between gap-x-18 gap-y-12">
+          <a href="#top" aria-label="Aurum Eleven, początek strony" className="text-ivory">
+            <Lockup width={56} size="md" />
+          </a>
+          <div className="flex flex-wrap gap-x-20 gap-y-10">
+            <div className="flex min-w-36 flex-col gap-3">
+              <h2 className="font-display text-[15px] font-medium">Kontakt</h2>
+              {site.email ? (
+                <a href={`mailto:${site.email}`} className="link-quiet text-[15px] text-ash no-underline">
+                  {site.email}
+                </a>
+              ) : (
+                <span className="text-[15px] text-ash">[e-mail firmowy]</span>
+              )}
+              {site.phone ? (
+                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="link-quiet text-[15px] text-ash no-underline">
+                  {site.phone}
+                </a>
+              ) : (
+                <span className="text-[15px] text-ash">[numer telefonu]</span>
+              )}
             </div>
-          </div>
-
-          {/* Legal */}
-          <div>
-            <h4 className="text-white font-semibold mb-3 md:mb-4 text-sm md:text-base">Informacje</h4>
-            <div className="space-y-2 md:space-y-3">
-              {footerContent.legal.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  className="block text-[#a0a0b0] hover:text-[#c9a227] transition-colors text-xs md:text-sm"
-                >
-                  {link.name}
+            <div className="flex min-w-36 flex-col gap-3">
+              <h2 className="font-display text-[15px] font-medium">Na bieżąco</h2>
+              {site.social.map((s) => (
+                <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className="link-quiet text-[15px] text-ash no-underline">
+                  {s.name}
                 </a>
               ))}
-              <p className="text-[#a0a0b0] text-xs md:text-sm">{footerContent.company.nip}</p>
+            </div>
+            <div className="flex min-w-36 flex-col gap-3">
+              <h2 className="font-display text-[15px] font-medium">Informacje</h2>
+              <a href="/polityka-prywatnosci" className="link-quiet text-[15px] text-ash no-underline">
+                Polityka prywatności
+              </a>
+              {site.company && <span className="text-[15px] text-stone">{site.company}</span>}
             </div>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-[#2a2a3e] text-center">
-          <p className="text-[#a0a0b0] text-xs md:text-sm">
-            © {new Date().getFullYear()} {footerContent.company.name}. Wszelkie prawa zastrzeżone.
-          </p>
+        <div className="mt-18 flex flex-wrap justify-between gap-x-8 gap-y-3 border-t border-rule-ink pt-6 text-[13px] text-stone">
+          <span>© {new Date().getFullYear()} Aurum Eleven</span>
+          <span>{site.tagline}</span>
         </div>
       </div>
     </footer>
   );
 }
-

@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aurum Eleven — strona www
 
-## Getting Started
+Landing page Aurum Eleven, 11-osobowego zespołu na eventy firmowe. Next.js (App Router) + Tailwind CSS 4, wideo renderowane w Remotion (`video/`).
 
-First, run the development server:
+## Uruchomienie
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Strona działa na http://localhost:3000. Build produkcyjny: `npm run build && npm run start`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Zmienne środowiskowe
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Skopiuj `.env.example` do `.env.local` i uzupełnij to, co już jest znane. Brakujące dane kontaktowe są na stronie ukrywane, a nie zastępowane zaślepkami.
 
-## Learn More
+| Zmienna | Do czego |
+|---|---|
+| `RESEND_API_KEY` | klucz Resend; bez niego formularz uczciwie informuje, że wysyłka nie jest włączona |
+| `CONTACT_TO_EMAIL` | adres (lub adresy po przecinku), na który przychodzą zapytania |
+| `CONTACT_FROM_EMAIL` | nadawca w domenie zweryfikowanej w Resend, np. `Aurum Eleven <formularz@aurumeleven.pl>` |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | firmowy e-mail pokazywany przy formularzu i w stopce |
+| `NEXT_PUBLIC_CONTACT_PHONE` | telefon pokazywany przy formularzu i w stopce |
+| `NEXT_PUBLIC_COMPANY_LINE` | nazwa firmy i NIP do stopki i polityki prywatności |
+| `NEXT_PUBLIC_FULL_RECORDING_URL` | link do pełnego nagrania na YouTube (domyślnie kanał @AurumEleven) |
+| `NEXT_PUBLIC_SITE_URL` | docelowy adres strony (canonical, sitemap) |
+| `NEXT_PUBLIC_INDEXABLE` | `true` tylko na produkcyjnej domenie; inaczej strona ma `noindex` |
 
-To learn more about Next.js, take a look at the following resources:
+## Struktura
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/content/site.ts` — wszystkie teksty (wiernie ze struktury od klienta) i zdjęcia.
+- `src/components/sections/` — sekcje strony w kolejności z `src/app/page.tsx`.
+- `src/components/StageBand.tsx` — hero „jedenaście pionów”: wideo z Remotion i animacja odsłonięcia pionów.
+- `src/app/api/enquiry/route.ts` — wysyłka formularza przez Resend.
+- `public/media/` — zdjęcia (2400 px, Next.js serwuje AVIF/WebP) i wyrenderowane wideo.
+- `video/` — projekt Remotion (instrukcja w `video/README.md`).
+- `PRODUCT.md`, `.impeccable/` — kontekst produktu i kierunek projektu dla skilla Impeccable.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Do uzupełnienia przez klienta
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Firmowy e-mail i telefon, dane firmy (NIP), treść polityki prywatności z danymi administratora, link do pełnego nagrania z dźwiękiem, potwierdzenie schematu ustawienia składu na scenie.

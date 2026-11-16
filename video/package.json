@@ -1,0 +1,24 @@
+{
+  "name": "aurum-eleven-video",
+  "private": true,
+  "description": "Remotion compositions rendering the Aurum Eleven hero loop and the line-up film for the website.",
+  "scripts": {
+    "studio": "remotion studio",
+    "render:hero-desktop": "remotion render HeroDesktop out/a11-hero-desktop.mp4 --codec=h264 --crf=26",
+    "render:hero-mobile": "remotion render HeroMobile out/a11-hero-mobile.mp4 --codec=h264 --crf=26",
+    "render:lineup": "remotion render LineUp out/a11-sklad.mp4 --codec=h264 --crf=22",
+    "render:posters": "remotion still HeroDesktop out/a11-hero-desktop.jpg --frame=12 --image-format=jpeg && remotion still HeroMobile out/a11-hero-mobile.jpg --frame=12 --image-format=jpeg && remotion still LineUp out/a11-sklad-poster.jpg --frame=150 --image-format=jpeg",
+    "render": "npm run render:hero-desktop && npm run render:hero-mobile && npm run render:lineup && npm run render:posters"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.544",
+    "@remotion/google-fonts": "4.0.544",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.544"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "typescript": "^5"
+  }
+}

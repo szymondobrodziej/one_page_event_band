@@ -1,331 +1,225 @@
 @import "tailwindcss";
 
-/* Brand Colors - Premium Event Band (Władca + Bohater) */
-:root {
-  /* Core palette */
-  --color-primary: #1a1a2e;      /* Deep navy - Władca */
-  --color-secondary: #c9a227;    /* Gold accent - Premium */
-  --color-accent: #e63946;       /* Energy red - Bohater */
+/* Aurum Eleven: matte black and ivory own the page; gold appears only at the culmination. */
+@theme {
+  --color-ink: #111111;
+  --color-ivory: #f5f2ec;
+  --color-gold: #b08d57;
+  --color-gold-light: #c2a46a;
+  --color-graphite: #2b2b2b;
+  --color-ash: #a8a39a; /* secondary text on ink, 7.5:1 */
+  --color-stone: #8e8a82; /* tertiary text on ink, 5.5:1 */
+  --color-dust: #77726a; /* large dimmed text on ink, 3.9:1 */
+  --color-smoke: #55514a; /* secondary text on ivory, 7:1 */
+  --color-pebble: #6b665e; /* captions on ivory, 5.1:1 */
+  --color-rule-ink: #2b2b2b;
+  --color-rule-ivory: #d9d2c5;
 
-  /* Backgrounds */
-  --background: #0f0f1a;
-  --background-elevated: #1a1a2e;
-  --background-card: #242438;
+  --font-display: var(--font-inter-tight), "Helvetica Neue", Arial, sans-serif;
+  --font-text: var(--font-manrope), "Helvetica Neue", Arial, sans-serif;
 
-  /* Text */
-  --foreground: #f8f8f8;
-  --foreground-muted: #a0a0b0;
-
-  /* Borders */
-  --border: #2a2a3e;
-  --border-accent: #c9a227;
+  --ease-arrive: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 72px;
+    -webkit-text-size-adjust: 100%;
+    color-scheme: dark;
+  }
 
-  /* Custom colors for Tailwind */
-  --color-primary: #1a1a2e;
-  --color-secondary: #c9a227;
-  --color-accent: #e63946;
-  --color-muted: #a0a0b0;
-  --color-card: #242438;
-  --color-border: #2a2a3e;
-}
+  body {
+    background: var(--color-ink);
+    color: var(--color-ivory);
+    font-family: var(--font-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
-}
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-ink);
+  }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
+  input,
+  textarea {
+    caret-color: var(--color-gold);
+  }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
+  a {
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1px;
+  }
 
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--color-secondary);
-  border-radius: 4px;
-}
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
 
-/* Gold gradient text */
-.text-gradient-gold {
-  background: linear-gradient(135deg, #c9a227 0%, #f4d03f 50%, #c9a227 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+  p {
+    text-wrap: pretty;
+  }
 
-/* Hero gradient overlay */
-.hero-gradient {
-  background: linear-gradient(
-    180deg,
-    rgba(15, 15, 26, 0.7) 0%,
-    rgba(15, 15, 26, 0.85) 50%,
-    rgba(15, 15, 26, 0.95) 100%
-  );
-}
+  html {
+    scrollbar-color: #4a4a4a var(--color-ink);
+    scrollbar-width: thin;
+  }
 
-/* Proof pill style */
-.proof-pill {
-  @apply inline-flex items-center gap-2 px-4 py-2 rounded-full
-         bg-white/5 border border-white/10 text-sm text-white/80
-         backdrop-blur-sm;
-}
-
-/* CTA Button primary */
-.btn-primary {
-  @apply inline-flex items-center justify-center gap-2 px-8 py-4
-         bg-[#c9a227] text-[#1a1a2e] font-semibold rounded-lg
-         hover:bg-[#d4af37] transition-all duration-300
-         shadow-lg shadow-[#c9a227]/20 hover:shadow-[#c9a227]/40
-         hover:scale-105;
-}
-
-/* CTA Button secondary */
-.btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 px-8 py-4
-         bg-transparent border-2 border-white/20 text-white font-medium rounded-lg
-         hover:border-white/40 hover:bg-white/5 transition-all duration-300;
-}
-
-/* Section container */
-.section-container {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24;
-}
-
-/* Section heading */
-.section-heading {
-  @apply text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4;
-}
-
-.section-subheading {
-  @apply text-lg md:text-xl text-[#a0a0b0] max-w-3xl;
-}
-
-/* Card style */
-.card {
-  @apply bg-[#242438] border border-[#2a2a3e] rounded-2xl p-6 md:p-8
-         hover:border-[#c9a227]/30 transition-all duration-300;
-}
-
-/* Accordion styles */
-.accordion-item {
-  @apply border-b border-[#2a2a3e] last:border-b-0;
-}
-
-.accordion-trigger {
-  @apply flex justify-between items-center w-full py-5 text-left text-white
-         hover:text-[#c9a227] transition-colors;
-}
-
-.accordion-content {
-  @apply overflow-hidden text-[#a0a0b0] pb-5;
-}
-
-/* Form input */
-.form-input {
-  @apply w-full px-4 py-3 bg-[#1a1a2e] border border-[#2a2a3e] rounded-lg
-         text-white placeholder:text-[#a0a0b0]/50
-         focus:border-[#c9a227] focus:ring-1 focus:ring-[#c9a227] focus:outline-none
-         transition-colors;
-}
-
-/* Date picker styling */
-input[type="date"].form-input {
-  color-scheme: dark;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
-input[type="date"].form-input::-webkit-calendar-picker-indicator {
-  filter: invert(0.7) sepia(1) saturate(3) hue-rotate(10deg);
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-}
-
-input[type="date"].form-input::-webkit-datetime-edit {
-  padding: 0;
-}
-
-input[type="date"].form-input::-webkit-datetime-edit-fields-wrapper {
-  padding: 0;
-}
-
-input[type="date"].form-input::-webkit-datetime-edit-text,
-input[type="date"].form-input::-webkit-datetime-edit-month-field,
-input[type="date"].form-input::-webkit-datetime-edit-day-field,
-input[type="date"].form-input::-webkit-datetime-edit-year-field {
-  color: white;
-}
-
-/* Select styling */
-select.form-input {
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c9a227' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  padding-right: 2.5rem;
-  cursor: pointer;
-}
-
-select.form-input option {
-  background-color: #1a1a2e;
-  color: white;
-  padding: 12px 16px;
-}
-
-select.form-input option:hover,
-select.form-input option:focus,
-select.form-input option:checked {
-  background-color: #c9a227;
-  color: #1a1a2e;
-}
-
-/* Dark DatePicker */
-.react-datepicker-wrapper {
-  width: 100% !important;
-}
-
-.react-datepicker-popper {
-  z-index: 50 !important;
-  width: 100% !important;
-  max-width: 20rem !important;
-  padding-top: 8px !important;
-}
-
-@media (min-width: 640px) {
-  .react-datepicker-popper {
-    max-width: 23rem !important;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
-.dark-datepicker {
-  background-color: #1a1a2e !important;
-  border: 1px solid #2a2a3e !important;
-  border-radius: 0.75rem !important;
-  font-family: inherit !important;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5) !important;
-  width: 100% !important;
-  max-width: 35rem !important;
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5vw, 64px);
+  }
+
+  .section {
+    padding-block: clamp(96px, 11vw, 168px);
+  }
+
+  .display-1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.875rem, 6.4vw, 6rem);
+    line-height: 0.96;
+    letter-spacing: -0.04em;
+  }
+
+  .display-2 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.5rem, 4.8vw, 4.625rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .display-3 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.25rem, 3.8vw, 3.625rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding-inline: 30px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    text-decoration: none;
+    transition:
+      background-color 220ms var(--ease-arrive),
+      color 220ms var(--ease-arrive);
+  }
+
+  .btn-ivory {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+  }
+
+  .btn-ivory:hover {
+    background: var(--color-gold);
+  }
+
+  .btn-ink {
+    background: var(--color-ink);
+    color: var(--color-ivory);
+  }
+
+  .btn-ink:hover {
+    background: var(--color-graphite);
+  }
+
+  .btn[aria-disabled="true"],
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: progress;
+  }
+
+  /* Documentary photography: colour held back so the centre pillar keeps it. */
+  .doc-photo {
+    filter: grayscale(0.92) contrast(1.06);
+  }
+
+  .link-quiet {
+    transition: color 200ms var(--ease-arrive);
+  }
+
+  .link-quiet:hover {
+    color: var(--color-gold-light);
+  }
+
+  .field {
+    width: 100%;
+    min-height: 52px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #3a3a3a;
+    border-radius: 0;
+    color: var(--color-ivory);
+    font-family: var(--font-text);
+    font-size: 18px;
+    transition: border-color 200ms var(--ease-arrive);
+  }
+
+  .field::placeholder {
+    color: #8e8a82;
+  }
+
+  .field:focus {
+    outline: none;
+    border-bottom-color: var(--color-gold);
+  }
+
+  .field:focus-visible {
+    outline: none;
+  }
+
+  .field[aria-invalid="true"] {
+    border-bottom-color: #c9a27a;
+  }
 }
 
-.dark-datepicker .react-datepicker__month-container {
-  background-color: #1a1a2e !important;
-  width: 100% !important;
+/* The eleven-pillar stage: pillar masks retract from both edges toward the centre, the gold pillar last. */
+@keyframes pillar-rise {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
 }
 
-.dark-datepicker .react-datepicker__header {
-  background-color: #242438 !important;
-  border-bottom: 1px solid #2a2a3e !important;
-  border-radius: 0.75rem 0.75rem 0 0 !important;
-  padding: 16px 16px 12px !important;
+.pillar-mask {
+  transform-origin: 50% 0;
+  transform: scaleY(0);
+  animation: pillar-rise 1100ms var(--ease-arrive) both;
 }
 
-.dark-datepicker .react-datepicker__current-month {
-  color: white !important;
-  font-size: 1.1rem !important;
-  font-weight: 600 !important;
-  margin-bottom: 8px !important;
-}
-
-.dark-datepicker .react-datepicker__day-names {
-  display: flex !important;
-  justify-content: space-around !important;
-  padding: 0 8px !important;
-}
-
-.dark-datepicker .react-datepicker__day-name {
-  color: #a0a0b0 !important;
-  font-size: 0.875rem !important;
-  width: 2.5rem !important;
-  line-height: 2.5rem !important;
-  margin: 0 !important;
-}
-
-.dark-datepicker .react-datepicker__month {
-  padding: 8px 8px 16px !important;
-  margin: 0 !important;
-}
-
-.dark-datepicker .react-datepicker__week {
-  display: flex !important;
-  justify-content: space-around !important;
-}
-
-.dark-datepicker .react-datepicker__day {
-  color: white !important;
-  border-radius: 0.5rem !important;
-  font-size: 0.95rem !important;
-  width: 2.5rem !important;
-  line-height: 2.5rem !important;
-  margin: 2px 0 !important;
-  transition: all 0.15s ease !important;
-}
-
-.dark-datepicker .react-datepicker__day:hover {
-  background-color: #c9a227 !important;
-  color: #1a1a2e !important;
-}
-
-.dark-datepicker .react-datepicker__day--selected,
-.dark-datepicker .react-datepicker__day--keyboard-selected {
-  background-color: #c9a227 !important;
-  color: #1a1a2e !important;
-  font-weight: 600 !important;
-}
-
-.dark-datepicker .react-datepicker__day--today {
-  border: 2px solid #c9a227 !important;
-  background-color: transparent !important;
-  color: #c9a227 !important;
-  font-weight: 600 !important;
-}
-
-.dark-datepicker .react-datepicker__day--today.react-datepicker__day--selected {
-  background-color: #c9a227 !important;
-  color: #1a1a2e !important;
-  border: none !important;
-}
-
-.dark-datepicker .react-datepicker__day--disabled {
-  color: #4a4a5a !important;
-}
-
-.dark-datepicker .react-datepicker__day--outside-month {
-  color: #4a4a5a !important;
-}
-
-.dark-datepicker .react-datepicker__navigation {
-  top: 16px !important;
-}
-
-.dark-datepicker .react-datepicker__navigation-icon::before {
-  border-color: #c9a227 !important;
-  border-width: 2px 2px 0 0 !important;
-}
-
-.dark-datepicker .react-datepicker__navigation:hover *::before {
-  border-color: white !important;
-}
-
-/* Sticky CTA mobile */
-.sticky-cta-mobile {
-  @apply fixed bottom-0 left-0 right-0 p-4 bg-[#0f0f1a]/95 backdrop-blur-lg
-         border-t border-[#2a2a3e] z-50 md:hidden;
+@media (prefers-reduced-motion: reduce) {
+  .pillar-mask {
+    animation: none;
+    transform: scaleY(0);
+  }
 }

@@ -32,9 +32,15 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
+
+# remotion (client footage and renders stay out of git; see video/README.md)
+/video/node_modules
+/video/out
+/video/public/*.mp4
 
 # typescript
 *.tsbuildinfo

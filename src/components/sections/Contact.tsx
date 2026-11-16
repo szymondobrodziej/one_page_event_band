@@ -1,162 +1,222 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Send, Phone, CheckCircle } from "lucide-react";
-import { contactContent, siteConfig } from "@/data/content";
-import { Button } from "@/components/ui/Button";
-import { DatePicker } from "@/components/ui/DatePicker";
+import Image from "next/image";
+import { useRef, useState } from "react";
+import { contact, photos, site } from "@/content/site";
+import { parseEnquiry, type EnquiryErrors } from "@/lib/enquiry";
+
+type Status = { kind: "idle" } | { kind: "sending" } | { kind: "sent" } | { kind: "error"; message: string };
+
+/** Marks contact data the client has not supplied yet; replaced automatically once the env variable is set. */
+function Placeholder({ children }: { children: React.ReactNode }) {
+  return <span className="text-ivory">[{children}]</span>;
+}
+
+function Field({
+  id,
+  label,
+  error,
+  children,
+}: {
+  id: string;
+  label: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex min-w-0 flex-col gap-1.5">
+      <label htmlFor={id} className="text-[14px] text-ash">
+        {label}
+      </label>
+      {children}
+      {error && (
+        <p id={`${id}-error`} className="text-[14px] leading-snug text-[#e0c49a]">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
 
 export function Contact() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    city: "",
-    eventType: "",
-    participants: "",
-    message: "",
-  });
+  const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const [errors, setErrors] = useState<EnquiryErrors>({});
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would integrate with your form backend
-    console.log("Form submitted:", { ...formData, date: selectedDate });
-    setIsSubmitted(true);
-  };
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const payload = Object.fromEntries(form.entries());
+    const { errors: found } = parseEnquiry(payload);
+    setErrors(found);
+    if (Object.keys(found).length > 0) {
+      const first = Object.keys(found)[0];
+      formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
+      return;
+    }
+    setStatus({ kind: "sending" });
+    try {
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        if (json.fields) setErrors(json.fields);
+        setStatus({ kind: "error", message: json.error || "Nie udało się wysłać zapytania. Spróbuj ponownie." });
+        return;
+      }
+      formRef.current?.reset();
+      setStatus({ kind: "sent" });
+    } catch {
+      setStatus({ kind: "error", message: "Brak połączenia. Sprawdź internet i spróbuj ponownie." });
+    }
+  }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const describedBy = (name: keyof EnquiryErrors) => (errors[name] ? `contact-${name}-error` : undefined);
+  const sending = status.kind === "sending";
+  const instagram = site.social.find((s) => s.name === "Instagram")!;
+  const facebook = site.social.find((s) => s.name === "Facebook")!;
 
   return (
-    <section id="contact" className="py-16 md:py-32 bg-[#0f0f1a]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8 md:mb-12"
-        >
-          <h2 className="section-heading text-2xl md:text-4xl lg:text-5xl">{contactContent.headline}</h2>
-          <p className="section-subheading mx-auto text-base md:text-xl">{contactContent.description}</p>
-        </motion.div>
+    <section id="kontakt" aria-labelledby="contact-title" className="bg-ink">
+      <div className="flex flex-wrap">
+        <figure className="relative m-0 min-h-[clamp(320px,40vw,560px)] flex-[1_1_460px] overflow-hidden">
+          <Image src={photos.side.src} alt={photos.side.alt} fill sizes="(min-width: 1020px) 45vw, 100vw" quality={78} className="object-cover object-[45%_50%] doc-photo" />
+        </figure>
+        <div className="min-w-0 flex-[1_1_560px] px-[clamp(20px,6vw,112px)] py-[clamp(72px,8vw,128px)]">
+          <div className="max-w-[540px]">
+            <h2 id="contact-title" className="display-3">
+              {contact.headline}
+            </h2>
+            <p className="mt-6 text-[18px] leading-[1.6] text-ash">{contact.lead}</p>
 
-        {isSubmitted ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="card text-center py-12"
-          >
-            <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-white mb-2">{contactContent.successMessage}</h3>
-            <p className="text-[#a0a0b0]">Sprawdź swoją skrzynkę email.</p>
-          </motion.div>
-        ) : (
-          <motion.form
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            onSubmit={handleSubmit}
-            className="card"
-          >
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Name */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Imię i nazwisko *</label>
-                <input type="text" name="name" required className="form-input" placeholder="Jan Kowalski" value={formData.name} onChange={handleChange} />
+            {status.kind === "sent" ? (
+              <div role="status" className="mt-12 border-t border-rule-ink pt-8">
+                <p className="font-display text-[36px] font-light tracking-[-0.03em]">{contact.sentTitle}</p>
+                <p className="mt-3 text-[17px] leading-[1.6] text-ash">{contact.sentBody}</p>
+                <button
+                  type="button"
+                  onClick={() => setStatus({ kind: "idle" })}
+                  className="link-quiet mt-5 min-h-11 text-[15px] text-[#cfcac0] underline"
+                >
+                  {contact.again}
+                </button>
               </div>
+            ) : (
+              <form ref={formRef} onSubmit={onSubmit} noValidate className="mt-12 flex flex-col gap-8" aria-describedby="contact-status">
+                <div className="grid gap-8 sm:grid-cols-2">
+                  <Field id="contact-name" label="Imię *" error={errors.name}>
+                    <input
+                      id="contact-name"
+                      name="name"
+                      type="text"
+                      autoComplete="given-name"
+                      required
+                      aria-invalid={Boolean(errors.name)}
+                      aria-describedby={describedBy("name")}
+                      className="field"
+                    />
+                  </Field>
+                  <Field id="contact-email" label="E-mail *" error={errors.email}>
+                    <input
+                      id="contact-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      inputMode="email"
+                      required
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={describedBy("email")}
+                      className="field"
+                    />
+                  </Field>
+                </div>
+                <Field id="contact-phone" label="Telefon (opcjonalnie)" error={errors.phone}>
+                  <input
+                    id="contact-phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    inputMode="tel"
+                    aria-invalid={Boolean(errors.phone)}
+                    aria-describedby={describedBy("phone")}
+                    className="field"
+                  />
+                </Field>
+                <Field id="contact-message" label="Wiadomość *" error={errors.message}>
+                  <textarea
+                    id="contact-message"
+                    name="message"
+                    rows={4}
+                    required
+                    placeholder={contact.messageHint}
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={describedBy("message")}
+                    className="field min-h-32 resize-y py-3.5 leading-[1.55]"
+                  />
+                </Field>
+                <div className="absolute -left-[9999px]" aria-hidden="true">
+                  <label htmlFor="contact-company">Firma</label>
+                  <input id="contact-company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+                </div>
 
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Email *</label>
-                <input type="email" name="email" required className="form-input" placeholder="jan@firma.pl" value={formData.email} onChange={handleChange} />
-              </div>
+                <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
+                  <button type="submit" className="btn btn-ivory" disabled={sending} aria-disabled={sending}>
+                    {sending ? contact.sending : contact.submit}
+                  </button>
+                  <span className="text-[14px] text-stone">{contact.noObligation}</span>
+                </div>
 
-              {/* Phone */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Telefon</label>
-                <input type="tel" name="phone" className="form-input" placeholder="+48 XXX XXX XXX" value={formData.phone} onChange={handleChange} />
-              </div>
+                <div id="contact-status" aria-live="polite">
+                  {status.kind === "error" && (
+                    <p role="alert" className="border-l border-gold-light pl-4 text-[15px] leading-[1.6] text-[#e0c49a]">
+                      {status.message}
+                    </p>
+                  )}
+                </div>
 
-              {/* Date */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Data eventu *</label>
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={setSelectedDate}
-                  placeholderText="Wybierz datę eventu"
-                  minDate={new Date()}
-                  required
-                />
-              </div>
+                <p className="text-[13px] leading-[1.6] text-stone">
+                  Wysyłając zapytanie, zgadzasz się na kontakt w jego sprawie. Szczegóły w{" "}
+                  <a href="/polityka-prywatnosci" className="link-quiet text-[#cfcac0] underline">
+                    polityce prywatności
+                  </a>
+                  .
+                </p>
+              </form>
+            )}
 
-              {/* City */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Miasto *</label>
-                <input type="text" name="city" required className="form-input" placeholder="Warszawa" value={formData.city} onChange={handleChange} />
-              </div>
-
-              {/* Event Type */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Typ eventu *</label>
-                <select name="eventType" required className="form-input" value={formData.eventType} onChange={handleChange}>
-                  <option value="">Wybierz...</option>
-                  {contactContent.eventTypes.map((type) => (
-                    <option key={type} value={type}>{type}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Participants */}
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-white mb-2">Liczba uczestników</label>
-                <select name="participants" className="form-input" value={formData.participants} onChange={handleChange}>
-                  <option value="">Wybierz...</option>
-                  {contactContent.participantRanges.map((range) => (
-                    <option key={range} value={range}>{range}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Message */}
-              <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-white mb-2">Dodatkowe informacje</label>
-                <textarea name="message" rows={4} className="form-input resize-none" placeholder="Opisz krótko swój event..." value={formData.message} onChange={handleChange} />
-              </div>
-            </div>
-
-            {/* Submit */}
-            <div className="mt-6 md:mt-8 flex flex-col-reverse sm:flex-row items-center justify-between gap-4">
-              <p className="text-xs md:text-sm text-[#a0a0b0] text-center sm:text-left">{contactContent.microcopy}</p>
-              <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto">
-                Wyślij zapytanie
-                <Send className="w-5 h-5" />
-              </Button>
-            </div>
-          </motion.form>
-        )}
-
-        {/* Phone CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-8 text-center"
-        >
-          <a href={`tel:${siteConfig.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 text-[#c9a227] hover:text-[#d4af37] transition-colors">
-            <Phone className="w-5 h-5" />
-            <span className="font-medium">{siteConfig.phone}</span>
-          </a>
-        </motion.div>
+            <p className="mt-12 border-t border-rule-ink pt-7 text-[16px] leading-[1.7] text-ash">
+              Możesz też napisać na{" "}
+              {site.email ? (
+                <a href={`mailto:${site.email}`} className="link-quiet text-ivory underline">
+                  {site.email}
+                </a>
+              ) : (
+                <Placeholder>e-mail firmowy</Placeholder>
+              )}{" "}
+              lub zadzwonić pod{" "}
+              {site.phone ? (
+                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="link-quiet text-ivory underline">
+                  {site.phone}
+                </a>
+              ) : (
+                <Placeholder>numer telefonu</Placeholder>
+              )}
+              . Jesteśmy też na{" "}
+              <a href={instagram.href} target="_blank" rel="noopener noreferrer" className="link-quiet text-ivory underline">
+                Instagramie
+              </a>{" "}
+              i{" "}
+              <a href={facebook.href} target="_blank" rel="noopener noreferrer" className="link-quiet text-ivory underline">
+                Facebooku
+              </a>
+              .
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
-

@@ -1,0 +1,435 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T22:21:21Z",
+  "title": "Design System: Aurum Eleven",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Matte Ink",
+        "canonical": "oklch(17.8% 0.000 90)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "ivory": {
+        "role": "neutral",
+        "displayName": "Warm Ivory",
+        "canonical": "oklch(96.2% 0.009 85)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#282623",
+          "#474541",
+          "#686661",
+          "#8b8984",
+          "#b0aea9",
+          "#d2d1cd",
+          "#f0eeeb"
+        ]
+      },
+      "gold": {
+        "role": "primary",
+        "displayName": "Satin Gold",
+        "canonical": "oklch(66.4% 0.083 77)",
+        "tonalRamp": [
+          "#140800",
+          "#352202",
+          "#594017",
+          "#7f602d",
+          "#a38454",
+          "#c4aa82",
+          "#e4cdad",
+          "#feecd1"
+        ]
+      },
+      "gold-light": {
+        "role": "primary",
+        "displayName": "Pale Gold",
+        "canonical": "oklch(73.2% 0.084 83)",
+        "tonalRamp": [
+          "#130900",
+          "#332401",
+          "#564115",
+          "#7c622c",
+          "#9f8553",
+          "#c1ab81",
+          "#e1cfac",
+          "#fcedd0"
+        ]
+      },
+      "graphite": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "oklch(28.9% 0.000 90)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "ivory-dim": {
+        "role": "neutral",
+        "displayName": "Dimmed Ivory",
+        "canonical": "oklch(84.0% 0.015 85)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#292621",
+          "#48453e",
+          "#6a665d",
+          "#8d8980",
+          "#b1ada6",
+          "#d4d1ca",
+          "#f1eee9"
+        ]
+      },
+      "ash": {
+        "role": "neutral",
+        "displayName": "Ash",
+        "canonical": "oklch(71.7% 0.014 82)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#292622",
+          "#48453e",
+          "#6a655e",
+          "#8d8981",
+          "#b1ada7",
+          "#d4d0cb",
+          "#f1eee9"
+        ]
+      },
+      "stone": {
+        "role": "neutral",
+        "displayName": "Stone",
+        "canonical": "oklch(63.4% 0.013 85)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#282622",
+          "#47453f",
+          "#69665e",
+          "#8c8982",
+          "#b1aea7",
+          "#d3d1cb",
+          "#f0eeea"
+        ]
+      },
+      "smoke": {
+        "role": "neutral",
+        "displayName": "Smoke",
+        "canonical": "oklch(43.7% 0.012 82)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#282622",
+          "#48453f",
+          "#69665f",
+          "#8d8982",
+          "#b1ada7",
+          "#d3d1cc",
+          "#f0eeea"
+        ]
+      },
+      "pebble": {
+        "role": "neutral",
+        "displayName": "Pebble",
+        "canonical": "oklch(51.2% 0.014 80)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#292622",
+          "#48443e",
+          "#6a655e",
+          "#8d8881",
+          "#b1ada7",
+          "#d4d0cb",
+          "#f1eee9"
+        ]
+      },
+      "rule-ink": {
+        "role": "neutral",
+        "displayName": "Ink Rule",
+        "canonical": "oklch(28.9% 0.000 90)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Strong Rule",
+        "canonical": "oklch(34.8% 0.000 90)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#aeaeae",
+          "#d1d1d1",
+          "#eeeeee"
+        ]
+      },
+      "rule-ivory": {
+        "role": "neutral",
+        "displayName": "Ivory Rule",
+        "canonical": "oklch(86.6% 0.019 83)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#292620",
+          "#49443c",
+          "#6b655a",
+          "#8e887e",
+          "#b2ada4",
+          "#d5d0c9",
+          "#f1eee7"
+        ]
+      },
+      "error-sand": {
+        "role": "error",
+        "displayName": "Error Sand",
+        "canonical": "oklch(83.4% 0.064 78)",
+        "tonalRamp": [
+          "#120900",
+          "#32240d",
+          "#544224",
+          "#79623d",
+          "#9d8562",
+          "#bfab8d",
+          "#dfceb5",
+          "#fbecd8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headline only."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headlines."
+      },
+      "headline-sm": {
+        "displayName": "Headline Small",
+        "purpose": "Headlines in split layouts with narrower columns."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Item, step and footer column titles; button labels share the weight."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Lead and section paragraphs, 30-34em measure."
+      },
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "List descriptions, FAQ answers, nav and footer links."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Microcopy under buttons, captions, field labels."
+      },
+      "logotype": {
+        "displayName": "Logotype",
+        "purpose": "AURUM / ELEVEN wordmark only; the single place tracked capitals appear."
+      }
+    },
+    "shadows": [
+      {
+        "name": "knockout-ring",
+        "value": "0 0 0 6px #111111",
+        "purpose": "Separates the gold process dot from the timeline rule; not an elevation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-arrive",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The single easing for every transition and the pillar rise."
+      },
+      {
+        "name": "state-colour",
+        "value": "200-220ms ease-arrive",
+        "purpose": "Hover and focus colour shifts on buttons, links, fields."
+      },
+      {
+        "name": "disclosure",
+        "value": "300ms ease-arrive",
+        "purpose": "FAQ row expand (grid rows), plus-to-minus, sticky bar slide."
+      },
+      {
+        "name": "pillar-rise",
+        "value": "1100ms ease-arrive, scaleY 1 to 0 from the top; delays 0/80/160/240/320 ms outer to inner, centre 560 ms, plus 200 ms lead-in",
+        "purpose": "Signature load reveal of the stage band; the only unprompted motion. Removed under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stage-phone",
+        "value": "699px",
+        "purpose": "Below: 1080x654 stage render, gap 10/1080."
+      },
+      {
+        "name": "md",
+        "value": "768px",
+        "purpose": "Sticky mobile CTA hidden from here; timeline goes horizontal."
+      },
+      {
+        "name": "lg",
+        "value": "1024px",
+        "purpose": "Desktop navigation replaces the menu toggle."
+      }
+    ],
+    "stageGeometry": {
+      "gapRatioDesktop": "12/1920",
+      "gapRatioPhone": "10/1080",
+      "stepRatio": 0.2126,
+      "centreRise": "27% taller than outer pillars",
+      "aspectDesktop": "1920/712",
+      "aspectPhone": "1080/654",
+      "source": "video/src/HeroLoop.tsx and src/components/StageBand.tsx must match"
+    }
+  },
+  "components": [
+    {
+      "name": "Ivory Button",
+      "kind": "button",
+      "refersTo": "button-ivory",
+      "description": "Primary action on ink; hover turns the field satin gold.",
+      "html": "<div class=\"ds-stage-ink\"><a href=\"#\" class=\"ds-btn-ivory\">Zapytaj o dostępność terminu</a></div>",
+      "css": ".ds-stage-ink{background:#111111;padding:32px;} .ds-btn-ivory{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 30px;border:0;border-radius:0;font-family:'Inter Tight', 'Helvetica Neue', Arial, sans-serif;font-size:16px;font-weight:500;letter-spacing:-0.005em;text-decoration:none;cursor:pointer;transition:background-color 220ms cubic-bezier(0.16,1,0.3,1),color 220ms cubic-bezier(0.16,1,0.3,1);background:#f5f2ec;color:#111111;} .ds-btn-ivory:hover{background:#b08d57;} .ds-btn-ivory:focus-visible{outline:2px solid #b08d57;outline-offset:3px;}"
+    },
+    {
+      "name": "Ink Button",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "Primary action on ivory sections; hover moves to graphite.",
+      "html": "<div class=\"ds-stage-ivory\"><a href=\"#\" class=\"ds-btn-ink\">Zapytaj o dostępność terminu</a></div>",
+      "css": ".ds-stage-ivory{background:#f5f2ec;padding:32px;} .ds-btn-ink{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 30px;border:0;border-radius:0;font-family:'Inter Tight', 'Helvetica Neue', Arial, sans-serif;font-size:16px;font-weight:500;letter-spacing:-0.005em;text-decoration:none;cursor:pointer;transition:background-color 220ms cubic-bezier(0.16,1,0.3,1),color 220ms cubic-bezier(0.16,1,0.3,1);background:#111111;color:#f5f2ec;} .ds-btn-ink:hover{background:#2b2b2b;} .ds-btn-ink:focus-visible{outline:2px solid #b08d57;outline-offset:3px;}"
+    },
+    {
+      "name": "Underline Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Boxless input on ink: a strong-rule underline that turns gold on focus and sand when invalid.",
+      "html": "<div class=\"ds-field-wrap\"><label class=\"ds-label\" for=\"ds-f\">E-mail *</label><input id=\"ds-f\" class=\"ds-field\" type=\"email\"><label class=\"ds-label\" for=\"ds-g\">Imię *</label><input id=\"ds-g\" class=\"ds-field ds-field-invalid\" type=\"text\" aria-invalid=\"true\"><p class=\"ds-error\">Podaj imię.</p></div>",
+      "css": ".ds-field-wrap{background:#111111;padding:32px;display:flex;flex-direction:column;gap:6px;max-width:420px;} .ds-label{font-family:Manrope, 'Helvetica Neue', Arial, sans-serif;font-size:14px;color:#a8a39a;margin-top:18px;} .ds-field{width:100%;min-height:52px;padding:0;background:transparent;border:0;border-bottom:1px solid #3a3a3a;border-radius:0;color:#f5f2ec;font-family:Manrope, 'Helvetica Neue', Arial, sans-serif;font-size:18px;caret-color:#b08d57;transition:border-color 200ms cubic-bezier(0.16,1,0.3,1);} .ds-field:focus{outline:none;border-bottom-color:#b08d57;} .ds-field-invalid{border-bottom-color:#c9a27a;} .ds-error{margin:0;font-family:Manrope, 'Helvetica Neue', Arial, sans-serif;font-size:14px;color:#e0c49a;}"
+    },
+    {
+      "name": "Inline Play Link",
+      "kind": "custom",
+      "refersTo": "play-ring",
+      "description": "Secondary video link: 40px outlined ring plus label; ring and label warm to pale gold on hover.",
+      "html": "<div class=\"ds-stage-ink\"><a href=\"#\" class=\"ds-play\">\n<span class=\"ds-play-ring\"><svg viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" aria-hidden=\"true\"><path d=\"M7 4.5v15L19.5 12z\" fill=\"currentColor\"/></svg></span>Zobacz pełne nagranie</a></div>",
+      "css": ".ds-stage-ink{background:#111111;padding:32px;} .ds-play{display:inline-flex;align-items:center;gap:14px;min-height:56px;font-family:'Inter Tight', 'Helvetica Neue', Arial, sans-serif;font-size:16px;font-weight:500;color:#f5f2ec;text-decoration:none;transition:color 200ms cubic-bezier(0.16,1,0.3,1);} .ds-play-ring{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:9999px;border:1px solid rgba(245,242,236,0.45);transition:border-color 200ms;} .ds-play:hover{color:#c2a46a;} .ds-play:hover .ds-play-ring{border-color:#c2a46a;} .ds-play:focus-visible{outline:2px solid #b08d57;outline-offset:3px;}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "72px ink bar: lockup, dimmed-ivory links with gold-light hover, compact ivory button.",
+      "html": "<header class=\"ds-nav\"><span class=\"ds-lockup\"><svg viewBox=\"4 6 194 144\" width=\"38\" height=\"28\" aria-hidden=\"true\"><path d=\"M16 142 L68 30 L120 142\" fill=\"none\" stroke=\"#F5F2EC\" stroke-width=\"16\"/><rect x=\"42\" y=\"96\" width=\"86\" height=\"14\" fill=\"#B08D57\"/><g fill=\"#F5F2EC\"><rect x=\"146\" y=\"28\" width=\"16\" height=\"114\"/><polygon points=\"146,28 131,45 146,45\"/><rect x=\"178\" y=\"28\" width=\"16\" height=\"114\"/><polygon points=\"178,28 163,45 178,45\"/></g></svg><span class=\"ds-word\"><span>AURUM</span><span>ELEVEN</span></span></span><nav class=\"ds-links\"><a href=\"#\">Na żywo</a><a href=\"#\">Współpraca</a><a href=\"#\">FAQ</a></nav><a href=\"#\" class=\"ds-nav-btn\">Zapytaj o termin</a></header>",
+      "css": ".ds-nav{display:flex;align-items:center;justify-content:space-between;gap:32px;height:72px;padding:0 32px;background:#111111;color:#f5f2ec;} .ds-lockup{display:flex;align-items:center;gap:14px;} .ds-word{display:flex;flex-direction:column;font-family:'Inter Tight', 'Helvetica Neue', Arial, sans-serif;font-size:11px;font-weight:500;line-height:1.45;letter-spacing:0.32em;} .ds-links{display:flex;gap:32px;} .ds-links a{font-family:Manrope, 'Helvetica Neue', Arial, sans-serif;font-size:15px;color:#cfcac0;text-decoration:none;transition:color 200ms cubic-bezier(0.16,1,0.3,1);} .ds-links a:hover{color:#c2a46a;} .ds-links a:focus-visible{outline:2px solid #b08d57;outline-offset:3px;} .ds-nav-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 20px;background:#f5f2ec;color:#111111;font-family:'Inter Tight', 'Helvetica Neue', Arial, sans-serif;font-size:15px;font-weight:500;text-decoration:none;transition:background-color 220ms cubic-bezier(0.16,1,0.3,1);} .ds-nav-btn:hover{background:#b08d57;}"
+    },
+    {
+      "name": "Process Timeline",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Numbered steps on one strong-rule line; only the final step is gold.",
+      "html": "<div class=\"ds-proc\"><div class=\"ds-proc-line\"></div><ol><li><span class=\"ds-num\">1</span><span class=\"ds-dot\"></span><span class=\"ds-step\">Kontakt</span></li><li><span class=\"ds-num\">2</span><span class=\"ds-dot\"></span><span class=\"ds-step\">Warunki</span></li><li><span class=\"ds-num\">3</span><span class=\"ds-dot\"></span><span class=\"ds-step\">Scenariusz</span></li><li><span class=\"ds-num ds-gold\">4</span><span class=\"ds-dot ds-dot-gold\"></span><span class=\"ds-step\">Koncert</span></li></ol></div>",
+      "css": ".ds-proc{position:relative;background:#111111;padding:32px;color:#f5f2ec;} .ds-proc-line{position:absolute;left:32px;right:32px;top:120px;height:1px;background:#3a3a3a;} .ds-proc ol{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;list-style:none;margin:0;padding:0;} .ds-proc li{display:flex;flex-direction:column;} .ds-num{font-family:'Inter Tight', 'Helvetica Neue', Arial, sans-serif;font-size:64px;font-weight:300;line-height:1;letter-spacing:-0.04em;} .ds-gold{color:#b08d57;} .ds-dot{margin-top:19px;width:9px;height:9px;border-radius:9999px;background:#f5f2ec;} .ds-dot-gold{background:#b08d57;box-shadow:0 0 0 6px #111111;} .ds-step{margin-top:28px;font-family:'Inter Tight', 'Helvetica Neue', Arial, sans-serif;font-size:22px;font-weight:500;letter-spacing:-0.01em;}"
+    },
+    {
+      "name": "FAQ Accordion Row",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Ruled question row on ivory with a plus that collapses to a minus.",
+      "html": "<div class=\"ds-faq\"><button class=\"ds-q\" aria-expanded=\"true\"><span>Czy gracie według ustalonej listy?</span><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" aria-hidden=\"true\"><path d=\"M5 12h14\"/></svg></button><p class=\"ds-a\">Układamy set wokół gości i czytamy salę na bieżąco.</p><button class=\"ds-q\" aria-expanded=\"false\"><span>Jak szybko dostanę wycenę?</span><svg viewBox=\"0 0 24 24\" width=\"22\" height=\"22\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"M12 5v14\"/></svg></button></div>",
+      "css": ".ds-faq{background:#f5f2ec;color:#111111;padding:32px;border-top:1px solid #d9d2c5;} .ds-q{display:flex;width:100%;align-items:center;justify-content:space-between;gap:24px;padding:28px 0;background:none;border:0;border-bottom:1px solid #d9d2c5;color:inherit;text-align:left;font-family:'Inter Tight', 'Helvetica Neue', Arial, sans-serif;font-size:22px;line-height:1.3;letter-spacing:-0.015em;cursor:pointer;transition:color 200ms;} .ds-q:hover{color:#55514a;} .ds-q:focus-visible{outline:2px solid #b08d57;outline-offset:3px;} .ds-a{margin:0;padding:0 56px 32px 0;font-family:Manrope, 'Helvetica Neue', Arial, sans-serif;font-size:17px;line-height:1.65;color:#55514a;border-bottom:1px solid #d9d2c5;}"
+    },
+    {
+      "name": "Documentary Photo",
+      "kind": "card",
+      "refersTo": "",
+      "description": "Square-edged full-bleed photograph graded near-monochrome so the centre pillar keeps the colour.",
+      "html": "<figure class=\"ds-photo\"><div class=\"ds-photo-img\"></div><figcaption>Sekcja dęta, gala firmowa</figcaption></figure>",
+      "css": ".ds-photo{margin:0;background:#f5f2ec;padding:32px;} .ds-photo-img{aspect-ratio:3/4;max-width:240px;background:#6b665e;filter:grayscale(0.92) contrast(1.06);} .ds-photo figcaption{margin-top:12px;font-family:Manrope, 'Helvetica Neue', Arial, sans-serif;font-size:14px;color:#6b665e;}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Stage Through Eleven Pillars",
+    "overview": "The whole system is built from one image: a stage seen through eleven vertical pillars, ten monochrome and the centre one in colour, 27% taller and capped with a gold edge. Everything else is quiet so that image carries the brand: matte black and ivory alternate as full-width fields, type is large, light and tightly set, edges are square, and colour is withheld except at the culmination.\n\nThe register is a premium design house rather than a party band: low density, generous pacing, long left-aligned measures, and exactly one unprompted motion (the pillar rise on load). All other motion answers the visitor.\n\nPhotography is documentary and graded near-monochrome so the only full colour on screen belongs to the hero's centre pillar.",
+    "keyCharacteristics": [
+      "Alternating ink and ivory sections, flat, no gradients",
+      "Inter Tight Light display with negative tracking; Manrope text",
+      "Square buttons and fields; circles only for play and timeline markers",
+      "Gold only at culmination or in response to action",
+      "Near-monochrome documentary photography"
+    ],
+    "rules": [
+      {
+        "name": "The Culmination Rule",
+        "body": "Gold marks the end of a sequence or the answer to an action: the mark's beam, the centre pillar, the last process step, a hover. Gold at rest anywhere else is wrong.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Fields Rule",
+        "body": "Sections are ink or ivory edge to edge. No third surface, no tints, no gradients, no red, blue or violet.",
+        "section": "colors"
+      },
+      {
+        "name": "The Held Colour Rule",
+        "body": "Photography is graded near-monochrome so the centre pillar is the only full colour on the page.",
+        "section": "colors"
+      },
+      {
+        "name": "The Light Voice Rule",
+        "body": "Display and headlines are weight 300 with -0.035 to -0.04em tracking; 500 is reserved for titles and buttons; nothing is bold.",
+        "section": "typography"
+      },
+      {
+        "name": "The Single Capitals Rule",
+        "body": "Tracked uppercase exists only in the logotype.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Stage Rule",
+        "body": "Surfaces never float; separate with a field change or a 1px rule, not a shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do alternate full-bleed ink and ivory sections and keep every surface flat.",
+      "Do set headlines in Inter Tight 300 with negative tracking and let them be large.",
+      "Do grade every photograph with the documentary treatment (92% grayscale, 1.06 contrast).",
+      "Do reserve gold for culminations and responses to action.",
+      "Do keep stage band geometry in lockstep with the Remotion render.",
+      "Do use the 2px gold focus outline with 3px offset on every interactive element.",
+      "Do use circles only for play affordances and timeline or diagram markers."
+    ],
+    "donts": [
+      "Don't use red, blue or violet, gradients, or decorative fonts.",
+      "Don't put gold on a field, a heading or body copy at rest.",
+      "Don't round buttons, inputs or image frames.",
+      "Don't add drop shadows or floating cards.",
+      "Don't use tracked uppercase outside the logotype, and don't add arrows to buttons.",
+      "Don't add a second unprompted animation.",
+      "Don't introduce logo walls, stat counters, or dark washes over full-bleed party photos."
+    ]
+  }
+}

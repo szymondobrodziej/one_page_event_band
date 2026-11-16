@@ -1,33 +1,64 @@
-import { Header } from "@/components/sections/Header";
-import { Hero } from "@/components/sections/Hero";
-import { Trust } from "@/components/sections/Trust";
-import { Showreel } from "@/components/sections/Showreel";
-import { Formats } from "@/components/sections/Formats";
-import { CaseStudies } from "@/components/sections/CaseStudies";
-import { Gallery } from "@/components/sections/Gallery";
-import { Process } from "@/components/sections/Process";
-import { FAQ } from "@/components/sections/FAQ";
+import { Header } from "@/components/Header";
+import { StickyCta } from "@/components/StickyCta";
 import { Contact } from "@/components/sections/Contact";
+import { Faq } from "@/components/sections/Faq";
 import { Footer } from "@/components/sections/Footer";
-import { StickyCTA } from "@/components/ui/StickyCTA";
+import { ForWhom } from "@/components/sections/ForWhom";
+import { Hero } from "@/components/sections/Hero";
+import { HowWePlay } from "@/components/sections/HowWePlay";
+import { Live } from "@/components/sections/Live";
+import { Musicians } from "@/components/sections/Musicians";
+import { Problem } from "@/components/sections/Problem";
+import { Process } from "@/components/sections/Process";
+import { WhatYouGet } from "@/components/sections/WhatYouGet";
+import { faq, site } from "@/content/site";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MusicGroup",
+      name: site.name,
+      description: site.description,
+      slogan: site.manifest,
+      genre: "Muzyka na żywo na eventy firmowe",
+      sameAs: site.social.map((s) => s.href),
+      ...(site.email ? { email: site.email } : {}),
+      ...(site.phone ? { telephone: site.phone } : {}),
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faq.items.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    },
+  ],
+};
 
 export default function Home() {
   return (
     <>
+      <a href="#tresc" className="sr-only z-[60] bg-ivory px-4 py-3 text-ink focus:not-sr-only focus:fixed focus:top-3 focus:left-3">
+        Przejdź do treści
+      </a>
       <Header />
-      <main>
+      <main id="tresc">
         <Hero />
-        <Trust />
-        <Showreel />
-        <Formats />
-        <CaseStudies />
-        <Gallery />
+        <Problem />
+        <HowWePlay />
+        <WhatYouGet />
+        <ForWhom />
+        <Live />
+        <Musicians />
         <Process />
-        <FAQ />
+        <Faq />
         <Contact />
       </main>
       <Footer />
-      <StickyCTA />
+      <StickyCta />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
     </>
   );
 }

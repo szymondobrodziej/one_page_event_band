@@ -1,54 +1,59 @@
-import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter_Tight, Manrope } from "next/font/google";
+import { site } from "@/content/site";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-geist-sans",
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
   subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500"],
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
+
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+
+const indexable = process.env.NEXT_PUBLIC_INDEXABLE === "true";
 
 export const metadata: Metadata = {
-  title: "Zespół na Event Firmowy | Premium Live Band | Gale, Integracje, Afterparty",
-  description: "Profesjonalny zespół live na eventy B2B. Pełna obsługa techniczna, faktura VAT, repertuar PL/EN. Sprawdź dostępność terminu.",
-  keywords: ["zespół na event", "live band", "muzyka na gale", "zespół na integrację", "afterparty", "event firmowy", "zespół premium"],
-  authors: [{ name: "Premium Live Band" }],
+  metadataBase: new URL(siteUrl),
+  title: site.title,
+  description: site.description,
+  applicationName: site.name,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Zespół na Event Firmowy | Premium Live Band",
-    description: "Profesjonalny zespół live na eventy B2B. Pełna obsługa techniczna, faktura VAT. Sprawdź dostępność terminu.",
     type: "website",
     locale: "pl_PL",
-    siteName: "Premium Live Band",
+    siteName: site.name,
+    title: site.title,
+    description: site.description,
+    url: "/",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zespół na Event Firmowy | Premium Live Band",
-    description: "Profesjonalny zespół live na eventy B2B. Sprawdź dostępność terminu.",
+    title: site.title,
+    description: site.description,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: indexable ? { index: true, follow: true } : { index: false, follow: false },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  themeColor: "#111111",
+  colorScheme: "dark",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pl" className="scroll-smooth">
-      <body
-        className={`${inter.variable} ${playfair.variable} antialiased bg-[#0f0f1a] text-white`}
-      >
-        {children}
-      </body>
+    <html lang="pl" className={`${interTight.variable} ${manrope.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
