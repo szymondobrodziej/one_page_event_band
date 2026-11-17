@@ -217,3 +217,9 @@
     border-bottom-color: var(--color-error-sand);
   }
 }
+
+/* iOS in Low Power Mode refuses autoplay and draws a play button over the hero film; the still beneath it stands instead. */
+.hero-film::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}

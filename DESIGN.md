@@ -1,6 +1,6 @@
 ---
 name: Aurum Eleven
-description: One musician opening onto all eleven; matte black and ivory own the page, satin gold arrives only at the culmination.
+description: The band on stage, playing; matte black and ivory own the page, satin gold arrives only at the culmination.
 colors:
   ink: "#111111"
   ivory: "#f5f2ec"
@@ -128,11 +128,11 @@ components:
 
 ## Overview
 
-**Creative North Star: "One of Eleven"**
+**Creative North Star: "The Band, Playing"**
 
-The whole system is built from one movement: from one musician to the whole band. The page opens on one vocalist in a tall frame beside the headline, and the visitor's own scroll opens the frame to the whole screen and pulls back to all eleven on stage. Eleven musicians, one signature sound. The vertical pillar stays the silhouette: the strokes of the mark, the tall opening frame, the line-up of eleven. Everything else on the page is quiet so that this image can carry the brand: matte black and ivory take turns owning full-width sections, type is large, light and tightly set, edges are square, and gold is withheld everywhere except at the point of culmination.
+The page opens on the band itself: the headline, then a silent film of the stage edge to edge, all eleven in front of the A11 screen and then the vocalists and horns in slow motion. It is plain HTML, a muted looping video the browser plays by itself with no script (the user asked for exactly that on 2026-11-17, after a scroll-driven photograph). Eleven musicians, one signature sound. The vertical pillar stays the silhouette: the strokes of the mark and the line-up of eleven. Everything else on the page is quiet so that this image can carry the brand: matte black and ivory take turns owning full-width sections, type is large, light and tightly set, edges are square, and gold is withheld everywhere except at the point of culmination.
 
-The register is a premium design house rather than a party band. Density is low and pacing is generous (sections breathe at up to 168px of vertical padding), copy sits in long left-aligned measures, and nothing on the page moves on its own. The one authored moment is the hero's opening frame, and it moves only with the visitor's scroll. All other motion answers the visitor too (the gold edge following the pointer over the line-up, accordion expand, form confirmation, hover colour shifts).
+The register is a premium design house rather than a party band. Density is low and pacing is generous (sections breathe at up to 168px of vertical padding), copy sits in long left-aligned measures, and the hero film is the only thing that moves on its own: silent, slow, and replaced by its still under reduced motion. All other motion answers the visitor (the gold edge following the pointer over the line-up, accordion expand, form confirmation, hover colour shifts).
 
 Photography is documentary and keeps its stage light, graded in the held colour wherever it appears (68% saturation, a slight shift toward amber), so magenta and blue washes sit beside the gold instead of shouting. An earlier near-monochrome grade read as gloomy to the user and was dropped. The category default this refuses: full-bleed party heroes under dark washes, gold-on-black "premium" chrome, logo walls and stat counters.
 
@@ -170,7 +170,7 @@ A two-field palette of matte black and warm ivory, ruled in graphite, with satin
 
 **The Two Fields Rule.** Sections are either ink or ivory, edge to edge. No third surface colour, no tints, no gradients, and no red, blue or violet anywhere.
 
-**The Held Colour Rule.** Every photograph, the hero's included, carries the same warm held grade (sepia 0.08, saturation 0.68, contrast 1.04). Stage light stays real but never shouts in raw magenta, red or blue, and it sits beside the gold. Gold remains the one held accent: the logo's beam, the lit pillar of the line-up, the last process step, hover. The YouTube recording plays in its own colour after the visitor presses play.
+**The Held Colour Rule.** Every photograph and the hero film carry the same warm held grade (sepia 0.08, saturation 0.68, contrast 1.04); in the film and its still it is baked into the file, so the page never filters moving video. Stage light stays real but never shouts in raw magenta, red or blue, and it sits beside the gold. Gold remains the one held accent: the logo's beam, the lit pillar of the line-up, the last process step, hover. The YouTube recording plays in its own colour after the visitor presses play.
 
 ## Typography
 
@@ -180,7 +180,7 @@ A two-field palette of matte black and warm ivory, ruled in graphite, with satin
 **Character:** A light, tightly tracked grotesk at very large sizes against a calm, open humanist sans for reading. The display voice is confident by being thin and large rather than bold.
 
 ### Hierarchy
-- **Display** (300, clamp 42–72px, 0.96): the hero headline only, left-aligned in the seven-column text side of the opening frame, capped near 12em.
+- **Display** (300, clamp 42–72px, 0.96): the hero headline only, left-aligned in the left seven columns above the film, capped near 12em.
 - **Headline** (300, clamp 40–74px, 1.0): section headlines, usually capped near 12em measure.
 - **Headline Small** (300, clamp 36–58px, 1.02): headlines in split layouts (contact, how-we-play) where the column is narrower.
 - **Statement** (Inter Tight 300, roughly 22–42px, tight negative tracking): pull lines, ruled list items and the footer manifesto; display face at an intermediate size, always light.
@@ -205,7 +205,7 @@ Content sits in a single shell (max 1280px, side gutter clamp 20–64px). Sectio
 
 Composition is built from flex-wrap splits rather than fixed breakpoints: a photo panel and a text panel share a row with flex bases around 420–560px and stack naturally on narrow screens. Split sections often let the photograph run edge to edge on one side while the text keeps its own padding. Text measures are held deliberately (lead 34em, answers 40em, headlines 10.5–12.5em).
 
-The hero is a scroll track: the opening frame stays pinned under the header for 230svh − 72px of scroll on desktop (270svh − 72px on phones, which also pan). Pinned, the viewport holds a 12-column grid: the sentence-case overline, the display headline, the lead and the primary button with the play link in the left seven columns, vertically centred; the tall frame with one vocalist in the right five, from 20–40px under the header to 20–40px above the bottom edge. On phones the overline and headline sit on top and the frame fills the rest of the screen; the lead and buttons follow the track, and the pinned enquiry button covers the first viewport. After the track: the ruled caption row with the facts and the credits.
+The hero is three bands. On desktop a 12-column row: the sentence-case overline and the display headline in the left seven columns, the lead, the primary button and the play link in the right five, bottom-aligned to the headline. Then the film edge to edge at 16:9, capped at one viewport under the header (it crops, never letterboxes). Then the ruled caption row with the facts and the credits. On phones and tablets the overline and headline sit on top, the film follows at 16:9, then the lead and buttons, then the caption row.
 
 On phones the enquiry button is pinned to the bottom edge, and steps aside whenever another enquiry button is on screen (the hero's or one closing a section) and while the form is in view, so two identical buttons never show at once. The contact section's photo panel appears only from 1040px up; on narrower screens every enquiry button lands straight on the form's headline and first field.
 
@@ -218,7 +218,7 @@ The system is flat. There are no drop shadows; depth comes from the alternation 
 
 ## Shapes
 
-Edges are square: buttons, inputs, image frames, the diagram frame and the sticky bar all have zero radius. Inputs are a single bottom hairline with no box. The only circles are functional markers: play affordances (a 40px outlined ring for inline links, a large ivory disc over video) and the small dots of the process timeline and stage diagram. The vertical pillar is the system's signature silhouette; it recurs in the mark, the hero's opening frame and the line-up.
+Edges are square: buttons, inputs, image frames, the diagram frame and the sticky bar all have zero radius. Inputs are a single bottom hairline with no box. The only circles are functional markers: play affordances (a 40px outlined ring for inline links, a large ivory disc over video) and the small dots of the process timeline and stage diagram. The vertical pillar is the system's signature silhouette; it recurs in the mark and the line-up.
 
 ## Components
 
@@ -234,7 +234,7 @@ Calm, square, and sized for touch.
 ### Play affordances
 - **Inline play link:** a 40px circular ring in ivory at 45% opacity holding a small play triangle, followed by a 16px Inter Tight 500 label. Hover shifts the ring to pale gold and the label colour to pale gold.
 - **Video play disc:** a large ivory disc (72–104px) centred over a lightly dimmed poster; hover turns it gold.
-- **Recording player ("Na żywo"):** a 16:9 still of the whole band (a frame of the client's showreel, graded like every photograph) under the play disc. Nothing from YouTube loads until the visitor presses it; then a youtube-nocookie player with sound replaces the still and takes focus. A stone caption says so. The hero's play link scrolls to this player instead of leaving the page.
+- **Recording player ("Na żywo"):** a 16:9 still of three vocalists singing (a frame of the client's showreel at 15.6 s, graded like every photograph; the whole band already opens the hero film) under the play disc. Nothing from YouTube loads until the visitor presses it; then a youtube-nocookie player with sound replaces the still and takes focus. A stone caption says so. The hero's play link scrolls to this player instead of leaving the page.
 
 ### Inputs / Fields
 - **Style:** transparent ground, no box, a 1px strong-rule underline, Manrope 18px ivory text, 52px minimum height. Labels sit above in ash at 14px.
@@ -258,8 +258,8 @@ Five steps on a single strong-rule line. Each step carries a 64px light numeral,
 ### Line-up
 "Kto stoi na scenie" shows the eleven musicians as eleven pillars (`src/components/LineUp.tsx`): each a 3:10 crop of one musician cut from the client's originals (`public/media/lineup`, 480x1600), captioned with the instrument in 13px pebble. Left to right: the rhythm section at the edges, the horns around the three vocals in the middle. Every pillar carries the held colour; the pillar under the pointer takes a 3px gold top edge, the logo beam's colour (scaling in over 300ms) and its caption turns ink. From 1024px the pillars stand in one row of eleven; below that they become a sideways strip with snap, about a third of the screen wide each, where the pillar nearest the middle is lit as the visitor scrolls. Nothing moves on its own, and all eleven images load together once the strip nears the viewport.
 
-### Opening frame (signature)
-The hero (`src/components/sections/Hero.tsx`) is one photograph, the client's picture of all eleven on stage in front of the A11 screen (`photos.stage`, 3600x2400, so the close-up stays sharp), held in the warm grade. At rest the frame shows only the vocalist in the black jumpsuit at the centre of the stage, about 1300 photo pixels of height filling the frame. As the visitor scrolls, the frame's clip opens linearly from its slot to the whole pinned viewport while the photo scales and moves linearly from the close-up to a cover of the full stage (ease-in-out cubic over the first 78% of the track on desktop), so the photo always covers the opening frame; the words fade out over the first 55% and leave the focus order once covered. Where the full stage is much wider than the screen (phones), the opening ends 10% in from the left and the camera then pans across the stage to its right edge (50–96% of the track). Nothing moves without the scroll, and there is no autoplay video and no pause control to need. Under reduced motion the track is not pinned: the headline column and a 4:5 still of the stage stand side by side. The photo carries the alt text; the moving layer and the still are never displayed at once.
+### Stage film (signature)
+The hero film (`src/components/sections/Hero.tsx`, cut in `video/src/HeroFilm.tsx`) is a 9.4 s silent loop from the client's showreel: the whole band in front of the A11 screen, then the frontman in red light, saxophone and trombone, the blonde vocalist, the trumpet and the brunette vocalist, each at 0.4x from the 75 fps interpolated master with half-second dissolves, the last shot dissolving back into the first so the loop has no seam. Colour shots only, held grade baked in. Two files: 1920x1080 (about 3.4 MB) from 700px up and 960x540 (about 1.2 MB) below, H.264 tagged BT.709, no audio track. The markup is a `<video autoplay muted loop playsinline>` over a `<picture>` of its first frame: the still carries the alt text and the LCP, shows before the film loads and where autoplay is refused (iOS's start-playback button is hidden), and is all there is under reduced motion, because both film sources carry `media="(prefers-reduced-motion: no-preference)"` and none is fetched. No script runs in the hero, so there is no pause control; a visitor who asks for less motion never gets the film.
 
 ## Do's and Don'ts
 
@@ -268,7 +268,7 @@ The hero (`src/components/sections/Hero.tsx`) is one photograph, the client's pi
 - **Do** set headlines in Inter Tight 300 with negative tracking and let them be large.
 - **Do** grade every photograph with `.doc-photo`, the held colour (sepia 0.08, saturation 0.68, contrast 1.04), so every picture on the page shares one warm light.
 - **Do** reserve gold for culminations and for responses to action (hover, focus, the last step).
-- **Do** use each documentary photograph once: the whole-band picture belongs to the hero, so other sections take other frames from the client's set.
+- **Do** use each documentary picture once: the whole band belongs to the hero film, so the recording's poster is three vocalists and other sections take other frames from the client's set.
 - **Do** use the 2px focus outline with 3px offset on every interactive element: gold on ink, ink on ivory.
 - **Do** use circles only for play affordances and timeline or diagram markers.
 
@@ -278,5 +278,5 @@ The hero (`src/components/sections/Hero.tsx`) is one photograph, the client's pi
 - **Don't** round buttons, inputs or image frames.
 - **Don't** add drop shadows or floating cards.
 - **Don't** use tracked uppercase outside the logotype, and don't add arrows to buttons.
-- **Don't** add unprompted animation; nothing on the page moves on its own, and the hero's opening frame moves only with the scroll.
+- **Don't** add unprompted animation; the hero film is the one thing that moves on its own, and the hero runs no script.
 - **Don't** introduce logo walls, stat counters, or dark washes over full-bleed party photos.

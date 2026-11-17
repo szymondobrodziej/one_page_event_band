@@ -45,6 +45,18 @@ export const hero = typeset({
   credits: "Muzycy grali z Adamem Sztabą, Justyną Steczkowską, Mrozem, Kwiatem Jabłoni. Wokaliści z The Voice of Poland.",
 });
 
+// The hero film: a silent loop cut from the client's showreel (video/src/HeroFilm.tsx), held colour baked in.
+// Its first frame is the still shown before it plays and instead of it under reduced motion.
+export const heroFilm = {
+  src: "/media/video/a11-hero-film-v1.mp4",
+  srcSmall: "/media/video/a11-hero-film-sm-v1.mp4",
+  poster: "/media/video/a11-hero-film-v1.jpg",
+  posterSmall: "/media/video/a11-hero-film-sm-v1.jpg",
+  alt: "Pełny skład Aurum Eleven na scenie, w tle ekran LED ze znakiem A11",
+  w: 1920,
+  h: 1080,
+} as const;
+
 export const problem = typeset({
   headline: "Goście siedzą przy stole, a parkiet jest pusty",
   body: "Część oficjalna eventu przebiegła dobrze. Zaczyna się część rozrywkowa i energia spada. Goście zostają przy stołach, a parkiet świeci pustkami. Po evencie słyszysz, że było ok, a po tygodniu nikt o nim nie pamięta.",
@@ -105,7 +117,8 @@ export const live = typeset({
   sub: "Jedenastu muzyków na scenie.",
   play: "Odtwórz nagranie z dźwiękiem",
   note: "Nagranie z dźwiękiem z YouTube. Odtwarzacz ładuje się dopiero po kliknięciu.",
-  poster: "/media/video/a11-nagranie-v1.jpg",
+  // Three vocalists at 15.6 s of the showreel: the whole band already opens the hero film, so it is not shown twice.
+  poster: "/media/video/a11-nagranie-v2.jpg",
 });
 
 export const musicians = typeset({
@@ -173,8 +186,6 @@ export const contact = typeset({
 
 export const photos = {
   trumpet: { src: "/media/photos/a11-foto-1.jpg", alt: "Trąbka w dłoni muzyka, wyłaniająca się z ciemności sceny", w: 1600, h: 2400 },
-  // The hero's picture: 3600 px wide, because it opens as a close-up on one vocalist before pulling back to the stage.
-  stage: { src: "/media/photos/a11-foto-2-xl.jpg", alt: "Pełny skład Aurum Eleven na scenie, w tle ekran LED ze znakiem A11", w: 3600, h: 2400 },
   horns: { src: "/media/photos/a11-foto-3.jpg", alt: "Sekcja dęta Aurum Eleven: saksofonista i puzonista na pierwszym planie, w głębi perkusjonalia i perkusja", w: 2400, h: 1600 },
   vocalsLed: { src: "/media/photos/a11-foto-7.jpg", alt: "Wokaliści Aurum Eleven na scenie, w tle napis AURUM ELEVEN", w: 2400, h: 1600 },
   // Portrait crop from the client's 6000x4000 original: the contact panel is tall, so a landscape file would be upscaled.

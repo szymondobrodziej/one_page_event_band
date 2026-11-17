@@ -10,7 +10,7 @@ function youtubeId(url: string) {
   return url.match(/(?:v=|youtu\.be\/|embed\/)([\w-]{11})/)?.[1] ?? null;
 }
 
-// The full recording with sound. Until the visitor asks for it the section shows a still of the whole band
+// The full recording with sound. Until the visitor asks for it the section shows a still of three vocalists singing
 // (a frame of the client's showreel, graded like every photograph); only then does the youtube-nocookie player load.
 export function Live() {
   const [playing, setPlaying] = useState(false);
@@ -47,7 +47,7 @@ export function Live() {
             />
           ) : (
             <button type="button" onClick={play} className="group absolute inset-0 flex items-center justify-center" aria-label={live.play}>
-              <Image src={live.poster} alt="" fill sizes="(min-width: 1280px) 1152px, 100vw" quality={78} className="origin-[50%_88%] scale-[1.12] object-cover doc-photo" />
+              <Image src={live.poster} alt="" fill sizes="(min-width: 1280px) 1152px, 100vw" quality={78} className="object-cover object-[50%_40%] doc-photo" />
               <span className="absolute inset-0 bg-ink/25" aria-hidden="true" />
               <span className="relative flex size-[clamp(72px,8vw,104px)] items-center justify-center rounded-full bg-ivory text-ink transition-colors duration-200 group-hover:bg-gold">
                 <PlayGlyph className="ml-1 size-[clamp(20px,2vw,26px)]" />
