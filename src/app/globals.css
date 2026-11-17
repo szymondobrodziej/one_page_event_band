@@ -164,20 +164,10 @@
     cursor: progress;
   }
 
-  /* Documentary photography: colour held back so the centre pillar keeps it. */
+  /* Photography in the held colour, the same grade the hero stage uses: real stage light, pulled toward
+     the warm side of the palette so magenta and blue washes sit beside the gold instead of shouting. */
   .doc-photo {
-    filter: grayscale(0.92) contrast(1.06);
-  }
-
-  /* Line-up pillars: documentary monochrome at rest; the lit pillar takes the hero's held, warm colour.
-     Both filters list the same functions in the same order, so the change interpolates instead of snapping. */
-  .pillar-photo {
-    filter: grayscale(0.92) sepia(0) saturate(1) contrast(1.06);
-    transition: filter 450ms var(--ease-arrive);
-  }
-
-  .pillar-photo[data-lit] {
-    filter: grayscale(0) sepia(0.08) saturate(0.68) contrast(1.04);
+    filter: sepia(0.08) saturate(0.68) contrast(1.04);
   }
 
   .no-scrollbar {

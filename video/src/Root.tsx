@@ -17,7 +17,6 @@ export const RemotionRoot: React.FC = () => (
       fps={FPS}
       width={1080}
       height={654}
-      defaultProps={{ gapRatio: 10 / 1080 }}
     />
     <Composition id="LineUp" component={LineUp} durationInFrames={lineUpDuration()} fps={FPS} width={1920} height={1080} />
   </>

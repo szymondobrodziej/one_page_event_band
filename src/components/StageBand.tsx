@@ -3,14 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 
 // Fallback for the living stage (StageCanvas) when WebGL, the shader or the stage video is unavailable.
-// The pillars, their monochrome grade and the gold edge are rendered into the video by Remotion
-// (video/src/HeroLoop.tsx); this component plays it inside the stage's own box, so nothing shifts, and
-// lifts the curtain: one mask per pillar retracts upward, from both edges toward the centre.
-// Geometry must match the render: gap = 12/1920 of the width on desktop, 10/1080 on phones (< 700 px).
+// The closed stage (one picture in the held colour, the raised centre pillar and its gold edge) is rendered
+// into the video by Remotion (video/src/HeroLoop.tsx); this component plays it inside the stage's own box,
+// so nothing shifts, and lifts the curtain: one mask per pillar retracts upward, from both edges toward the
+// centre. Geometry must match the render: eleven equal pillars, no gaps.
 // The desktop render is cropped from the bottom (the crown stays); the phone render is shown whole.
 
-const STAGE = { src: "/media/video/a11-hero-stage-v2.mp4", poster: "/media/video/a11-hero-stage-v2.jpg" };
-const MOBILE = { src: "/media/video/a11-hero-mobile-v4.mp4", poster: "/media/video/a11-hero-mobile-v4.jpg" };
+const STAGE = { src: "/media/video/a11-hero-stage-v3.mp4", poster: "/media/video/a11-hero-stage-v3.jpg" };
+const MOBILE = { src: "/media/video/a11-hero-mobile-v5.mp4", poster: "/media/video/a11-hero-mobile-v5.jpg" };
 
 // Delay per pillar index (0–10): outer pillars first, the centre last.
 const DELAYS = [0, 80, 160, 240, 320, 560, 320, 240, 160, 80, 0];
@@ -65,7 +65,7 @@ export function StageBand({ paused = false }: { paused?: boolean }) {
   return (
     <div
       ref={wrapRef}
-      className="relative h-full w-full overflow-hidden bg-ink [--pillar-gap:0.926%] min-[700px]:[--pillar-gap:0.625%]"
+      className="relative h-full w-full overflow-hidden bg-ink"
       aria-hidden="true"
     >
       <picture>
@@ -75,17 +75,13 @@ export function StageBand({ paused = false }: { paused?: boolean }) {
       {src && <video key={src} ref={videoRef} className={MEDIA_FIT} src={src} muted loop playsInline preload="auto" tabIndex={-1} />}
       <div
         className="pointer-events-none absolute inset-0 grid"
-        style={{ gridTemplateColumns: "repeat(10, minmax(0, 1fr) var(--pillar-gap)) minmax(0, 1fr)" }}
+        style={{ gridTemplateColumns: "repeat(11, minmax(0, 1fr))" }}
       >
-        {Array.from({ length: 21 }, (_, i) =>
-          i % 2 === 1 ? (
-            <span key={i} />
-          ) : (
-            <span key={i} className="relative overflow-hidden">
-              <span className="pillar-mask absolute inset-0 bg-ink" style={{ animationDelay: `${DELAYS[i / 2] + 200}ms` }} />
-            </span>
-          ),
-        )}
+        {DELAYS.map((delay, i) => (
+          <span key={i} className="relative overflow-hidden">
+            <span className="pillar-mask absolute inset-0 bg-ink" style={{ animationDelay: `${delay + 200}ms` }} />
+          </span>
+        ))}
       </div>
     </div>
   );

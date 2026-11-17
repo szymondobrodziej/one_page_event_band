@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { StageBand } from "./StageBand";
 
 // The living stage. A clean colour loop of the showreel (Remotion: video/src/StageSource.tsx) is drawn
-// through eleven pillars by a WebGL shader. Ten pillars are monochrome, the centre one keeps its colour
-// and its gold edge; colour follows the visitor's pointer across the stage (on touch screens it drifts on
-// its own). Geometry is computed per pixel, so the pillars stay sharp at any size. Without WebGL, or if
-// the shader, the context or the video fails, the pre-rendered StageBand plays instead. With reduced
-// motion the stage is a still frame; otherwise a pause control stops all motion (WCAG 2.2.2).
-// The parent sets the height; the stage fills it.
+// through eleven pillars by a WebGL shader, in the warm held colour. On load the eleven pillars rise
+// apart, then close ranks into one picture: eleven musicians, one sound. The centre pillar stays raised
+// and keeps its gold edge. Geometry is computed per pixel, so the pillars stay sharp at any size. Without
+// WebGL, or if the shader, the context or the video fails, the pre-rendered StageBand plays instead. With
+// reduced motion the stage is a still, closed frame; otherwise a pause control stops all motion
+// (WCAG 2.2.2). The parent sets the height; the stage fills it.
 
 const SOURCES = {
   large: "/media/video/a11-stage-source-v2.mp4",
@@ -20,7 +20,8 @@ const DELAYS = [0, 80, 160, 240, 320, 560, 320, 240, 160, 80, 0]; // outer pilla
 const RISE_MS = 1100;
 const REVEAL_WAIT_MS = 1200;
 const VIDEO_FADE_MS = 700;
-const CENTRE = 5;
+const MERGE_AT_MS = 1500; // after the reveal starts: the centre is nearly up
+const MERGE_MS = 1400;
 const PAUSE_KEY = "a11-stage-paused";
 
 const VERT = `
@@ -38,7 +39,6 @@ uniform float u_step;
 uniform float u_gold;
 uniform float u_video;
 uniform float u_rise[11];
-uniform float u_col[11];
 
 const vec3 GROUND = vec3(0.0667);
 const vec3 FLOOR = vec3(0.1098);
@@ -57,9 +57,8 @@ void main() {
   if (local > colW || idxf > 10.0) { gl_FragColor = vec4(GROUND, 1.0); return; }
 
   float rise = 0.0;
-  float c = 0.0;
   for (int k = 0; k < 11; k++) {
-    if (float(k) == idxf) { rise = u_rise[k]; c = u_col[k]; }
+    if (float(k) == idxf) rise = u_rise[k];
   }
   bool centre = idxf == 5.0;
   float stepTop = centre ? 0.0 : u_step * H;
@@ -75,13 +74,11 @@ void main() {
   vec3 rgb = texture2D(u_tex, uv).rgb;
 
   float lum = dot(rgb, vec3(0.2126, 0.7152, 0.0722));
-  float m = clamp((lum * 1.18 - 0.5) * 1.12 + 0.5, 0.0, 1.0);
-  vec3 mono = max(vec3(m), FLOOR);
-  // Held colour: stage light pulled toward the warm side of the palette, so the lit pillar sits
-  // beside the gold edge instead of shouting in magenta or red.
+  // Held colour: stage light pulled toward the warm side of the palette, so the picture sits beside
+  // the gold edge instead of shouting in magenta or red.
   vec3 colour = clamp((mix(vec3(lum), rgb, 0.68) * WARM - 0.5) * 1.04 + 0.5, 0.0, 1.0);
   colour = max(colour, FLOOR);
-  gl_FragColor = vec4(mix(FLOOR, mix(mono, colour, c), u_video), 1.0);
+  gl_FragColor = vec4(mix(FLOOR, colour, u_video), 1.0);
 }
 `;
 
@@ -98,6 +95,10 @@ function compile(gl: WebGLRenderingContext, type: number, source: string) {
 }
 
 const easeOutExpo = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
+const easeInOutCubic = (t: number) => {
+  const x = Math.min(1, Math.max(0, t));
+  return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+};
 
 const readPaused = () => {
   try {
@@ -208,15 +209,11 @@ export function StageCanvas() {
     const uGold = u("u_gold");
     const uVideo = u("u_video");
     const uRise = u("u_rise");
-    const uCol = u("u_col");
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const phone = window.matchMedia("(max-width: 699px)").matches;
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
     const rise = new Float32Array(11);
-    const colour = new Float32Array(11);
-    colour[CENTRE] = 1;
     const mountedAt = performance.now();
     let paused = !reduceMotion && readPaused();
     let revealStart = -1;
@@ -226,10 +223,6 @@ export function StageCanvas() {
     let inView = true;
     let visible = true;
     let raf = 0;
-    let last = performance.now();
-    let pointerX = 0.5;
-    let pointerActive = false;
-    let idleSince = performance.now();
     const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
     const still = () => reduceMotion || paused;
 
@@ -257,8 +250,6 @@ export function StageCanvas() {
 
     const draw = (now: number) => {
       if (torn) return;
-      const dt = Math.min(0.1, (now - last) / 1000);
-      last = now;
       const settled = still();
 
       // The pillars rise with the first video frame, or after a short wait on a slow connection;
@@ -270,19 +261,8 @@ export function StageCanvas() {
         rise[i] = settled ? 1 : revealStart < 0 ? 0 : Math.max(0, easeOutExpo((now - revealStart - DELAYS[i]) / RISE_MS));
       }
 
-      // Where the light is: the pointer, or a slow drift across the stage when nobody is steering.
-      // A still stage keeps colour in the centre pillar only.
-      let x = pointerX;
-      if (!pointerActive) {
-        const drift = (now - idleSince) / 1000;
-        x = 0.5 + 0.46 * Math.sin(drift * 0.42 + (canHover ? 0 : 1.2));
-      }
-      const k = settled ? 1 : 1 - Math.exp(-dt * 7);
-      for (let i = 0; i < 11; i++) {
-        const d = ((i + 0.5) / 11 - x) / (0.62 / 11);
-        const target = i === CENTRE ? 1 : settled ? 0 : Math.exp(-d * d);
-        colour[i] += (target - colour[i]) * k;
-      }
+      // Once the pillars stand, they close ranks into one picture. A still stage is simply closed.
+      const merge = settled ? 1 : revealStart < 0 ? 0 : easeInOutCubic((now - revealStart - MERGE_AT_MS) / MERGE_MS);
 
       if (hasFrame && freshFrame && video.readyState >= 2) {
         freshFrame = !frameCallbacks;
@@ -298,12 +278,11 @@ export function StageCanvas() {
       const cssW = canvas.width / dpr;
       gl.uniform2f(uRes, canvas.width, canvas.height);
       gl.uniform2f(uVid, video.videoWidth || 16, video.videoHeight || 9);
-      gl.uniform1f(uGap, cssW * (phone ? 10 / 1080 : 12 / 1920) * dpr);
+      gl.uniform1f(uGap, cssW * (phone ? 10 / 1080 : 12 / 1920) * dpr * (1 - merge));
       gl.uniform1f(uStep, 0.2126);
       gl.uniform1f(uGold, Math.max(3, Math.round(canvas.height * 0.007)));
       gl.uniform1f(uVideo, videoMix);
       gl.uniform1fv(uRise, rise);
-      gl.uniform1fv(uCol, colour);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     };
 
@@ -313,10 +292,7 @@ export function StageCanvas() {
       if (!torn && visible && !still()) raf = requestAnimationFrame(loop);
     };
     const start = () => {
-      if (!raf && !torn) {
-        last = performance.now();
-        raf = requestAnimationFrame(loop);
-      }
+      if (!raf && !torn) raf = requestAnimationFrame(loop);
     };
     cleanups.push(() => cancelAnimationFrame(raf));
 
@@ -388,21 +364,6 @@ export function StageCanvas() {
     io.observe(wrap);
     cleanups.push(() => io.disconnect());
     listen(document, "visibilitychange", sync);
-
-    const onLeave = () => {
-      pointerActive = false;
-      idleSince = performance.now() - (Math.asin(Math.max(-1, Math.min(1, (pointerX - 0.5) / 0.46))) / 0.42) * 1000;
-    };
-    listen(wrap, "pointermove", (event) => {
-      const rect = wrap.getBoundingClientRect();
-      pointerX = Math.min(1, Math.max(0, ((event as PointerEvent).clientX - rect.left) / rect.width));
-      pointerActive = true;
-    });
-    listen(wrap, "pointerleave", onLeave);
-    listen(wrap, "pointercancel", onLeave);
-    listen(wrap, "pointerup", (event) => {
-      if ((event as PointerEvent).pointerType !== "mouse") onLeave();
-    });
 
     if (still()) draw(performance.now());
     else start();

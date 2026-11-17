@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { lineup } from "@/content/site";
 
-// The line-up: eleven pillars, one musician in each, in the hero's geometry and grade. They rest in documentary
-// monochrome; the pillar the visitor points at takes the hero's held colour. On touch screens, where nothing
-// hovers, the pillar nearest the middle of the strip is lit as the visitor scrolls it (or the one they touch).
+// The line-up: eleven pillars, one musician in each, in the hero's geometry and held colour. The pillar the
+// visitor points at takes the hero centre pillar's gold edge. On touch screens, where nothing hovers, the
+// pillar nearest the middle of the strip is lit as the visitor scrolls it (or the one they touch).
 // Nothing moves on its own: the living stage in the hero stays the page's only unprompted motion.
 export function LineUp() {
   const [lit, setLit] = useState<number | null>(null);
@@ -103,6 +103,10 @@ export function LineUp() {
             >
               <figure className="m-0">
                 <div className="relative aspect-[3/10] overflow-hidden bg-ink">
+                  <span
+                    aria-hidden="true"
+                    className={`absolute inset-x-0 top-0 z-10 h-[3px] origin-top bg-gold transition-transform duration-300 ease-[var(--ease-arrive)] ${on ? "scale-y-100" : "scale-y-0"}`}
+                  />
                   <Image
                     src={`/media/lineup/a11-pion-${member.slug}.jpg`}
                     alt=""
@@ -110,8 +114,7 @@ export function LineUp() {
                     sizes="(min-width: 1024px) 9vw, 34vw"
                     quality={78}
                     loading={near ? "eager" : "lazy"}
-                    data-lit={on || undefined}
-                    className="pillar-photo object-cover"
+                    className="doc-photo object-cover"
                   />
                 </div>
                 <figcaption className={`mt-3 whitespace-nowrap text-[13px] leading-tight transition-colors duration-300 ${on ? "text-ink" : "text-pebble"}`}>
