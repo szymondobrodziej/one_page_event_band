@@ -38,7 +38,7 @@ function StagePlot() {
             </div>
           ))}
         </div>
-        <div className="mt-7 border-t border-[#3a3a3a] py-3 text-center text-[13px] text-stone">Przód sceny</div>
+        <div className="mt-7 border-t border-rule-strong py-3 text-center text-[13px] text-stone">Przód sceny</div>
       </div>
       <figcaption className="mt-3.5 text-[14px] text-stone">Schemat składu. Dokładny plan sceny jest w riderze.</figcaption>
     </figure>

@@ -12,7 +12,10 @@
   --color-dust: #77726a; /* large dimmed text on ink, 3.9:1 */
   --color-smoke: #55514a; /* secondary text on ivory, 7:1 */
   --color-pebble: #6b665e; /* captions on ivory, 5.1:1 */
+  --color-ivory-dim: #cfcac0; /* lead paragraphs and nav links on ink */
+  --color-error-sand: #e0c49a; /* validation on ink; the brand forbids red */
   --color-rule-ink: #2b2b2b;
+  --color-rule-strong: #3a3a3a; /* rules that must read as structure on ink */
   --color-rule-ivory: #d9d2c5;
 
   --font-display: var(--font-inter-tight), "Helvetica Neue", Arial, sans-serif;
@@ -56,6 +59,11 @@
   :focus-visible {
     outline: 2px solid var(--color-gold);
     outline-offset: 3px;
+  }
+
+  /* Gold measures under 3:1 on ivory, so ivory sections take an ink ring. */
+  .bg-ivory :focus-visible {
+    outline-color: var(--color-ink);
   }
 
   h1,
@@ -161,6 +169,25 @@
     filter: grayscale(0.92) contrast(1.06);
   }
 
+  /* Line-up pillars: documentary monochrome at rest; the lit pillar takes the hero's held, warm colour.
+     Both filters list the same functions in the same order, so the change interpolates instead of snapping. */
+  .pillar-photo {
+    filter: grayscale(0.92) sepia(0) saturate(1) contrast(1.06);
+    transition: filter 450ms var(--ease-arrive);
+  }
+
+  .pillar-photo[data-lit] {
+    filter: grayscale(0) sepia(0.08) saturate(0.68) contrast(1.04);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   .link-quiet {
     transition: color 200ms var(--ease-arrive);
   }
@@ -175,7 +202,7 @@
     padding: 0;
     background: transparent;
     border: 0;
-    border-bottom: 1px solid #3a3a3a;
+    border-bottom: 1px solid var(--color-rule-strong);
     border-radius: 0;
     color: var(--color-ivory);
     font-family: var(--font-text);
@@ -184,7 +211,7 @@
   }
 
   .field::placeholder {
-    color: #8e8a82;
+    color: var(--color-stone);
   }
 
   .field:focus {
@@ -197,7 +224,7 @@
   }
 
   .field[aria-invalid="true"] {
-    border-bottom-color: #c9a27a;
+    border-bottom-color: var(--color-error-sand);
   }
 }
 

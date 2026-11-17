@@ -19,7 +19,7 @@ export function Problem() {
           <h2 id="problem-title" className="display-2 max-w-[10.5em]">
             {problem.headline}
           </h2>
-          <p className="mt-10 max-w-[31em] text-[19px] leading-[1.65] text-smoke">{problem.body}</p>
+          <p className="mt-10 max-w-[31em] text-[18px] leading-[1.6] text-smoke">{problem.body}</p>
           <p className="mt-[clamp(48px,6vw,88px)] max-w-[15em] font-display text-[clamp(26px,2.6vw,38px)] leading-[1.15] tracking-[-0.025em]">
             {problem.turn}
           </p>

@@ -9,7 +9,7 @@ export function Process() {
           {workflow.headline}
         </h2>
         <div className="relative">
-          <div className="absolute inset-x-0 top-[88px] hidden h-px bg-[#3a3a3a] md:block" aria-hidden="true" />
+          <div className="absolute inset-x-0 top-[88px] hidden h-px bg-rule-strong md:block" aria-hidden="true" />
           <ol className="relative grid list-none gap-x-8 gap-y-14 p-0 md:grid-cols-5">
             {workflow.steps.map((step, i) => (
               <li key={step.title} className="flex flex-col">

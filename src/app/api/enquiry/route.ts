@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { parseEnquiry } from "@/lib/enquiry";
+import { HONEYPOT_FIELD, parseEnquiry } from "@/lib/enquiry";
 
 // Sends the availability enquiry through Resend (https://resend.com).
 // Required on the server: RESEND_API_KEY and CONTACT_TO_EMAIL. Optional: CONTACT_FROM_EMAIL
@@ -13,7 +13,8 @@ export async function POST(request: Request) {
   }
 
   // Honeypot: real visitors never see or fill this field.
-  if (typeof body.company === "string" && body.company.trim() !== "") {
+  const trap = body[HONEYPOT_FIELD];
+  if (typeof trap === "string" && trap.trim() !== "") {
     return NextResponse.json({ ok: true });
   }
 

@@ -6,6 +6,7 @@ import { Lockup } from "./Logo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
@@ -13,6 +14,17 @@ export function Header() {
     if (!open) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // While the sheet is open, everything outside the header is inert, so Tab stays within the menu.
+    const inerted: Element[] = [];
+    for (let node = headerRef.current as Element | null; node?.parentElement; node = node.parentElement) {
+      if (node === document.body) break;
+      for (const sibling of Array.from(node.parentElement.children)) {
+        if (sibling !== node && !sibling.hasAttribute("inert")) {
+          sibling.setAttribute("inert", "");
+          inerted.push(sibling);
+        }
+      }
+    }
     firstLinkRef.current?.focus();
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -23,12 +35,13 @@ export function Header() {
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = previous;
+      inerted.forEach((el) => el.removeAttribute("inert"));
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 h-[72px] bg-ink">
+    <header ref={headerRef} className="sticky top-0 z-50 h-[72px] bg-ink">
       <div className="shell flex h-full items-center justify-between gap-8">
         <a href="#top" aria-label="Aurum Eleven, początek strony" className="text-ivory">
           <Lockup />
@@ -36,7 +49,7 @@ export function Header() {
 
         <nav aria-label="Nawigacja główna" className="hidden items-center gap-8 lg:flex">
           {nav.map((item) => (
-            <a key={item.href} href={item.href} className="link-quiet text-[15px] text-[#cfcac0] no-underline">
+            <a key={item.href} href={item.href} className="link-quiet text-[15px] text-ivory-dim no-underline">
               {item.label}
             </a>
           ))}

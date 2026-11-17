@@ -3,27 +3,35 @@
 import { useEffect, useState } from "react";
 import { cta } from "@/content/site";
 
-/** Phones only: the enquiry button pinned to the bottom edge once the hero button has scrolled away,
- *  hidden again while the form itself is on screen. */
+/** Phones only: the enquiry button pinned to the bottom edge. It steps aside whenever another enquiry button
+ *  is on screen (the hero's, or one closing a section) and while the form itself is in view,
+ *  so the visitor never sees two identical buttons at once. */
 export function StickyCta() {
-  const [heroVisible, setHeroVisible] = useState(true);
+  const [buttonVisible, setButtonVisible] = useState(true);
   const [formVisible, setFormVisible] = useState(false);
 
   useEffect(() => {
-    const hero = document.getElementById("hero-cta");
     const form = document.getElementById("kontakt");
-    if (!hero || !form) return;
-    const heroObs = new IntersectionObserver(([e]) => setHeroVisible(e.isIntersecting));
+    const buttons = document.querySelectorAll('main a.btn[href="#kontakt"]');
+    if (!form) return;
+    const onScreen = new Set<Element>();
+    const buttonObs = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) onScreen.add(entry.target);
+        else onScreen.delete(entry.target);
+      }
+      setButtonVisible(onScreen.size > 0);
+    });
     const formObs = new IntersectionObserver(([e]) => setFormVisible(e.isIntersecting), { threshold: 0.15 });
-    heroObs.observe(hero);
+    buttons.forEach((button) => buttonObs.observe(button));
     formObs.observe(form);
     return () => {
-      heroObs.disconnect();
+      buttonObs.disconnect();
       formObs.disconnect();
     };
   }, []);
 
-  const shown = !heroVisible && !formVisible;
+  const shown = !buttonVisible && !formVisible;
 
   return (
     <div

@@ -33,7 +33,7 @@ Eleven musicians on stage, with a full horn section, percussion and three vocali
 - Deployment for this round: a separate Vercel project used as the dev environment, apart from the existing one-page-event-band deployment.
 - Motion: Remotion is approved for rendering the hero loop from the showreel and a short film for the live section.
 - Form: name and e-mail required, phone optional, message required with the hint "data, miejsce, liczba gości"; no other fields.
-- Undecided: business e-mail address, phone number, company legal data (name, NIP), privacy policy text, link to the full recording on YouTube, form delivery provider.
+- Undecided: business e-mail address, phone number, company legal data (name, NIP), privacy policy text, form delivery provider. The full recording with sound is https://youtu.be/OH8YCK4aEQU (supplied 2026-11-17).
 
 ## Brand Commitments
 

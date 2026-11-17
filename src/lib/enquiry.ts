@@ -7,16 +7,22 @@ export type Enquiry = {
 
 export type EnquiryErrors = Partial<Record<keyof Enquiry, string>>;
 
+/** Field limits shared by the form (maxLength) and the server, so nothing is clipped without the visitor seeing it. */
+export const ENQUIRY_LIMITS = { name: 120, email: 200, phone: 40, message: 4000 } as const;
+
+/** Hidden anti-spam field. Its name and label match no autofill category, so browsers and password managers leave it empty. */
+export const HONEYPOT_FIELD = "nie_wypelniaj";
+
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 const clean = (value: unknown, max: number) => (typeof value === "string" ? value.trim().slice(0, max) : "");
 
 export function parseEnquiry(input: Record<string, unknown>): { data: Enquiry; errors: EnquiryErrors } {
   const data: Enquiry = {
-    name: clean(input.name, 120),
-    email: clean(input.email, 200),
-    phone: clean(input.phone, 40),
-    message: clean(input.message, 4000),
+    name: clean(input.name, ENQUIRY_LIMITS.name),
+    email: clean(input.email, ENQUIRY_LIMITS.email),
+    phone: clean(input.phone, ENQUIRY_LIMITS.phone),
+    message: clean(input.message, ENQUIRY_LIMITS.message),
   };
   const errors: EnquiryErrors = {};
   if (!data.name) errors.name = "Wpisz imię, żebyśmy wiedzieli, do kogo odpisać.";

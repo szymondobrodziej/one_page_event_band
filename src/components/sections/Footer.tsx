@@ -1,5 +1,9 @@
-import { site } from "@/content/site";
+import { cta, site } from "@/content/site";
 import { Lockup } from "../Logo";
+
+const COLUMN_HEAD = "mb-1 font-display text-[15px] font-medium";
+// Footer links are stacked, not inline, so each gets a full touch row (about 38px) rather than its 22px line.
+const LINK = "link-quiet py-2 text-[15px] text-ash no-underline";
 
 export function Footer() {
   return (
@@ -15,37 +19,36 @@ export function Footer() {
             <Lockup width={56} size="md" />
           </a>
           <div className="flex flex-wrap gap-x-20 gap-y-10">
-            <div className="flex min-w-36 flex-col gap-3">
-              <h2 className="font-display text-[15px] font-medium">Kontakt</h2>
-              {site.email ? (
-                <a href={`mailto:${site.email}`} className="link-quiet text-[15px] text-ash no-underline">
+            <div className="flex min-w-36 flex-col">
+              <h2 className={COLUMN_HEAD}>Kontakt</h2>
+              <a href="#kontakt" className={LINK}>
+                {cta.short}
+              </a>
+              {site.email && (
+                <a href={`mailto:${site.email}`} className={LINK}>
                   {site.email}
                 </a>
-              ) : (
-                <span className="text-[15px] text-ash">[e-mail firmowy]</span>
               )}
-              {site.phone ? (
-                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="link-quiet text-[15px] text-ash no-underline">
+              {site.phone && (
+                <a href={`tel:${site.phone.replace(/\s/g, "")}`} className={LINK}>
                   {site.phone}
                 </a>
-              ) : (
-                <span className="text-[15px] text-ash">[numer telefonu]</span>
               )}
             </div>
-            <div className="flex min-w-36 flex-col gap-3">
-              <h2 className="font-display text-[15px] font-medium">Na bieżąco</h2>
+            <div className="flex min-w-36 flex-col">
+              <h2 className={COLUMN_HEAD}>Na bieżąco</h2>
               {site.social.map((s) => (
-                <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className="link-quiet text-[15px] text-ash no-underline">
+                <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className={LINK}>
                   {s.name}
                 </a>
               ))}
             </div>
-            <div className="flex min-w-36 flex-col gap-3">
-              <h2 className="font-display text-[15px] font-medium">Informacje</h2>
-              <a href="/polityka-prywatnosci" className="link-quiet text-[15px] text-ash no-underline">
+            <div className="flex min-w-36 flex-col">
+              <h2 className={COLUMN_HEAD}>Informacje</h2>
+              <a href="/polityka-prywatnosci" className={LINK}>
                 Polityka prywatności
               </a>
-              {site.company && <span className="text-[15px] text-stone">{site.company}</span>}
+              {site.company && <span className="py-2 text-[15px] text-stone">{site.company}</span>}
             </div>
           </div>
         </div>

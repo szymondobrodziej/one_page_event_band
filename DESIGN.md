@@ -54,6 +54,17 @@ typography:
     fontFamily: "Manrope, Helvetica Neue, Arial, sans-serif"
     fontSize: "14px"
     fontWeight: 400
+  label:
+    fontFamily: "Inter Tight, Helvetica Neue, Arial, sans-serif"
+    fontSize: "16px"
+    fontWeight: 500
+    letterSpacing: "-0.005em"
+  numeral:
+    fontFamily: "Inter Tight, Helvetica Neue, Arial, sans-serif"
+    fontSize: "64px"
+    fontWeight: 300
+    lineHeight: 1
+    letterSpacing: "-0.04em"
   logotype:
     fontFamily: "Inter Tight, Helvetica Neue, Arial, sans-serif"
     fontSize: "11px"
@@ -72,7 +83,7 @@ components:
   button-ivory:
     backgroundColor: "{colors.ivory}"
     textColor: "{colors.ink}"
-    typography: "{typography.title}"
+    typography: "{typography.label}"
     rounded: "{rounded.none}"
     padding: "0 30px"
     height: "56px"
@@ -82,7 +93,7 @@ components:
   button-ink:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.ivory}"
-    typography: "{typography.title}"
+    typography: "{typography.label}"
     rounded: "{rounded.none}"
     padding: "0 30px"
     height: "56px"
@@ -121,7 +132,7 @@ components:
 
 The whole system is built from one image: a stage seen through eleven vertical pillars, ten of them monochrome and the centre one in colour, standing 27% taller and capped with a gold edge. Eleven musicians, one signature sound. Everything else on the page is quiet so that this image can carry the brand: matte black and ivory take turns owning full-width sections, type is large, light and tightly set, edges are square, and colour is withheld everywhere except at the point of culmination.
 
-The register is a premium design house rather than a party band. Density is low and pacing is generous (sections breathe at up to 168px of vertical padding), copy sits in long left-aligned measures, and there is exactly one unprompted motion on the page: the living stage in the hero (the pillars rising on load, the footage playing inside them, and colour drifting slowly across the pillars while nobody steers it). All other motion answers the visitor (colour following the pointer over the stage, accordion expand, form confirmation, hover colour shifts).
+The register is a premium design house rather than a party band. Density is low and pacing is generous (sections breathe at up to 168px of vertical padding), copy sits in long left-aligned measures, and there is exactly one unprompted motion on the page: the living stage in the hero (the pillars rising on load, the footage playing inside them, and colour drifting slowly across the pillars while nobody steers it). All other motion answers the visitor (colour following the pointer over the stage and over the line-up, accordion expand, form confirmation, hover colour shifts).
 
 Photography is documentary and graded near-monochrome (92% grayscale with a slight contrast lift) wherever it appears, so that the only full colour on screen belongs to the hero's stage: its centre pillar, and the pillar the visitor lights. The category default this refuses: full-bleed party heroes under dark washes, gold-on-black "premium" chrome, logo walls and stat counters.
 
@@ -159,7 +170,7 @@ A two-field palette of matte black and warm ivory, ruled in graphite, with satin
 
 **The Two Fields Rule.** Sections are either ink or ivory, edge to edge. No third surface colour, no tints, no gradients, and no red, blue or violet anywhere.
 
-**The Held Colour Rule.** Photography is graded near-monochrome so that the hero stage is the only full colour on the page: the centre pillar always, plus the one pillar under the visitor's pointer (or under the slow drift). A colour photograph anywhere else spends the one colour moment the system has.
+**The Held Colour Rule.** Photography is graded near-monochrome so that the hero stage is the only full colour on the page: the centre pillar always, plus the one pillar under the visitor's pointer (or under the slow drift). The line-up in "Kto stoi na scenie" borrows the same rule: its pillars rest in monochrome and only the one the visitor points at (on touch, the one nearest the middle of the strip) takes the held colour. A colour photograph anywhere else spends the one colour moment the system has; the YouTube recording is in colour only after the visitor presses play.
 
 ## Typography
 
@@ -177,12 +188,16 @@ A two-field palette of matte black and warm ivory, ruled in graphite, with satin
 - **Body** (Manrope 400, 18px, 1.6): lead and section paragraphs, measures of 30–34em.
 - **Body Small** (Manrope 400, 15–17px, 1.6–1.7): list descriptions, FAQ answers, footer links.
 - **Caption** (Manrope 400, 13–14px): microcopy under buttons, photo captions, field labels, notes.
+- **Label** (Inter Tight 500, 16px, -0.005em): buttons and the play link.
+- **Numeral** (Inter Tight 300, 64px, 1.0, tabular): the process step numbers.
 - **Logotype** (Inter Tight 500, 11–12px, 0.32em tracking, uppercase): the AURUM / ELEVEN wordmark only.
 
 ### Named Rules
 **The Light Voice Rule.** Display and headline sizes are set at weight 300 with negative tracking (-0.035em to -0.04em). Weight 500 is reserved for titles and buttons; nothing on the page is bold.
 
 **The Single Capitals Rule.** Tracked uppercase exists only inside the logotype. Headings, labels and buttons are sentence case.
+
+**The Bound Letter Rule.** Polish one-letter words (a, i, o, u, w, z) and bare numbers never end a line: every content string passes through `typeset()` (`src/lib/typeset.ts`), which binds them to the next word with a non-breaking space. Text written directly in JSX binds them by hand with `\u00A0`.
 
 ## Layout
 
@@ -192,7 +207,7 @@ Composition is built from flex-wrap splits rather than fixed breakpoints: a phot
 
 The hero stage opens the page, full bleed, after 16–48px of air below the header (so the centre pillar's gold edge never reads as a nav underline). Its height leaves the overline and the whole headline above the fold: clamp(300px, min(34vw, 100svh − 430px), 760px) from 700px up, and clamp(280px, min(118vw, 100svh − 380px), 560px) on phones, where the pinned enquiry button also has to clear the headline. The shader computes the geometry per pixel: eleven columns separated by ten gaps of 12/1920 of the width on desktop and 10/1080 under 700px; the ten outer pillars start 21.26% of the height below the top, so the centre pillar stands 27% taller. The pre-rendered fallback (Remotion `HeroStage`, `HeroMobile`) uses the same ratios; any change to one side must be mirrored in the other. Below the stage: the sentence-case overline and the display headline, then the lead beside the primary button and play link, then a ruled caption row with the facts and the credits.
 
-On phones the enquiry button is pinned to the bottom edge once the hero button has scrolled out of view, and hides again while the form is on screen.
+On phones the enquiry button is pinned to the bottom edge, and steps aside whenever another enquiry button is on screen (the hero's or one closing a section) and while the form is in view, so two identical buttons never show at once. The contact section's photo panel appears only from 1040px up; on narrower screens every enquiry button lands straight on the form's headline and first field.
 
 ## Elevation & Depth
 
@@ -203,7 +218,7 @@ The system is flat. There are no drop shadows; depth comes from the alternation 
 
 ## Shapes
 
-Edges are square: buttons, inputs, image frames, the diagram frame and the sticky bar all have zero radius. Inputs are a single bottom hairline with no box. The only circles are functional markers: play affordances (a 40px outlined ring for inline links, a large ivory disc over video) and the small dots of the process timeline and stage diagram. The vertical pillar is the system's signature silhouette; it recurs in the mark, the eleven-pillar icon and the hero stage.
+Edges are square: buttons, inputs, image frames, the diagram frame and the sticky bar all have zero radius. Inputs are a single bottom hairline with no box. The only circles are functional markers: play affordances (a 40px outlined ring for inline links, a large ivory disc over video) and the small dots of the process timeline and stage diagram. The vertical pillar is the system's signature silhouette; it recurs in the mark, the hero stage and the line-up.
 
 ## Components
 
@@ -213,17 +228,19 @@ Calm, square, and sized for touch.
 - **Ivory (primary on ink):** ivory field, ink text, Inter Tight 500 at 16px. Hover moves the field to satin gold over 220ms on the arrival ease.
 - **Ink (primary on ivory):** ink field, ivory text. Hover moves to graphite.
 - **Disabled / sending:** 55% opacity with a progress cursor.
-- **Focus:** a 2px gold outline offset by 3px, shared with every focusable element.
+- **Focus:** a 2px gold outline offset by 3px, shared with every focusable element; inside ivory sections the outline is ink, because gold measures under 3:1 on ivory.
 - There is one call to action wording across the page; buttons carry no arrows or icons.
 
 ### Play affordances
 - **Inline play link:** a 40px circular ring in ivory at 45% opacity holding a small play triangle, followed by a 16px Inter Tight 500 label. Hover shifts the ring to pale gold and the label colour to pale gold.
 - **Video play disc:** a large ivory disc (72–104px) centred over a lightly dimmed poster; hover turns it gold.
+- **Recording player ("Na żywo"):** a 16:9 still of the whole band (a frame of the client's showreel, graded like every photograph) under the play disc. Nothing from YouTube loads until the visitor presses it; then a youtube-nocookie player with sound replaces the still and takes focus. A stone caption says so. The hero's play link scrolls to this player instead of leaving the page.
 
 ### Inputs / Fields
 - **Style:** transparent ground, no box, a 1px strong-rule underline, Manrope 18px ivory text, 52px minimum height. Labels sit above in ash at 14px.
 - **Focus:** the underline turns gold; no outline or glow.
 - **Error:** the underline warms to sand and the message appears below in error sand at 14px; a submission error appears as a sand paragraph with a pale-gold left rule.
+- **Limits and success:** every field carries the same maximum length the server enforces, so nothing is clipped unseen. On success the confirmation heading takes focus; "send another" returns focus to the first field. Contact data the client has not supplied is left out of sentences and the footer, never shown as a bracketed placeholder.
 
 ### Navigation
 - **Desktop:** Manrope 15px links in dimmed ivory on the ink header, 32px apart, quiet gold-light hover; a compact ivory button sits at the right.
@@ -234,6 +251,12 @@ On ivory, the headline sits sticky in a narrow column while questions run in rul
 
 ### Process timeline
 Five steps on a single strong-rule line. Each step carries a 64px light numeral, a 9px dot on the line, a title, its owner in stone and a short body in ash. The last step's numeral and dot are gold; every other is ivory.
+
+### Ruled lists
+"Co dostajesz" and "Dla kogo" set their items as ruled rows rather than cards: an ivory-rule hairline above each item, the item in Inter Tight Light at 22–28px, a short body in smoke below. "Co dostajesz" splits its nine items into two titled groups, "Na scenie" and "Organizacja"; no icons.
+
+### Line-up
+"Kto stoi na scenie" shows the eleven musicians as eleven pillars (`src/components/LineUp.tsx`): each a 3:10 crop of one musician cut from the client's originals (`public/media/lineup`, 480x1600), captioned with the instrument in 13px pebble. Left to right: the rhythm section at the edges, the horns around the three vocals in the middle. At rest every pillar carries the documentary grade; the pillar under the pointer takes the hero's held colour (grayscale 0, sepia 0.08, saturation 0.68) over 450ms and its caption turns ink. From 1024px the pillars stand in one row of eleven; below that they become a sideways strip with snap, about a third of the screen wide each, where the pillar nearest the middle is lit as the visitor scrolls. Nothing moves on its own, and all eleven images load together once the strip nears the viewport.
 
 ### Living stage (signature)
 The hero's eleven-pillar stage, drawn live by a WebGL shader (`src/components/StageCanvas.tsx`) from a clean colour showreel loop (Remotion `StageSource`, 1600x900, phones 960x540): four shots in 2.5x slow motion from a 75 fps motion-interpolated master, the whole band first and held longest, then the horns and the two lead vocalists, each picked by measuring the centre crown so it always carries lit content and never reads as an empty slab. Ten pillars are graded monochrome (luminance, 1.18 brightness, 1.12 contrast, floor #1c1c1c); colour pillars are held warm (68% saturation, a slight shift toward amber) so they sit beside the gold edge, and the centre pillar always carries colour and the gold top edge. Colour follows the pointer: the pillar under it lights up in full colour and its neighbours fall off on a Gaussian (sigma 0.62 of a pillar), easing at a 140ms time constant. With no pointer on the stage, and always on touch screens, the light drifts slowly across the pillars on its own (a 15 s sine sweep). On load the pillars rise from both outer edges toward the centre (80ms steps, centre held to 560ms, 1100ms each, ease-out-expo) as soon as the first frame decodes, or after 1.2 s on a slow connection, with the footage then fading in over 700ms. The stage plays only while in view and in a visible tab, uploads a texture only on new video frames, and caps the pixel ratio at 1.75. A square outlined 44px pause control sits at the stage's lower right, on the shell's right edge; it stops the footage and the drift, holds colour in the centre pillar and is remembered per visitor. With reduced motion the stage is a still frame with the centre in colour and no control. Without WebGL, if the context is lost, or if the shader or video fails, the stage tears itself down and the pre-rendered Remotion band (`StageBand`, same cut and grade) plays in the same box, so nothing shifts. The stage is decorative (`aria-hidden`); the headline below carries the message.
@@ -246,7 +269,7 @@ The hero's eleven-pillar stage, drawn live by a WebGL shader (`src/components/St
 - **Do** grade every photograph with the documentary treatment (92% grayscale, 1.06 contrast) so the centre pillar keeps the only colour.
 - **Do** reserve gold for culminations and for responses to action (hover, focus, the last step).
 - **Do** keep the stage geometry in the shader in lockstep with the Remotion fallback renders (gap ratio, step ratio).
-- **Do** use the 2px gold focus outline with 3px offset on every interactive element.
+- **Do** use the 2px focus outline with 3px offset on every interactive element: gold on ink, ink on ivory.
 - **Do** use circles only for play affordances and timeline or diagram markers.
 
 ### Don't:
