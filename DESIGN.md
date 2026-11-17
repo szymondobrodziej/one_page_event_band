@@ -1,6 +1,6 @@
 ---
 name: Aurum Eleven
-description: The stage seen through eleven pillars, lit where the visitor points; matte black and ivory own the page, satin gold arrives only at the culmination.
+description: The stage filling the first screen, lit where the visitor points; matte black and ivory own the page, satin gold arrives only at the culmination.
 colors:
   ink: "#111111"
   ivory: "#f5f2ec"
@@ -128,11 +128,11 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Stage Through Eleven Pillars"**
+**Creative North Star: "The Lit Stage"**
 
-The whole system is built from one image: a stage seen through eleven vertical pillars, ten of them monochrome and the centre one in colour, standing 27% taller and capped with a gold edge; colour lights the pillar under the visitor's pointer. Eleven musicians, one signature sound. Everything else on the page is quiet so that this image can carry the brand: matte black and ivory take turns owning full-width sections, type is large, light and tightly set, edges are square, and gold is withheld everywhere except at the point of culmination.
+The whole system is built from one image: the band's stage filling the first screen under the header, in monochrome, with colour lighting it wherever the visitor points. Eleven musicians, one signature sound. The vertical pillar stays the silhouette of the mark and of the line-up of eleven; the hero itself has no stripes (the user asked for it full height and without them on 2026-11-17). Everything else on the page is quiet so that this image can carry the brand: matte black and ivory take turns owning full-width sections, type is large, light and tightly set, edges are square, and gold is withheld everywhere except at the point of culmination.
 
-The register is a premium design house rather than a party band. Density is low and pacing is generous (sections breathe at up to 168px of vertical padding), copy sits in long left-aligned measures, and there is exactly one unprompted motion on the page: the living stage in the hero (the pillars rising on load, the footage playing inside them, and colour drifting slowly across the pillars while nobody steers it). All other motion answers the visitor (colour following the pointer over the stage, the gold edge over the line-up, accordion expand, form confirmation, hover colour shifts).
+The register is a premium design house rather than a party band. Density is low and pacing is generous (sections breathe at up to 168px of vertical padding), copy sits in long left-aligned measures, and there is exactly one unprompted motion on the page: the living stage in the hero (the footage fading up and playing, and the light drifting slowly across it while nobody steers it). All other motion answers the visitor (colour following the pointer over the stage, the gold edge over the line-up, accordion expand, form confirmation, hover colour shifts).
 
 Photography is documentary and keeps its stage light, graded in the held colour wherever it appears (68% saturation, a slight shift toward amber), so magenta and blue washes sit beside the gold instead of shouting. An earlier near-monochrome grade read as gloomy to the user and was dropped. The category default this refuses: full-bleed party heroes under dark washes, gold-on-black "premium" chrome, logo walls and stat counters.
 
@@ -148,7 +148,7 @@ Photography is documentary and keeps its stage light, graded in the held colour 
 A two-field palette of matte black and warm ivory, ruled in graphite, with satin gold held in reserve.
 
 ### Primary
-- **Satin Gold** (gold): the culmination colour. The logo's beam, the centre pillar's top edge in the hero stage, the final step's numeral and marker in the process timeline, and the hover state of ivory buttons and the large play disc. Never a background field, never body text.
+- **Satin Gold** (gold): the culmination colour. The logo's beam, the lit pillar's top edge in the line-up, the final step's numeral and marker in the process timeline, and the hover state of ivory buttons and the large play disc. Never a background field, never body text.
 - **Pale Gold** (gold-light): the lighter step of gold, used only in response to action: quiet-link hover, play-ring hover border, the left rule on a form error alert.
 
 ### Neutral
@@ -166,11 +166,11 @@ A two-field palette of matte black and warm ivory, ruled in graphite, with satin
 - **Error Sand** (error-sand): validation messages on ink. The brand forbids red, so errors speak in a warm sand that stays legible (well above AA on ink) and is separated from gold by context and by the alert's left rule.
 
 ### Named Rules
-**The Culmination Rule.** Gold marks the end of a sequence or the answer to an action: the gold beam in the mark, the centre pillar, the last process step, a hover. If gold appears at rest anywhere that is not a culmination, it is wrong.
+**The Culmination Rule.** Gold marks the end of a sequence or the answer to an action: the gold beam in the mark, the lit pillar of the line-up, the last process step, a hover. If gold appears at rest anywhere that is not a culmination, it is wrong.
 
 **The Two Fields Rule.** Sections are either ink or ivory, edge to edge. No third surface colour, no tints, no gradients, and no red, blue or violet anywhere.
 
-**The Held Colour Rule.** Every photograph carries the warm held grade (sepia 0.08, saturation 0.68, contrast 1.04), and so does every lit pillar of the hero stage (in the shader: 68% of the original saturation, a slight shift toward amber, 1.04 contrast, floor #1c1c1c). On the stage, ten pillars rest in monochrome; the centre pillar always carries colour, and the pillar under the visitor's pointer (or under the slow drift) lights up. Stage light stays real but never shouts in raw magenta, red or blue, and it sits beside the gold. Gold remains the one held accent: the centre pillar's edge, the lit pillar of the line-up, the last process step, hover. The YouTube recording plays in its own colour after the visitor presses play.
+**The Held Colour Rule.** Every photograph carries the warm held grade (sepia 0.08, saturation 0.68, contrast 1.04), and so does the light on the hero stage (in the shader: 68% of the original saturation, a slight shift toward amber, 1.04 contrast, floor #1c1c1c). The stage rests in monochrome; colour appears only in the pool of light under the visitor's pointer (or under the slow drift). Stage light stays real but never shouts in raw magenta, red or blue, and it sits beside the gold. Gold remains the one held accent: the logo's beam, the lit pillar of the line-up, the last process step, hover. The YouTube recording plays in its own colour after the visitor presses play.
 
 ## Typography
 
@@ -205,9 +205,9 @@ Content sits in a single shell (max 1280px, side gutter clamp 20–64px). Sectio
 
 Composition is built from flex-wrap splits rather than fixed breakpoints: a photo panel and a text panel share a row with flex bases around 420–560px and stack naturally on narrow screens. Split sections often let the photograph run edge to edge on one side while the text keeps its own padding. Text measures are held deliberately (lead 34em, answers 40em, headlines 10.5–12.5em).
 
-The hero stage opens the page, full bleed, after 16–48px of air below the header (so the centre pillar's gold edge never reads as a nav underline). Its height leaves the overline and the whole headline above the fold: clamp(300px, min(34vw, 100svh − 430px), 760px) from 700px up, and clamp(280px, min(118vw, 100svh − 380px), 560px) on phones, where the pinned enquiry button also has to clear the headline. The shader computes the geometry per pixel: eleven columns separated by ten gaps of 12/1920 of the width on desktop and 10/1080 under 700px; the ten outer pillars start 21.26% of the height below the top, so the centre pillar stands 27% taller. The pre-rendered fallback (Remotion `HeroStage`, `HeroMobile`) uses the same ratios; any change to one side must be mirrored in the other. Below the stage: the sentence-case overline and the display headline, then the lead beside the primary button and play link, then a ruled caption row with the facts and the credits.
+The hero stage opens the page, full bleed and full height: it fills the screen under the 72px header (100svh − 72px, at least 440px) on every width, so the overline, the headline, the lead and the buttons follow below the fold; the page opens on the stage alone, with only the header's own enquiry button. The footage covers the stage from its centre, so phones see the middle of the stage (the vocalists).
 
-On phones the enquiry button is pinned to the bottom edge, and steps aside whenever another enquiry button is on screen (the hero's or one closing a section) and while the form is in view, so two identical buttons never show at once. The contact section's photo panel appears only from 1040px up; on narrower screens every enquiry button lands straight on the form's headline and first field.
+On phones the enquiry button is pinned to the bottom edge once the visitor has scrolled most of the hero stage away (never on the opening screen), and steps aside whenever another enquiry button is on screen (the hero's or one closing a section) and while the form is in view, so two identical buttons never show at once. The contact section's photo panel appears only from 1040px up; on narrower screens every enquiry button lands straight on the form's headline and first field.
 
 ## Elevation & Depth
 
@@ -218,7 +218,7 @@ The system is flat. There are no drop shadows; depth comes from the alternation 
 
 ## Shapes
 
-Edges are square: buttons, inputs, image frames, the diagram frame and the sticky bar all have zero radius. Inputs are a single bottom hairline with no box. The only circles are functional markers: play affordances (a 40px outlined ring for inline links, a large ivory disc over video) and the small dots of the process timeline and stage diagram. The vertical pillar is the system's signature silhouette; it recurs in the mark, the hero stage and the line-up.
+Edges are square: buttons, inputs, image frames, the diagram frame and the sticky bar all have zero radius. Inputs are a single bottom hairline with no box. The only circles are functional markers: play affordances (a 40px outlined ring for inline links, a large ivory disc over video) and the small dots of the process timeline and stage diagram. The vertical pillar is the system's signature silhouette; it recurs in the mark and the line-up.
 
 ## Components
 
@@ -256,10 +256,10 @@ Five steps on a single strong-rule line. Each step carries a 64px light numeral,
 "Co dostajesz" and "Dla kogo" set their items as ruled rows rather than cards: an ivory-rule hairline above each item, the item in Inter Tight Light at 22–28px, a short body in smoke below. "Co dostajesz" splits its nine items into two titled groups, "Na scenie" and "Organizacja"; no icons.
 
 ### Line-up
-"Kto stoi na scenie" shows the eleven musicians as eleven pillars (`src/components/LineUp.tsx`): each a 3:10 crop of one musician cut from the client's originals (`public/media/lineup`, 480x1600), captioned with the instrument in 13px pebble. Left to right: the rhythm section at the edges, the horns around the three vocals in the middle. Every pillar carries the held colour; the pillar under the pointer takes the hero centre pillar's 3px gold top edge (scaling in over 300ms) and its caption turns ink. From 1024px the pillars stand in one row of eleven; below that they become a sideways strip with snap, about a third of the screen wide each, where the pillar nearest the middle is lit as the visitor scrolls. Nothing moves on its own, and all eleven images load together once the strip nears the viewport.
+"Kto stoi na scenie" shows the eleven musicians as eleven pillars (`src/components/LineUp.tsx`): each a 3:10 crop of one musician cut from the client's originals (`public/media/lineup`, 480x1600), captioned with the instrument in 13px pebble. Left to right: the rhythm section at the edges, the horns around the three vocals in the middle. Every pillar carries the held colour; the pillar under the pointer takes a 3px gold top edge, the logo beam's colour (scaling in over 300ms) and its caption turns ink. From 1024px the pillars stand in one row of eleven; below that they become a sideways strip with snap, about a third of the screen wide each, where the pillar nearest the middle is lit as the visitor scrolls. Nothing moves on its own, and all eleven images load together once the strip nears the viewport.
 
 ### Living stage (signature)
-The hero's eleven-pillar stage, drawn live by a WebGL shader (`src/components/StageCanvas.tsx`) from a clean colour showreel loop (Remotion `StageSource`, 1600x900, phones 960x540): four shots in 2.5x slow motion from a 75 fps motion-interpolated master, the whole band first and held longest, then the horns and the two lead vocalists, each picked by measuring the centre crown so it always carries lit content and never reads as an empty slab. Ten pillars are graded monochrome (luminance, 1.18 brightness, 1.12 contrast, floor #1c1c1c); colour pillars are held warm (68% saturation, a slight shift toward amber) so they sit beside the gold edge, and the centre pillar always carries colour and the gold top edge. Colour follows the pointer: the pillar under it lights up in full colour and its neighbours fall off on a Gaussian (sigma 0.62 of a pillar), easing at a 140ms time constant. With no pointer on the stage, and always on touch screens, the light drifts slowly across the pillars on its own (a 15 s sine sweep). On load the pillars rise from both outer edges toward the centre (80ms steps, centre held to 560ms, 1100ms each, ease-out-expo) as soon as the first frame decodes, or after 1.2 s on a slow connection, with the footage then fading in over 700ms. The stage plays only while in view and in a visible tab, uploads a texture only on new video frames, and caps the pixel ratio at 1.75. A square outlined 44px pause control sits at the stage's lower right, on the shell's right edge; it stops the footage and the drift, holds colour in the centre pillar and is remembered per visitor. With reduced motion the stage is a still frame with the centre in colour and no control. Without WebGL, if the context is lost, or if the shader or video fails, the stage tears itself down and the pre-rendered Remotion band (`StageBand`, same cut and grade) plays in the same box, so nothing shifts. The stage is decorative (`aria-hidden`); the headline below carries the message.
+The hero stage (`src/components/StageCanvas.tsx`) is the client's showreel drawn live by a WebGL shader from a clean colour loop (Remotion `StageSource`, 1600x900; 960x540 only where the stage needs under ~600 device pixels of height): four shots in 2.5x slow motion from a 75 fps motion-interpolated master, the whole band first and held longest, then the horns and the two lead vocalists. It covers the whole stage with no pillars, gaps or steps. The picture rests in monochrome (luminance, 1.18 brightness, 1.12 contrast, floor #1c1c1c); a round pool of the held colour (a Gaussian with a radius of 0.34 of the stage's shorter side) follows the pointer in both axes, easing at a 140ms time constant. With no pointer on the stage (touch screens, or the pointer elsewhere) the light drifts slowly from side to side on its own. The loop's first frame (`a11-stage-source-v2.jpg`) is drawn as soon as it decodes and the footage takes over when it arrives, both fading up from the floor over 700ms. The loop plays only while the stage is on screen and the tab is in front; a square pause control at the stage's bottom right stops all motion and is remembered per visitor (WCAG 2.2.2). Under reduced motion the footage is never fetched: the stage is the still first frame, lit at the centre, with no control. Without WebGL, or if the shader, the context or the video fails, `StageBand` plays the same loop plainly in the held colour of the photographs, with no light.
 
 ## Do's and Don'ts
 
@@ -268,7 +268,7 @@ The hero's eleven-pillar stage, drawn live by a WebGL shader (`src/components/St
 - **Do** set headlines in Inter Tight 300 with negative tracking and let them be large.
 - **Do** grade every photograph with `.doc-photo`, the held colour (sepia 0.08, saturation 0.68, contrast 1.04), so photographs and the stage share one warm light.
 - **Do** reserve gold for culminations and for responses to action (hover, focus, the last step).
-- **Do** keep the stage geometry in the shader in lockstep with the Remotion fallback renders (gap ratio, step ratio).
+- **Do** keep the stage poster the loop's own first frame, so the hand-over from poster to footage is invisible.
 - **Do** use each documentary picture once: the whole band belongs to the hero stage, so "Jak gramy" carries the horn section and the recording's poster shows three vocalists.
 - **Do** use the 2px focus outline with 3px offset on every interactive element: gold on ink, ink on ivory.
 - **Do** use circles only for play affordances and timeline or diagram markers.

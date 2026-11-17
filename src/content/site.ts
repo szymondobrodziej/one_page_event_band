@@ -45,6 +45,13 @@ export const hero = typeset({
   credits: "Muzycy grali z Adamem Sztabą, Justyną Steczkowską, Mrozem, Kwiatem Jabłoni. Wokaliści z The Voice of Poland.",
 });
 
+// The hero stage: a clean colour loop of the showreel (video/src/StageSource.tsx) and its first frame.
+export const stageMedia = {
+  large: "/media/video/a11-stage-source-v2.mp4",
+  small: "/media/video/a11-stage-source-sm-v2.mp4",
+  poster: "/media/video/a11-stage-source-v2.jpg",
+} as const;
+
 export const problem = typeset({
   headline: "Goście siedzą przy stole, a parkiet jest pusty",
   body: "Część oficjalna eventu przebiegła dobrze. Zaczyna się część rozrywkowa i energia spada. Goście zostają przy stołach, a parkiet świeci pustkami. Po evencie słyszysz, że było ok, a po tygodniu nikt o nim nie pamięta.",

@@ -1,26 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { stageMedia as STAGE_MEDIA } from "@/content/site";
 import { StageBand } from "./StageBand";
 
-// The living stage. A clean colour loop of the showreel (Remotion: video/src/StageSource.tsx) is drawn
-// through eleven pillars by a WebGL shader. Ten pillars are monochrome, the centre one keeps its colour
-// and its gold edge; colour follows the visitor's pointer across the stage (on touch screens it drifts on
-// its own). Geometry is computed per pixel, so the pillars stay sharp at any size. Without WebGL, or if
-// the shader, the context or the video fails, the pre-rendered StageBand plays instead. With reduced
-// motion the stage is a still frame; otherwise a pause control stops all motion (WCAG 2.2.2).
+// The living stage. A clean colour loop of the showreel (Remotion: video/src/StageSource.tsx) fills the
+// hero edge to edge, drawn by a WebGL shader in monochrome; colour lights the stage where the visitor
+// points, a soft pool of the warm held colour that follows the pointer (on touch screens it drifts on its
+// own). The first frame is drawn from a poster until the footage arrives. Without WebGL, or if the shader,
+// the context or the video fails, StageBand plays the loop plainly instead. With reduced motion the stage
+// is the poster, still, lit at the centre; otherwise a pause control stops all motion (WCAG 2.2.2).
 // The parent sets the height; the stage fills it.
 
-const SOURCES = {
-  large: "/media/video/a11-stage-source-v2.mp4",
-  small: "/media/video/a11-stage-source-sm-v2.mp4",
-};
-
-const DELAYS = [0, 80, 160, 240, 320, 560, 320, 240, 160, 80, 0]; // outer pillars first, the centre last
-const RISE_MS = 1100;
-const REVEAL_WAIT_MS = 1200;
-const VIDEO_FADE_MS = 700;
-const CENTRE = 5;
+const FADE_MS = 700;
 const PAUSE_KEY = "a11-stage-paused";
 
 const VERT = `
@@ -33,55 +25,32 @@ precision mediump float;
 uniform sampler2D u_tex;
 uniform vec2 u_res;
 uniform vec2 u_vid;
-uniform float u_gap;
-uniform float u_step;
-uniform float u_gold;
-uniform float u_video;
-uniform float u_rise[11];
-uniform float u_col[11];
+uniform vec2 u_light;
+uniform float u_radius;
+uniform float u_show;
 
-const vec3 GROUND = vec3(0.0667);
 const vec3 FLOOR = vec3(0.1098);
-const vec3 GOLD = vec3(0.6902, 0.5529, 0.3412);
 const vec3 WARM = vec3(1.03, 0.99, 0.93);
 
 void main() {
-  vec2 p = gl_FragCoord.xy;
-  float W = u_res.x;
-  float H = u_res.y;
-  float yTop = H - p.y;
-  float colW = (W - 10.0 * u_gap) / 11.0;
-  float pitch = colW + u_gap;
-  float idxf = floor(p.x / pitch);
-  float local = p.x - idxf * pitch;
-  if (local > colW || idxf > 10.0) { gl_FragColor = vec4(GROUND, 1.0); return; }
+  vec2 p = vec2(gl_FragCoord.x, u_res.y - gl_FragCoord.y);
+  if (u_show <= 0.0) { gl_FragColor = vec4(FLOOR, 1.0); return; }
 
-  float rise = 0.0;
-  float c = 0.0;
-  for (int k = 0; k < 11; k++) {
-    if (float(k) == idxf) { rise = u_rise[k]; c = u_col[k]; }
-  }
-  bool centre = idxf == 5.0;
-  float stepTop = centre ? 0.0 : u_step * H;
-  float top = mix(H, stepTop, rise);
-  if (yTop < top) { gl_FragColor = vec4(GROUND, 1.0); return; }
-  if (centre && yTop < top + u_gold) { gl_FragColor = vec4(GOLD, 1.0); return; }
-  if (u_video <= 0.0) { gl_FragColor = vec4(FLOOR, 1.0); return; }
-
-  float sc = max(W / u_vid.x, H / u_vid.y);
+  float sc = max(u_res.x / u_vid.x, u_res.y / u_vid.y);
   vec2 size = u_vid * sc;
-  vec2 off = (vec2(W, H) - size) * 0.5;
-  vec2 uv = (vec2(p.x, yTop) - off) / size;
+  vec2 uv = (p - (u_res - size) * 0.5) / size;
   vec3 rgb = texture2D(u_tex, uv).rgb;
 
   float lum = dot(rgb, vec3(0.2126, 0.7152, 0.0722));
   float m = clamp((lum * 1.18 - 0.5) * 1.12 + 0.5, 0.0, 1.0);
   vec3 mono = max(vec3(m), FLOOR);
-  // Held colour: stage light pulled toward the warm side of the palette, so the lit pillar sits
-  // beside the gold edge instead of shouting in magenta or red.
+  // Held colour: stage light pulled toward the warm side of the palette instead of shouting in magenta or red.
   vec3 colour = clamp((mix(vec3(lum), rgb, 0.68) * WARM - 0.5) * 1.04 + 0.5, 0.0, 1.0);
   colour = max(colour, FLOOR);
-  gl_FragColor = vec4(mix(FLOOR, mix(mono, colour, c), u_video), 1.0);
+
+  vec2 d = (p - u_light) / u_radius;
+  float lit = exp(-dot(d, d));
+  gl_FragColor = vec4(mix(FLOOR, mix(mono, colour, lit), u_show), 1.0);
 }
 `;
 
@@ -96,8 +65,6 @@ function compile(gl: WebGLRenderingContext, type: number, source: string) {
   }
   return shader;
 }
-
-const easeOutExpo = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
 const readPaused = () => {
   try {
@@ -203,35 +170,42 @@ export function StageCanvas() {
     const u = (name: string) => gl.getUniformLocation(program, name);
     const uRes = u("u_res");
     const uVid = u("u_vid");
-    const uGap = u("u_gap");
-    const uStep = u("u_step");
-    const uGold = u("u_gold");
-    const uVideo = u("u_video");
-    const uRise = u("u_rise");
-    const uCol = u("u_col");
+    const uLight = u("u_light");
+    const uRadius = u("u_radius");
+    const uShow = u("u_show");
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const phone = window.matchMedia("(max-width: 699px)").matches;
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-    const rise = new Float32Array(11);
-    const colour = new Float32Array(11);
-    colour[CENTRE] = 1;
-    const mountedAt = performance.now();
     let paused = !reduceMotion && readPaused();
-    let revealStart = -1;
-    let videoAt = -1;
+    let shownAt = -1;
     let hasFrame = false;
     let freshFrame = true;
+    let posterReady = false;
+    let posterUploaded = false;
     let inView = true;
     let visible = true;
     let raf = 0;
     let last = performance.now();
-    let pointerX = 0.5;
+    // The light, in fractions of the stage: where it is now, and where the pointer wants it.
+    const light = { x: 0.5, y: 0.5 };
+    const target = { x: 0.5, y: 0.5 };
     let pointerActive = false;
     let idleSince = performance.now();
     const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
     const still = () => reduceMotion || paused;
+
+    // The poster is the loop's first frame, so the stage has a picture before the footage loads.
+    const poster = new Image();
+    poster.decoding = "async";
+    poster.onload = () => {
+      posterReady = true;
+      if (!raf) draw(performance.now());
+    };
+    poster.src = STAGE_MEDIA.poster;
+    cleanups.push(() => {
+      poster.onload = null;
+    });
 
     // Upload the texture only when the video has a new frame (where the browser can tell us).
     const frameCallbacks = typeof video.requestVideoFrameCallback === "function";
@@ -261,29 +235,6 @@ export function StageCanvas() {
       last = now;
       const settled = still();
 
-      // The pillars rise with the first video frame, or after a short wait on a slow connection;
-      // footage that arrives later fades in inside the risen pillars. A still stage is simply risen.
-      if (revealStart < 0 && (hasFrame || now - mountedAt > REVEAL_WAIT_MS)) revealStart = now;
-      if (hasFrame && videoAt < 0) videoAt = now - (now - revealStart < 50 ? VIDEO_FADE_MS : 0);
-      const videoMix = settled ? (hasFrame ? 1 : 0) : videoAt < 0 ? 0 : Math.min(1, (now - videoAt) / VIDEO_FADE_MS);
-      for (let i = 0; i < 11; i++) {
-        rise[i] = settled ? 1 : revealStart < 0 ? 0 : Math.max(0, easeOutExpo((now - revealStart - DELAYS[i]) / RISE_MS));
-      }
-
-      // Where the light is: the pointer, or a slow drift across the stage when nobody is steering.
-      // A still stage keeps colour in the centre pillar only.
-      let x = pointerX;
-      if (!pointerActive) {
-        const drift = (now - idleSince) / 1000;
-        x = 0.5 + 0.46 * Math.sin(drift * 0.42 + (canHover ? 0 : 1.2));
-      }
-      const k = settled ? 1 : 1 - Math.exp(-dt * 7);
-      for (let i = 0; i < 11; i++) {
-        const d = ((i + 0.5) / 11 - x) / (0.62 / 11);
-        const target = i === CENTRE ? 1 : settled ? 0 : Math.exp(-d * d);
-        colour[i] += (target - colour[i]) * k;
-      }
-
       if (hasFrame && freshFrame && video.readyState >= 2) {
         freshFrame = !frameCallbacks;
         gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -293,17 +244,38 @@ export function StageCanvas() {
           fail();
           return;
         }
+      } else if (!hasFrame && posterReady && !posterUploaded) {
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, poster);
+        posterUploaded = true;
       }
 
-      const cssW = canvas.width / dpr;
-      gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.uniform2f(uVid, video.videoWidth || 16, video.videoHeight || 9);
-      gl.uniform1f(uGap, cssW * (phone ? 10 / 1080 : 12 / 1920) * dpr);
-      gl.uniform1f(uStep, 0.2126);
-      gl.uniform1f(uGold, Math.max(3, Math.round(canvas.height * 0.007)));
-      gl.uniform1f(uVideo, videoMix);
-      gl.uniform1fv(uRise, rise);
-      gl.uniform1fv(uCol, colour);
+      // The picture fades up from the stage floor the first time there is one to show.
+      const picture = hasFrame || posterUploaded;
+      if (picture && shownAt < 0) shownAt = now;
+      const show = !picture ? 0 : settled ? 1 : Math.min(1, (now - shownAt) / FADE_MS);
+
+      // Where the light is: the pointer, or a slow drift across the stage when nobody is steering.
+      // Under reduced motion the stage is lit at the centre; a paused stage keeps its light where it was.
+      if (reduceMotion) {
+        target.x = 0.5;
+        target.y = 0.5;
+      } else if (!pointerActive && !paused) {
+        const drift = (now - idleSince) / 1000;
+        target.x = 0.5 + 0.42 * Math.sin(drift * 0.42 + (canHover ? 0 : 1.2));
+        target.y = 0.5 + 0.08 * Math.sin(drift * 0.27);
+      }
+      const k = settled ? 1 : 1 - Math.exp(-dt * 7);
+      light.x += (target.x - light.x) * k;
+      light.y += (target.y - light.y) * k;
+
+      const W = canvas.width;
+      const H = canvas.height;
+      gl.uniform2f(uRes, W, H);
+      gl.uniform2f(uVid, hasFrame ? video.videoWidth || 16 : poster.naturalWidth || 16, hasFrame ? video.videoHeight || 9 : poster.naturalHeight || 9);
+      gl.uniform2f(uLight, light.x * W, light.y * H);
+      gl.uniform1f(uRadius, 0.34 * Math.min(W, H));
+      gl.uniform1f(uShow, show);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
     };
 
@@ -352,31 +324,27 @@ export function StageCanvas() {
       event.preventDefault();
       fail();
     });
-    listen(video, "loadeddata", () => {
-      if (hasFrame) return;
-      hasFrame = true;
-      freshFrame = true;
-      if (still()) draw(performance.now());
-    });
-    listen(video, "error", fail);
-    if (reduceMotion) {
-      listen(video, "loadedmetadata", () => {
-        video.currentTime = 0.6;
-      });
-      listen(video, "seeked", () => {
+
+    // With reduced motion the poster is the whole stage and the footage is never fetched.
+    if (!reduceMotion) {
+      listen(video, "loadeddata", () => {
+        if (hasFrame) return;
         hasFrame = true;
         freshFrame = true;
-        draw(performance.now());
+        if (still()) draw(performance.now());
+      });
+      listen(video, "error", fail);
+      video.muted = true;
+      // The large loop wherever the stage needs more than ~600 device pixels of height (full-height phones too).
+      const needed = Math.max(canvas.clientHeight, (canvas.clientWidth * 9) / 16) * dpr;
+      video.src = needed > 600 ? STAGE_MEDIA.large : STAGE_MEDIA.small;
+      if (paused) video.load();
+      cleanups.push(() => {
+        video.pause();
+        video.removeAttribute("src");
+        video.load();
       });
     }
-    video.muted = true;
-    video.src = phone ? SOURCES.small : SOURCES.large;
-    if (reduceMotion || paused) video.load();
-    cleanups.push(() => {
-      video.pause();
-      video.removeAttribute("src");
-      video.load();
-    });
 
     const io = new IntersectionObserver(
       ([entry]) => {
@@ -391,11 +359,13 @@ export function StageCanvas() {
 
     const onLeave = () => {
       pointerActive = false;
-      idleSince = performance.now() - (Math.asin(Math.max(-1, Math.min(1, (pointerX - 0.5) / 0.46))) / 0.42) * 1000;
+      idleSince = performance.now() - (Math.asin(Math.max(-1, Math.min(1, (light.x - 0.5) / 0.42))) / 0.42) * 1000;
     };
     listen(wrap, "pointermove", (event) => {
       const rect = wrap.getBoundingClientRect();
-      pointerX = Math.min(1, Math.max(0, ((event as PointerEvent).clientX - rect.left) / rect.width));
+      const e = event as PointerEvent;
+      target.x = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+      target.y = Math.min(1, Math.max(0, (e.clientY - rect.top) / rect.height));
       pointerActive = true;
     });
     listen(wrap, "pointerleave", onLeave);

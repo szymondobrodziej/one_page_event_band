@@ -5,13 +5,9 @@ import { StageCanvas } from "../StageCanvas";
 export function Hero() {
   return (
     <section id="top" aria-labelledby="hero-title" className="bg-ink">
-      {/* Air between the header and the stage, so the gold edge of the centre pillar reads as the stage, not as a
-          nav underline. The stage height leaves the overline and the whole headline above the fold (phones: above
-          the pinned enquiry button). */}
-      <div className="pt-[clamp(16px,3.3vw,48px)]">
-        <div className="h-[clamp(280px,min(118vw,calc(100svh-380px)),560px)] min-[700px]:h-[clamp(300px,min(34vw,calc(100svh-430px)),760px)]">
-          <StageCanvas />
-        </div>
+      {/* The stage fills the screen under the 72px header, edge to edge; the headline follows below it. */}
+      <div data-hero-stage className="h-[calc(100svh-72px)] min-h-[440px]">
+        <StageCanvas />
       </div>
 
       <div className="shell pt-[clamp(28px,3.3vw,48px)] pb-[clamp(80px,9vw,136px)]">
