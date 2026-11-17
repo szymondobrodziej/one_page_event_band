@@ -4,12 +4,14 @@
   "description": "Remotion compositions rendering the Aurum Eleven hero loop and the line-up film for the website.",
   "scripts": {
     "studio": "remotion studio",
-    "render:hero-desktop": "remotion render HeroDesktop out/a11-hero-desktop.mp4 --codec=h264 --crf=26",
-    "render:hero-mobile": "remotion render HeroMobile out/a11-hero-mobile.mp4 --codec=h264 --crf=26",
+    "master:smooth": "ffmpeg -y -i public/showreel.mp4 -vf \"minterpolate=fps=75:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1\" -c:v libx264 -crf 12 -preset medium -pix_fmt yuv420p -an public/showreel-75.mp4",
+    "render:stage": "remotion render StageSource out/a11-stage-source.mp4 --codec=h264 --crf=25 && remotion render StageSourceSmall out/a11-stage-source-sm.mp4 --codec=h264 --crf=26",
+    "render:fallback": "remotion render HeroStage out/a11-hero-stage.mp4 --codec=h264 --crf=26 && remotion render HeroMobile out/a11-hero-mobile.mp4 --codec=h264 --crf=26",
     "render:lineup": "remotion render LineUp out/a11-sklad.mp4 --codec=h264 --crf=22",
-    "render:posters": "remotion still HeroDesktop out/a11-hero-desktop.jpg --frame=12 --image-format=jpeg && remotion still HeroMobile out/a11-hero-mobile.jpg --frame=12 --image-format=jpeg && remotion still LineUp out/a11-sklad-poster.jpg --frame=150 --image-format=jpeg",
-    "render": "npm run render:hero-desktop && npm run render:hero-mobile && npm run render:lineup && npm run render:posters"
+    "render:posters": "remotion still HeroStage out/a11-hero-stage.jpg --frame=40 --image-format=jpeg && remotion still HeroMobile out/a11-hero-mobile.jpg --frame=40 --image-format=jpeg && remotion still LineUp out/a11-sklad-poster.jpg --frame=150 --image-format=jpeg",
+    "render": "npm run render:stage && npm run render:fallback && npm run render:lineup && npm run render:posters"
   },
+
   "dependencies": {
     "@remotion/cli": "4.0.544",
     "@remotion/google-fonts": "4.0.544",

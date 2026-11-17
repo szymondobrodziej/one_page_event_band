@@ -10,6 +10,9 @@ import {
 import { frames, Shot } from "./shots";
 
 const SRC = staticFile("showreel.mp4");
+// The same showreel motion-interpolated to 75 fps (ffmpeg minterpolate, mci/aobmc/bidir), so slow
+// playback rates stay smooth instead of repeating frames. Same timeline, so the shot map applies.
+export const SMOOTH_SRC = staticFile("showreel-75.mp4");
 
 export type ReelItem = { shot: Shot; rate?: number };
 
@@ -29,18 +32,19 @@ export const planReel = (items: ReelItem[], xf: number) => {
   return { planned, total: cursor };
 };
 
-const Clip: React.FC<{ shot: Shot; rate: number; fadeIn: number; trimOffset?: number }> = ({
+const Clip: React.FC<{ shot: Shot; rate: number; fadeIn: number; trimOffset?: number; src?: string }> = ({
   shot,
   rate,
   fadeIn,
   trimOffset = 0,
+  src = SRC,
 }) => {
   const frame = useCurrentFrame();
   const opacity = fadeIn > 0 ? interpolate(frame, [0, fadeIn - 1], [0, 1], { extrapolateRight: "clamp" }) : 1;
   return (
     <AbsoluteFill style={{ opacity }}>
       <OffthreadVideo
-        src={SRC}
+        src={src}
         muted
         trimBefore={frames(shot.in) + trimOffset}
         playbackRate={rate}
@@ -51,7 +55,7 @@ const Clip: React.FC<{ shot: Shot; rate: number; fadeIn: number; trimOffset?: nu
 };
 
 /** A looping reel: the first shot dissolves back in over the last `xf` frames, so the last frame leads into frame 0. */
-export const LoopingReel: React.FC<{ items: ReelItem[]; xf: number }> = ({ items, xf }) => {
+export const LoopingReel: React.FC<{ items: ReelItem[]; xf: number; src?: string }> = ({ items, xf, src }) => {
   const { planned, total } = planReel(items, xf);
   const first = items[0];
   const firstRate = first.rate ?? 1;
@@ -59,11 +63,11 @@ export const LoopingReel: React.FC<{ items: ReelItem[]; xf: number }> = ({ items
     <AbsoluteFill>
       {planned.map((p, i) => (
         <Sequence key={i} from={p.from} durationInFrames={p.length} layout="none">
-          <Clip shot={p.item.shot} rate={p.item.rate ?? 1} fadeIn={i === 0 ? 0 : xf} />
+          <Clip shot={p.item.shot} rate={p.item.rate ?? 1} fadeIn={i === 0 ? 0 : xf} src={src} />
         </Sequence>
       ))}
       <Sequence from={total - xf} durationInFrames={xf} layout="none">
-        <Clip shot={first.shot} rate={firstRate} fadeIn={xf} trimOffset={-Math.round(xf * firstRate)} />
+        <Clip shot={first.shot} rate={firstRate} fadeIn={xf} trimOffset={-Math.round(xf * firstRate)} src={src} />
       </Sequence>
     </AbsoluteFill>
   );

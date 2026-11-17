@@ -275,7 +275,7 @@
       {
         "name": "pillar-rise",
         "value": "1100ms ease-arrive, scaleY 1 to 0 from the top; delays 0/80/160/240/320 ms outer to inner, centre 560 ms, plus 200 ms lead-in",
-        "purpose": "Signature load reveal of the stage band; the only unprompted motion. Removed under reduced motion."
+        "purpose": "Signature load reveal of the living stage (WebGL); with the footage and the idle colour drift it is the only unprompted motion. Still frame under reduced motion."
       }
     ],
     "breakpoints": [
@@ -302,7 +302,7 @@
       "centreRise": "27% taller than outer pillars",
       "aspectDesktop": "1920/712",
       "aspectPhone": "1080/654",
-      "source": "video/src/HeroLoop.tsx and src/components/StageBand.tsx must match"
+      "source": "src/components/StageCanvas.tsx (shader) and the Remotion fallback renders in video/src/HeroLoop.tsx must match"
     }
   },
   "components": [
@@ -373,7 +373,7 @@
   ],
   "narrative": {
     "northStar": "The Stage Through Eleven Pillars",
-    "overview": "The whole system is built from one image: a stage seen through eleven vertical pillars, ten monochrome and the centre one in colour, 27% taller and capped with a gold edge. Everything else is quiet so that image carries the brand: matte black and ivory alternate as full-width fields, type is large, light and tightly set, edges are square, and colour is withheld except at the culmination.\n\nThe register is a premium design house rather than a party band: low density, generous pacing, long left-aligned measures, and exactly one unprompted motion (the pillar rise on load). All other motion answers the visitor.\n\nPhotography is documentary and graded near-monochrome so the only full colour on screen belongs to the hero's centre pillar.",
+    "overview": "The whole system is built from one image: a stage seen through eleven vertical pillars, ten monochrome and the centre one in colour, 27% taller and capped with a gold edge. Everything else is quiet so that image carries the brand: matte black and ivory alternate as full-width fields, type is large, light and tightly set, edges are square, and colour is withheld except at the culmination.\n\nThe register is a premium design house rather than a party band: low density, generous pacing, long left-aligned measures, and exactly one unprompted motion (the living stage: pillars rising on load, footage inside them, colour drifting while nobody steers). All other motion answers the visitor, starting with colour following the pointer over the stage.\n\nPhotography is documentary and graded near-monochrome so the only full colour on screen belongs to the hero stage: its centre pillar and the pillar the visitor lights.",
     "keyCharacteristics": [
       "Alternating ink and ivory sections, flat, no gradients",
       "Inter Tight Light display with negative tracking; Manrope text",
@@ -394,7 +394,7 @@
       },
       {
         "name": "The Held Colour Rule",
-        "body": "Photography is graded near-monochrome so the centre pillar is the only full colour on the page.",
+        "body": "Photography is graded near-monochrome so the hero stage (the centre pillar and the pillar under the pointer) is the only full colour on the page.",
         "section": "colors"
       },
       {
