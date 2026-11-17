@@ -4,9 +4,14 @@ Kompozycje renderowane ze showreelu klienta:
 
 | Kompozycja | Plik na stronie | Co to jest |
 |---|---|---|
-| `HeroFilm` (1920×1080) | `public/media/video/a11-hero-film-v1.mp4` i `a11-hero-film-sm-v1.mp4` (960×540) + klatki 0 jako `.jpg` | film hero: 9,4 s ciszy, ujęcia kolorowe w zwolnieniu 0,4× z przenikaniem, bez szwu w pętli, ciepły kolor wypalony w pliku; strona gra go zwykłym `<video autoplay muted loop playsinline>` bez skryptu |
-| `StageSource`, `StageSourceSmall`, `HeroStage`, `HeroMobile` | (zdjęte ze strony) | pętle i wersje awaryjne dawnej sceny WebGL w jedenastu pionach; zostają do użytku w social media |
+| `StageSource` (1600×900) | `public/media/video/a11-stage-source-v2.mp4` | czysta, kolorowa pętla dla żywej sceny w hero (`src/components/StageCanvas.tsx`): cztery ujęcia w zwolnieniu 2,5× (cały zespół, sekcja dęta, dwie wokalistki), bez pionów i bez gradacji, bo rysuje je shader WebGL |
+| `StageSourceSmall` (960×540) | `public/media/video/a11-stage-source-sm-v2.mp4` | ta sama pętla na telefony |
+| `HeroStage` (1920×960) | `public/media/video/a11-hero-stage-v2.mp4` (+ `.jpg`) | wersja awaryjna sceny (bez WebGL): ta sama pętla z pionami, monochromem, kolorowym środkiem i złotą krawędzią wypalonymi w obrazie |
+| `HeroMobile` (1080×654) | `public/media/video/a11-hero-mobile-v4.mp4` (+ `.jpg`) | wersja awaryjna na telefon |
+| `HeroFilm` (1920×1080) | (zdjęte ze strony) | zwykły film hero bez skryptu, używany krótko 2026-11-17: 9,4 s, ujęcia kolorowe 0,4× z przenikaniem, ciepły kolor wypalony; zostaje do użytku w social media (`npm run render:film`) |
 | `LineUp` (1920×1080) | `public/media/video/a11-sklad-v2.mp4` | prezentacja składu z podpisami instrumentów; bez dźwięku |
+
+Geometria pionów (odstęp 12/1920 szerokości na desktopie, 10/1080 na telefonie; schodek 21,26% wysokości) musi zgadzać się z shaderem w `src/components/StageCanvas.tsx` i z `src/components/StageBand.tsx`.
 
 ## Render
 

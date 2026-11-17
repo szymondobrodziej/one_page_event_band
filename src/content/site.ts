@@ -45,18 +45,6 @@ export const hero = typeset({
   credits: "Muzycy grali z Adamem Sztabą, Justyną Steczkowską, Mrozem, Kwiatem Jabłoni. Wokaliści z The Voice of Poland.",
 });
 
-// The hero film: a silent loop cut from the client's showreel (video/src/HeroFilm.tsx), held colour baked in.
-// Its first frame is the still shown before it plays and instead of it under reduced motion.
-export const heroFilm = {
-  src: "/media/video/a11-hero-film-v1.mp4",
-  srcSmall: "/media/video/a11-hero-film-sm-v1.mp4",
-  poster: "/media/video/a11-hero-film-v1.jpg",
-  posterSmall: "/media/video/a11-hero-film-sm-v1.jpg",
-  alt: "Pełny skład Aurum Eleven na scenie, w tle ekran LED ze znakiem A11",
-  w: 1920,
-  h: 1080,
-} as const;
-
 export const problem = typeset({
   headline: "Goście siedzą przy stole, a parkiet jest pusty",
   body: "Część oficjalna eventu przebiegła dobrze. Zaczyna się część rozrywkowa i energia spada. Goście zostają przy stołach, a parkiet świeci pustkami. Po evencie słyszysz, że było ok, a po tygodniu nikt o nim nie pamięta.",
@@ -117,7 +105,7 @@ export const live = typeset({
   sub: "Jedenastu muzyków na scenie.",
   play: "Odtwórz nagranie z dźwiękiem",
   note: "Nagranie z dźwiękiem z YouTube. Odtwarzacz ładuje się dopiero po kliknięciu.",
-  // Three vocalists at 15.6 s of the showreel: the whole band already opens the hero film, so it is not shown twice.
+  // Three vocalists at 15.6 s of the showreel: the whole band already opens the hero stage, so it is not shown twice.
   poster: "/media/video/a11-nagranie-v2.jpg",
 });
 

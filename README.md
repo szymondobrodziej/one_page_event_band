@@ -31,7 +31,7 @@ Skopiuj `.env.example` do `.env.local` i uzupełnij to, co już jest znane. Brak
 
 - `src/content/site.ts` — wszystkie teksty (wiernie ze struktury od klienta) i zdjęcia.
 - `src/components/sections/` — sekcje strony w kolejności z `src/app/page.tsx`.
-- `src/components/sections/Hero.tsx` — hero: nagłówek i film sceny na całą szerokość (zwykłe `<video>` bez JavaScriptu; pętla renderowana w `video/`).
+- `src/components/StageBand.tsx` — hero „jedenaście pionów”: wideo z Remotion i animacja odsłonięcia pionów.
 - `src/app/api/enquiry/route.ts` — wysyłka formularza przez Resend.
 - `public/media/` — zdjęcia (2400 px, Next.js serwuje AVIF/WebP) i wyrenderowane wideo.
 - `video/` — projekt Remotion (instrukcja w `video/README.md`).
