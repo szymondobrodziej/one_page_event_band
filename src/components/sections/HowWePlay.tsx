@@ -49,7 +49,7 @@ export function HowWePlay() {
   return (
     <section id="jak-gramy" aria-label="Jak gramy" className="bg-ink">
       <div className="relative h-[clamp(420px,52vw,780px)]">
-        <Image src={photos.stage.src} alt={photos.stage.alt} fill sizes="100vw" quality={80} className="object-cover object-[50%_42%] doc-photo" />
+        <Image src={photos.horns.src} alt={photos.horns.alt} fill sizes="100vw" quality={80} className="object-cover object-[38%_30%] doc-photo" />
       </div>
       <div className="shell section flex flex-wrap gap-x-[clamp(48px,7vw,120px)] gap-y-18">
         {howWePlay.map((block, i) => (

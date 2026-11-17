@@ -173,7 +173,9 @@ export const contact = typeset({
 
 export const photos = {
   trumpet: { src: "/media/photos/a11-foto-1.jpg", alt: "Trąbka w dłoni muzyka, wyłaniająca się z ciemności sceny", w: 1600, h: 2400 },
-  stage: { src: "/media/photos/a11-foto-2.jpg", alt: "Pełny skład Aurum Eleven na scenie, w tle ekran LED ze znakiem A11", w: 2400, h: 1600 },
+  // The hero's picture: 3600 px wide, because it opens as a close-up on one vocalist before pulling back to the stage.
+  stage: { src: "/media/photos/a11-foto-2-xl.jpg", alt: "Pełny skład Aurum Eleven na scenie, w tle ekran LED ze znakiem A11", w: 3600, h: 2400 },
+  horns: { src: "/media/photos/a11-foto-3.jpg", alt: "Sekcja dęta Aurum Eleven: saksofonista i puzonista na pierwszym planie, w głębi perkusjonalia i perkusja", w: 2400, h: 1600 },
   vocalsLed: { src: "/media/photos/a11-foto-7.jpg", alt: "Wokaliści Aurum Eleven na scenie, w tle napis AURUM ELEVEN", w: 2400, h: 1600 },
   // Portrait crop from the client's 6000x4000 original: the contact panel is tall, so a landscape file would be upscaled.
   side: { src: "/media/photos/a11-foto-12-pion.jpg", alt: "Scena Aurum Eleven z boku: zza talerzy perkusji widać klawiszowca i gitarzystę", w: 1600, h: 2400 },

@@ -217,26 +217,3 @@
     border-bottom-color: var(--color-error-sand);
   }
 }
-
-/* The eleven-pillar stage: pillar masks retract from both edges toward the centre, the gold pillar last. */
-@keyframes pillar-rise {
-  from {
-    transform: scaleY(1);
-  }
-  to {
-    transform: scaleY(0);
-  }
-}
-
-.pillar-mask {
-  transform-origin: 50% 0;
-  transform: scaleY(0);
-  animation: pillar-rise 1100ms var(--ease-arrive) both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pillar-mask {
-    animation: none;
-    transform: scaleY(0);
-  }
-}
