@@ -30,7 +30,7 @@ export function Faq() {
                     <span className="font-display text-[clamp(19px,1.7vw,24px)] leading-[1.3] tracking-[-0.015em] transition-colors duration-200 group-hover:text-smoke">
                       {item.q}
                     </span>
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true" className="flex-none">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true" className="flex-none text-gold">
                       <path d="M5 12h14" />
                       <path d="M12 5v14" className={`origin-center transition-transform duration-300 ease-[var(--ease-arrive)] ${isOpen ? "scale-y-0" : "scale-y-100"}`} />
                     </svg>

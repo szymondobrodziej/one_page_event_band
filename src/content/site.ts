@@ -1,6 +1,7 @@
 // Copy comes from the client's structure document (STRUKTURA, 2026-11-16) and stays verbatim.
 // Contact details that do not exist yet are read from environment variables and hidden until set.
 
+import type { IconName } from "@/components/Icons";
 import { typeset } from "@/lib/typeset";
 
 export const site = {
@@ -9,8 +10,10 @@ export const site = {
   description: "Muzyka na żywo na eventy firmowe. 11 muzyków, własne aranżacje. Sprawdź termin i poproś o wycenę.",
   manifest: "Eleven musicians. One signature sound.",
   tagline: "Premium Live Band for Corporate Events",
-  // The full showreel with sound, supplied by the client on 2026-11-17.
-  fullRecordingUrl: process.env.NEXT_PUBLIC_FULL_RECORDING_URL || "https://www.youtube.com/watch?v=OH8YCK4aEQU",
+  // The full recording with sound (client corrections, 2026-11-18): the hero's "Zobacz pełne nagranie" opens it on
+  // YouTube, and the "Na żywo" player starts it at 10:38 (the client's link: https://youtu.be/UPvItS4fOE0?t=638).
+  fullRecordingUrl: "https://www.youtube.com/watch?v=UPvItS4fOE0",
+  liveStart: 638,
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "",
   phone: process.env.NEXT_PUBLIC_CONTACT_PHONE || "",
   company: process.env.NEXT_PUBLIC_COMPANY_LINE || "",
@@ -21,11 +24,12 @@ export const site = {
   ],
 } as const;
 
+// Labels from the client's corrections (2026-11-18): "Jak gramy? — Oferta — Na żywo — O nas — Współpraca — FAQ".
 export const nav = [
-  { label: "Jak gramy", href: "#jak-gramy" },
-  { label: "Co dostajesz", href: "#co-dostajesz" },
+  { label: "Jak gramy?", href: "#jak-gramy" },
+  { label: "Oferta", href: "#co-dostajesz" },
   { label: "Na żywo", href: "#na-zywo" },
-  { label: "Muzycy", href: "#muzycy" },
+  { label: "O nas", href: "#muzycy" },
   { label: "Współpraca", href: "#wspolpraca" },
   { label: "FAQ", href: "#faq" },
 ] as const;
@@ -38,10 +42,16 @@ export const cta = typeset({
 });
 
 export const hero = typeset({
-  overline: "Zespół na event firmowy.",
+  overline: "Zespół na event firmowy",
   headline: "Event? Zagramy tak, że goście nie zejdą z parkietu.",
   lead: "11 muzyków, pełna sekcja dęta i własne aranżacje na gale, bale i duże produkcje. Utwory z naszego repertuaru dobieramy pod gości, a ofertę dostajesz w 24 godziny.",
-  facts: "11 muzyków, pełna sekcja dęta, własne aranżacje, oferta w 24 godziny",
+  // The client's facts line ("11 muzyków, pełna sekcja dęta, własne aranżacje, oferta w 24 godziny"), one cell per fact.
+  facts: [
+    { icon: "muzycy", text: "11 muzyków" },
+    { icon: "sekcja", text: "pełna sekcja dęta" },
+    { icon: "aranzacje", text: "własne aranżacje" },
+    { icon: "wycena", text: "oferta w 24 godziny" },
+  ] as { icon: IconName; text: string }[],
   credits: "Muzycy grali z Adamem Sztabą, Justyną Steczkowską, Mrozem, Kwiatem Jabłoni. Wokaliści z The Voice of Poland.",
 });
 
@@ -53,6 +63,8 @@ export const stageMedia = {
 } as const;
 
 export const problem = typeset({
+  // Added by the client (2026-11-18) above the headline; set as the heading's first line, in sentence case.
+  lead: "Największy problem eventów",
   headline: "Goście siedzą przy stole, a parkiet jest pusty",
   body: "Część oficjalna eventu przebiegła dobrze. Zaczyna się część rozrywkowa i energia spada. Goście zostają przy stołach, a parkiet świeci pustkami. Po evencie słyszysz, że było ok, a po tygodniu nikt o nim nie pamięta.",
   turn: "Eventy z naszym udziałem przebiegają inaczej.",
@@ -77,16 +89,44 @@ export const benefitGroups: { id: BenefitGroup; title: string }[] = [
   { id: "organizacja", title: "Organizacja" },
 ];
 
-export const benefits: { group: BenefitGroup; title: string; body: string }[] = typeset([
-  { group: "scena", title: "11 muzyków", body: "Sekcja dęta, perkusjonalia, perkusja, bas, klawisze, gitara i trzy wokale dają moc na dużej sali." },
-  { group: "scena", title: "Własne aranżacje znanych kawałków", body: "Znasz te piosenki, ale my gramy je w wersjach, których nikt inny nie ma." },
-  { group: "scena", title: "Kontakt z gośćmi podczas grania", body: "Wokaliści nawiązują kontakt z gośćmi, a cały zespół wymienia sceniczną energię z parkietem." },
-  { group: "organizacja", title: "3 sety po 40 minut", body: "W przerwach gra DJ, więc muzyka nie milknie do końca wieczoru." },
-  { group: "scena", title: "Własny realizator dźwięku", body: "Brzmienie jest ustawione pod nasz skład i powtarzalne na każdym evencie." },
-  { group: "organizacja", title: "Wycena w 24 godziny", body: "Dostajesz ofertę, gdy podasz datę, miejsce i orientacyjną liczbę gości." },
-  { group: "organizacja", title: "Skład wpisany do umowy", body: "W sytuacjach losowych zapewniamy zastępstwo." },
-  { group: "organizacja", title: "Scenariusz wieczoru", body: "Przed eventem ustalamy godziny, przebieg i wymagania techniczne." },
-  { group: "organizacja", title: "Pełna produkcja na życzenie", body: "Nagłośnienie, światło, scena i DJ od jednej firmy, jeśli nie masz własnego zaplecza." },
+// Each item has its own line icon (src/components/Icons.tsx). The four "Na scenie" items carry the client's
+// photos 3, 4, 5 and 6 from the first package (corrections, point 6), cut 4:5 in public/media/photos.
+export type Benefit = { group: BenefitGroup; icon: IconName; title: string; body: string; photo?: { src: string; alt: string } };
+
+export const benefits: Benefit[] = typeset([
+  {
+    group: "scena",
+    icon: "muzycy",
+    title: "11 muzyków",
+    body: "Sekcja dęta, perkusjonalia, perkusja, bas, klawisze, gitara i trzy wokale dają moc na dużej sali.",
+    photo: { src: "/media/photos/a11-foto-3-pion.jpg", alt: "Sekcja dęta Aurum Eleven: saksofonista i dwaj puzoniści, w głębi perkusja" },
+  },
+  {
+    group: "scena",
+    icon: "aranzacje",
+    title: "Własne aranżacje znanych kawałków",
+    body: "Znasz te piosenki, ale my gramy je w wersjach, których nikt inny nie ma.",
+    photo: { src: "/media/photos/a11-foto-4-pion.jpg", alt: "Perkusjonalista Aurum Eleven przy dzwonkach i kongach" },
+  },
+  {
+    group: "scena",
+    icon: "kontakt",
+    title: "Kontakt z gośćmi podczas grania",
+    body: "Wokaliści nawiązują kontakt z gośćmi, a cały zespół wymienia sceniczną energię z parkietem.",
+    photo: { src: "/media/photos/a11-foto-5-pion.jpg", alt: "Wokalistka i wokalista Aurum Eleven śpiewają w stronę publiczności" },
+  },
+  { group: "organizacja", icon: "sety", title: "3 sety po 40 minut", body: "W przerwach gra DJ, więc muzyka nie milknie do końca wieczoru." },
+  {
+    group: "scena",
+    icon: "realizator",
+    title: "Własny realizator dźwięku",
+    body: "Brzmienie jest ustawione pod nasz skład i powtarzalne na każdym evencie.",
+    photo: { src: "/media/photos/a11-foto-6-pion.jpg", alt: "Dłonie realizatora dźwięku na suwakach cyfrowej konsolety" },
+  },
+  { group: "organizacja", icon: "wycena", title: "Wycena w 24 godziny", body: "Dostajesz ofertę, gdy podasz datę, miejsce i orientacyjną liczbę gości." },
+  { group: "organizacja", icon: "umowa", title: "Skład wpisany do umowy", body: "W sytuacjach losowych zapewniamy zastępstwo." },
+  { group: "organizacja", icon: "scenariusz", title: "Scenariusz wieczoru", body: "Przed eventem ustalamy godziny, przebieg i wymagania techniczne." },
+  { group: "organizacja", icon: "produkcja", title: "Pełna produkcja na życzenie", body: "Nagłośnienie, światło, scena i DJ od jednej firmy, jeśli nie masz własnego zaplecza." },
 ]);
 
 export const forWhom = typeset({
@@ -112,8 +152,9 @@ export const live = typeset({
   sub: "Jedenastu muzyków na scenie.",
   play: "Odtwórz nagranie z dźwiękiem",
   note: "Nagranie z dźwiękiem z YouTube. Odtwarzacz ładuje się dopiero po kliknięciu.",
-  // Three vocalists at 15.6 s of the showreel: the whole band already opens the hero stage, so it is not shown twice.
-  poster: "/media/video/a11-nagranie-v2.jpg",
+  // The vocalists under the AURUM ELEVEN LED wall (client photo 7): it used to close "Dla kogo" at full width;
+  // the user chose it as the recording's poster (corrections, point 7).
+  poster: "/media/photos/a11-foto-7.jpg",
 });
 
 export const musicians = typeset({
@@ -124,8 +165,10 @@ export const musicians = typeset({
   ],
 });
 
-// "Kto stoi na scenie": one pillar per musician, cut from the client's originals (public/media/lineup, 480x1600).
-// Left to right: the rhythm section at the edges, the horns around the three vocals in the middle.
+// "Kto stoi na scenie": one pillar per musician, cut from the client's originals (public/media/lineup, 960x1600,
+// provenance in docs/media-provenance.md). Each file is twice as wide as the pillar at rest, so a pillar that opens
+// on hover or tap reveals more of the frame. Left to right: the rhythm section at the edges, the horns around the
+// three vocals in the middle. Wokal 1 is Zuzia and Wokal 3 is Kama (photos of 2026-11-18).
 export const lineup = [
   { slug: "perkusja", label: "Perkusja" },
   { slug: "bas", label: "Bas" },
@@ -167,6 +210,11 @@ export const faq = typeset({
   ],
 });
 
+// The footer line from the client's corrections (point 10). site.manifest stays for the hero-stage lettering.
+export const footer = typeset({
+  manifesto: ["11 muzyków.", "Jedna scena.", "Własne aranżacje."],
+});
+
 export const contact = typeset({
   headline: "Zapytaj o dostępność terminu",
   lead: "Podaj datę, miejsce i liczbę gości. Odpiszemy w ciągu 24 godzin, czy termin jest wolny i wyślemy wycenę.",
@@ -181,8 +229,6 @@ export const contact = typeset({
 
 export const photos = {
   trumpet: { src: "/media/photos/a11-foto-1.jpg", alt: "Trąbka w dłoni muzyka, wyłaniająca się z ciemności sceny", w: 1600, h: 2400 },
-  horns: { src: "/media/photos/a11-foto-3.jpg", alt: "Sekcja dęta Aurum Eleven: saksofonista i puzonista na pierwszym planie, w głębi perkusjonalia i perkusja", w: 2400, h: 1600 },
-  vocalsLed: { src: "/media/photos/a11-foto-7.jpg", alt: "Wokaliści Aurum Eleven na scenie, w tle napis AURUM ELEVEN", w: 2400, h: 1600 },
   // Portrait crop from the client's 6000x4000 original: the contact panel is tall, so a landscape file would be upscaled.
   side: { src: "/media/photos/a11-foto-12-pion.jpg", alt: "Scena Aurum Eleven z boku: zza talerzy perkusji widać klawiszowca i gitarzystę", w: 1600, h: 2400 },
 } as const;

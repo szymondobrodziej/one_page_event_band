@@ -33,11 +33,11 @@ Eleven musicians on stage, with a full horn section, percussion and three vocali
 - Deployment for this round: a separate Vercel project used as the dev environment, apart from the existing one-page-event-band deployment.
 - Motion: Remotion is approved for rendering the hero loop from the showreel and a short film for the live section.
 - Form: name and e-mail required, phone optional, message required with the hint "data, miejsce, liczba gości"; no other fields.
-- Undecided: business e-mail address, phone number, company legal data (name, NIP), privacy policy text, form delivery provider. The full recording with sound is https://youtu.be/OH8YCK4aEQU (supplied 2026-11-17).
+- Undecided: business e-mail address, phone number, company legal data (name, NIP), privacy policy text, form delivery provider. The full recording with sound is https://www.youtube.com/watch?v=UPvItS4fOE0 (corrections of 2026-11-18; the "Na żywo" player starts it at 10:38).
 
 ## Brand Commitments
 
-- Name: Aurum Eleven; logo A11 Precision Mark (SVG/PNG in `branding/a11-precision/` and the client package). Manifest: "Eleven musicians. One signature sound."
+- Name: Aurum Eleven; logo A11 Precision Mark (SVG/PNG in `branding/a11-precision/` and the client package). Manifest: "Eleven musicians. One signature sound." The footer line is now the client's "11 muzyków. Jedna scena. Własne aranżacje." (corrections of 2026-11-18).
 - Archetypes: Ruler 50%, Creator 30%, Magician 20%.
 - Colour commitments from the brand book: matte black #111111, satin gold #B08D57 (or #C2A46A), ivory #F5F2EC for large surfaces, graphite #2B2B2B as accent. No red, blue or violet, no gradients.
 - Type commitments: headings from Neue Haas Grotesk, Suisse Int'l, Helvetica Now, Gotham or Inter Tight; text from Inter, Manrope or IBM Plex Sans. No decorative fonts.

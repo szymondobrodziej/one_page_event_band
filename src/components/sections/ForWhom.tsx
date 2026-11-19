@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { forWhom, photos } from "@/content/site";
+import { forWhom } from "@/content/site";
 import { CheckGlyph, DashGlyph } from "../Icons";
 
 export function ForWhom() {
@@ -17,7 +16,7 @@ export function ForWhom() {
             <ul className="list-none p-0">
               {forWhom.yes.map((line) => (
                 <li key={line} className="flex gap-4.5 border-t border-rule-ivory py-5.5">
-                  <CheckGlyph className="mt-1 size-[22px] flex-none" />
+                  <CheckGlyph className="mt-1 size-[22px] flex-none text-gold" />
                   <span className="font-display text-[clamp(22px,2vw,28px)] font-light leading-tight tracking-[-0.02em]">{line}</span>
                 </li>
               ))}
@@ -37,9 +36,6 @@ export function ForWhom() {
             </ul>
           </div>
         </div>
-      </div>
-      <div className="relative h-[clamp(320px,42vw,640px)]">
-        <Image src={photos.vocalsLed.src} alt={photos.vocalsLed.alt} fill sizes="100vw" quality={80} className="object-cover object-[50%_30%] doc-photo" />
       </div>
     </section>
   );

@@ -20,9 +20,11 @@ export function Musicians() {
 
         <LineUp />
 
-        <a href="#kontakt" className="btn btn-ink mt-[clamp(48px,5vw,72px)]">
-          {cta.primary}
-        </a>
+        <div className="mt-[clamp(48px,5vw,72px)] flex justify-center">
+          <a href="#kontakt" className="btn btn-ink">
+            {cta.primary}
+          </a>
+        </div>
       </div>
     </section>
   );

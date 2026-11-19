@@ -1,4 +1,4 @@
-import { cta, site } from "@/content/site";
+import { cta, footer, site } from "@/content/site";
 import { Lockup } from "../Logo";
 
 const COLUMN_HEAD = "mb-1 font-display text-[15px] font-medium";
@@ -10,8 +10,11 @@ export function Footer() {
     <footer className="border-t border-rule-ink bg-ink pt-[clamp(72px,8vw,120px)] pb-[calc(40px+env(safe-area-inset-bottom))] max-md:pb-32">
       <div className="shell">
         <p className="font-display text-[clamp(2.375rem,5.2vw,5rem)] font-light leading-[0.98] tracking-[-0.04em]">
-          <span className="block">Eleven musicians.</span>
-          <span className="block">One signature sound.</span>
+          {footer.manifesto.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
         </p>
 
         <div className="mt-[clamp(56px,7vw,104px)] flex flex-wrap items-start justify-between gap-x-18 gap-y-12">

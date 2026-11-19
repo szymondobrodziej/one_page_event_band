@@ -21,7 +21,7 @@ export function Process() {
                 </span>
                 <span
                   aria-hidden="true"
-                  className={`mt-[19px] hidden size-[9px] rounded-full md:block ${i === last ? "bg-gold shadow-[0_0_0_6px_#111111]" : "bg-ivory"}`}
+                  className="mt-[19px] hidden size-[9px] rounded-full bg-gold shadow-[0_0_0_6px_#111111] md:block"
                 />
                 <h3 className="mt-7 font-display text-[22px] font-medium tracking-[-0.01em]">
                   <span className="sr-only">Krok {i + 1}: </span>

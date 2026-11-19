@@ -1,5 +1,5 @@
-import { cta, hero } from "@/content/site";
-import { PlayGlyph } from "../Icons";
+import { cta, hero, site } from "@/content/site";
+import { LineIcon, PlayGlyph } from "../Icons";
 import { StageCanvas } from "../StageCanvas";
 
 export function Hero() {
@@ -30,20 +30,35 @@ export function Hero() {
               <span className="text-[14px] leading-normal text-stone">{cta.heroNote}</span>
             </div>
             <a
-              href="#na-zywo"
+              href={site.fullRecordingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="link-quiet group inline-flex min-h-14 items-center gap-3.5 font-display text-[16px] font-medium text-ivory no-underline"
             >
               <span className="inline-flex size-10 items-center justify-center rounded-full border border-ivory/45 transition-colors duration-200 group-hover:border-gold-light">
                 <PlayGlyph className="size-3" />
               </span>
               {cta.recording}
+              <span className="sr-only"> (YouTube, nowa karta)</span>
             </a>
           </div>
         </div>
 
-        <div className="mt-[clamp(48px,6vw,88px)] flex flex-wrap items-baseline justify-between gap-x-16 gap-y-4 border-t border-rule-ink pt-6">
-          <p className="max-w-[34em] font-display text-[clamp(18px,1.5vw,21px)] leading-[1.4] tracking-[-0.005em] text-ivory">{hero.facts}</p>
-          <p className="max-w-[30em] text-[15px] leading-relaxed text-ash">{hero.credits}</p>
+        {/* The facts as a band of four cells under a gold rule, each with its gold line icon: the logo's beam carried
+            into the page, so the row reads apart from the paragraphs around it (corrections, point 2). */}
+        <div className="mt-[clamp(56px,7vw,104px)]">
+          <ul className="grid list-none grid-cols-2 border-t-2 border-b border-t-gold border-b-rule-strong p-0 md:grid-cols-4">
+            {hero.facts.map((fact) => (
+              <li
+                key={fact.text}
+                className="flex flex-col gap-[clamp(16px,1.6vw,22px)] py-[clamp(22px,2.4vw,32px)] pr-4 even:border-l even:border-rule-strong even:pl-5 max-md:[&:nth-child(-n+2)]:border-b max-md:[&:nth-child(-n+2)]:border-rule-strong md:pl-6 md:not-first:border-l md:not-first:border-rule-strong md:first:pl-0"
+              >
+                <LineIcon name={fact.icon} className="size-8 text-gold md:size-9" />
+                <span className="font-display text-[clamp(21px,2.1vw,30px)] font-light leading-[1.12] tracking-[-0.025em] text-ivory">{fact.text}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 max-w-[44em] text-[15px] leading-relaxed text-ash">{hero.credits}</p>
         </div>
       </div>
     </section>
