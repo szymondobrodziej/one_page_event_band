@@ -51,7 +51,11 @@ the brand book rules out, so its file carries 0.3 of the saturation before the C
 - `a11-foto-7.jpg` (first package, 7.JPG): the vocalists under the AURUM ELEVEN LED wall, now the poster of the
   "Na żywo" recording (corrections, point 7).
 - `a11-foto-12-pion.jpg` (first package, 12.JPG): the portrait crop beside the contact form.
-- `public/media/video/`: the hero stage loop and its first frame, rendered by Remotion from the showreel (`video/README.md`).
+- `public/media/video/a11-showreel-v1.mp4` (1600x900) and `a11-showreel-pion-v1.mp4` (540x960 portrait cut) with their
+  first frames as posters: the hero since 2026-11-24, encoded from the client's `showreel www_3.mp4` (first package and
+  corrections package, identical files), no grade baked in; commands in `video/README.md`.
+- `public/media/video/a11-stage-source-*`: the former living stage's loop and first frame, rendered by Remotion from the
+  same showreel; off the page, kept with `StageCanvas`.
 
 Removed in this round: the old 480x1600 pillars, `a11-foto-3.jpg` (the full-width horn photo in "Jak gramy") and
 `a11-nagranie-v2.jpg` (the showreel still that was the recording's poster).

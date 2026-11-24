@@ -1,13 +1,13 @@
 import { cta, hero, site } from "@/content/site";
 import { LineIcon, PlayGlyph } from "../Icons";
-import { StageCanvas } from "../StageCanvas";
+import { HeroReel } from "../HeroReel";
 
 export function Hero() {
   return (
     <section id="top" aria-labelledby="hero-title" className="bg-ink">
-      {/* The stage fills the screen under the 72px header, edge to edge; the headline follows below it. */}
+      {/* The showreel fills the screen under the 72px header, edge to edge; the headline follows below it. */}
       <div data-hero-stage className="h-[calc(100svh-72px)] min-h-[440px]">
-        <StageCanvas />
+        <HeroReel />
       </div>
 
       <div className="shell pt-[clamp(28px,3.3vw,48px)] pb-[clamp(80px,9vw,136px)]">

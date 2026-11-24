@@ -55,7 +55,17 @@ export const hero = typeset({
   credits: "Muzycy grali z Adamem Sztabą, Justyną Steczkowską, Mrozem, Kwiatem Jabłoni. Wokaliści z The Voice of Poland.",
 });
 
-// The hero stage: a clean colour loop of the showreel (video/src/StageSource.tsx) and its first frame.
+// The hero: the client's own showreel ("showreel www", 19.7 s, no sound) on a loop (corrections, point 1). A landscape
+// cut and a portrait cut for phones, each with its first frame as the poster; see video/README.md.
+export const heroReel = {
+  landscape: "/media/video/a11-showreel-v1.mp4",
+  portrait: "/media/video/a11-showreel-pion-v1.mp4",
+  poster: "/media/video/a11-showreel-v1.jpg",
+  portraitPoster: "/media/video/a11-showreel-pion-v1.jpg",
+} as const;
+
+// The former living stage (StageCanvas): a clean colour loop of the showreel (video/src/StageSource.tsx) and its
+// first frame. Off the page since the showreel took the hero; kept so the stage can come back in one line.
 export const stageMedia = {
   large: "/media/video/a11-stage-source-v2.mp4",
   small: "/media/video/a11-stage-source-sm-v2.mp4",
