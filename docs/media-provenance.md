@@ -33,17 +33,22 @@ the originals (normalised cross-correlation 0.98–0.998), so the framing at res
 
 Wokal 1 is Zuzia and Wokal 3 is Kama (the user's mapping, 2026-11-19); Wokal 2, the male vocalist, is unchanged.
 
-## "Co dostajesz", Na scenie (`public/media/photos/`, 1200x1500, JPEG q82)
+## "Co dostajesz", Na scenie (`public/media/photos/`, 1800x1500, JPEG q82 mozjpeg, sRGB)
 
-The client's "grafiki 3, 4, 5, 6" (corrections, point 6), full-height 4:5 crops. Photo 5 is lit in violet, which
-the brand book rules out, so its file carries 0.3 of the saturation before the CSS grade (about a fifth in all).
+The client's "grafiki 3, 4, 5, 6" (corrections, point 6), full-height 6:5 cuts (2026-11-26) around the centre of the
+former 4:5 crops. At rest each card shows a 4:5 window of the file, which keeps the old framing; a card that opens on
+hover shows more of the stage. Photo 4 could not be centred in its source, so its window sits at `75% 50%`
+(`photo.position` in `site.ts`). Photo 5 is lit in violet, which the brand book rules out, so its file carries 0.3
+of the saturation before the CSS grade (about a fifth in all).
 
 | File | Source | Source size | Crop | Item |
 |---|---|---|---|---|
-| a11-foto-3-pion.jpg | first package, 3.JPG | 4421x2947 | 2358x2947+1127+0 | 11 muzyków |
-| a11-foto-4-pion.jpg | first package, 4.JPG | 4800x3200 | 2560x3200+1920+0 | Własne aranżacje znanych kawałków |
-| a11-foto-5-pion.jpg | first package, 5.JPG | 4479x2986 | 2389x2986+873+0, saturation 0.3 in the file | Kontakt z gośćmi podczas grania |
-| a11-foto-6-pion.jpg | first package, 6.jpg | 3840x2160 | 1728x2160+1056+0 | Własny realizator dźwięku |
+| a11-foto-3-karta.jpg | first package, 3.JPG | 4421x2947 | 3536x2947+538+0 | 11 muzyków |
+| a11-foto-4-karta.jpg | first package, 4.JPG | 4800x3200 | 3840x3200+960+0 | Własne aranżacje znanych kawałków |
+| a11-foto-5-karta.jpg | first package, 5.JPG | 4479x2986 | 3583x2986+275+0, saturation 0.3 in the file | Kontakt z gośćmi podczas grania |
+| a11-foto-6-karta.jpg | first package, 6.jpg | 3840x2160 | 2592x2160+624+0 | Własny realizator dźwięku |
+
+The 4:5 files they replace (`a11-foto-3-pion.jpg` to `a11-foto-6-pion.jpg`, 1200x1500) were removed.
 
 ## Other photographs (unchanged in this round)
 

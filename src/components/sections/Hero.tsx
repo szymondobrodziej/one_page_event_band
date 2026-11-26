@@ -12,8 +12,9 @@ export function Hero() {
 
       <div className="shell pt-[clamp(28px,3.3vw,48px)] pb-[clamp(80px,9vw,136px)]">
         <h1 id="hero-title">
-          <span className="mb-[clamp(10px,1.2vw,16px)] block font-display text-[clamp(1.5rem,2.4vw,2.25rem)] font-light leading-[1.05] tracking-[-0.03em] text-ash">
-            {hero.overline}
+          {/* The overline on an ivory plate in gold (client, 2026-11-26), like "Jak pracujemy?" and "Współpraca". */}
+          <span className="plate-line plate-ivory mb-[clamp(14px,1.6vw,22px)]">
+            <span>{hero.overline}</span>
           </span>
           <span className="block max-w-[13em] font-display text-[clamp(3rem,6.67vw,6rem)] font-light leading-[0.94] tracking-[-0.04em] text-ivory">
             {hero.headline}
@@ -23,12 +24,9 @@ export function Hero() {
         <div className="mt-[clamp(32px,4vw,56px)] flex flex-wrap items-start justify-between gap-x-16 gap-y-8">
           <p className="max-w-[34em] flex-[1_1_340px] text-[18px] leading-[1.6] text-ivory-dim">{hero.lead}</p>
           <div id="hero-cta" className="flex flex-wrap items-start gap-x-7 gap-y-4">
-            <div className="flex max-w-[320px] flex-col gap-3">
-              <a href="#kontakt" className="btn btn-ivory">
-                {cta.primary}
-              </a>
-              <span className="text-[14px] leading-normal text-stone">{cta.heroNote}</span>
-            </div>
+            <a href="#kontakt" className="btn btn-ivory">
+              {cta.primary}
+            </a>
             <a
               href={site.fullRecordingUrl}
               target="_blank"
@@ -58,7 +56,13 @@ export function Hero() {
               </li>
             ))}
           </ul>
-          <p className="mt-6 max-w-[44em] text-[15px] leading-relaxed text-ash">{hero.credits}</p>
+          <p className="mt-6 max-w-[44em] text-[15px] leading-relaxed text-ash">
+            {hero.credits.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
+          </p>
         </div>
       </div>
     </section>

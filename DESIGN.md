@@ -6,6 +6,7 @@ colors:
   ivory: "#f5f2ec"
   gold: "#b08d57"
   gold-light: "#c2a46a"
+  gold-deep: "#9a7a48"
   graphite: "#2b2b2b"
   ivory-dim: "#cfcac0"
   ash: "#a8a39a"
@@ -148,7 +149,8 @@ Photography is documentary and keeps its stage light, graded in the held colour 
 A two-field palette of matte black and warm ivory, ruled in graphite, with satin gold held in reserve.
 
 ### Primary
-- **Satin Gold** (gold): the logo's beam. At the culmination: the lit pillar's top edge in the line-up, the final step's numeral in the process timeline, the hover state of ivory buttons and the large play disc. As a drawn accent at rest (since 2026-11-19): the 2px rule and the four line icons of the hero facts band, the check marks of "Dla kogo", the plus/minus of the FAQ, and every dot on the process line. Never a background field, never a heading or body text. On ivory it measures 2.8:1, so there it is only ever a mark beside text (check, plus), never text.
+- **Satin Gold** (gold): the logo's beam. At the culmination: the lit pillar's top edge in the line-up, the final step's numeral in the process timeline, the hover state of ivory buttons and the large play disc. As a drawn accent at rest (since 2026-11-19): the 2px rule and the four line icons of the hero facts band, the check marks of "Dla kogo", the plus/minus of the FAQ, and every dot on the process line. Since 2026-11-26 the client also wants it as the field of the gold plates (see Plates), with ink type on it (6.1:1). Otherwise never a background field, never a heading or body text. On ivory it measures 2.8:1, so there it is only ever a mark beside text (check, plus), never text.
+- **Deep Gold** (gold-deep): gold type on an ivory plate (3.6:1, so large text only: plates never go under 24px).
 - **Pale Gold** (gold-light): the lighter step of gold, used only in response to action: quiet-link hover, play-ring hover border, the left rule on a form error alert.
 
 ### Neutral
@@ -181,10 +183,10 @@ A two-field palette of matte black and warm ivory, ruled in graphite, with satin
 
 ### Hierarchy
 - **Display** (300, clamp 46–96px, 0.96): the hero headline only, left-aligned across about two thirds of the width.
-- **Lead line** (Inter Tight 300, clamp 22–36px, ash on ink, pebble on ivory, sentence case, no full stop): the first line inside a heading, above its main line: "Zespół na event firmowy" in the H1 and "Największy problem eventów" in the problem H2. It is part of the heading, never a separate label, and never tracked capitals (the client marked the problem line in red capitals; the red was only a marker).
+- **Lead line** (Inter Tight 400, clamp 24–32px, on a plate, sentence case, no full stop): the first line inside a heading, above its main line: "Zespół na event firmowy" in the H1, "Największy problem eventów", "Oferta" and "Współpraca" in their H2s. "Jak pracujemy?" is a whole H2 in the same style. It is part of the heading, never a separate label, and never tracked capitals. Since 2026-11-26 every lead line sits on a plate (see Plates).
 - **Headline** (300, clamp 40–74px, 1.0): section headlines, usually capped near 12em measure.
 - **Headline Small** (300, clamp 36–58px, 1.02): headlines in split layouts (contact, how-we-play) where the column is narrower.
-- **Statement** (Inter Tight 300, roughly 21–42px, tight negative tracking): pull lines, ruled list items, the hero facts and the footer manifesto ("11 muzyków. Jedna scena. Własne aranżacje.", one sentence per line); display face at an intermediate size, always light.
+- **Statement** (Inter Tight 300, roughly 21–42px, tight negative tracking): pull lines, ruled list items, the hero facts and the footer manifesto ("11 muzyków. Jedno brzmienie.", one sentence per line); display face at an intermediate size, always light.
 - **Title** (500, 20–22px, -0.01em): item and step titles, footer column heads.
 - **Body** (Manrope 400, 18px, 1.6): lead and section paragraphs, measures of 30–34em.
 - **Body Small** (Manrope 400, 15–17px, 1.6–1.7): list descriptions, FAQ answers, footer links.
@@ -246,14 +248,17 @@ Calm, square, and sized for touch.
 - **Limits and success:** every field carries the same maximum length the server enforces, so nothing is clipped unseen. On success the confirmation heading takes focus; "send another" returns focus to the first field. Contact data the client has not supplied is left out of sentences and the footer, never shown as a bracketed placeholder.
 
 ### Navigation
-- **Desktop:** Manrope 15px links in dimmed ivory on the ink header, 32px apart, quiet gold-light hover; a compact ivory button sits at the right. Labels (client, 2026-11-18): Jak gramy?, Oferta, Na żywo, O nas, Współpraca, FAQ. "Jak gramy?" lands on the section's text, which now opens the section.
+- **Desktop:** Manrope 15px links in dimmed ivory on the ink header, 32px apart, quiet gold-light hover; a compact ivory button sits at the right. Labels (client, 2026-11-18 and 2026-11-26): Jak pracujemy?, Oferta, Na żywo, O nas, Współpraca, FAQ. "Jak pracujemy?" lands on the section's heading of the same name.
 - **Mobile:** a square outlined toggle (44px) opens a full-height ink sheet listing the sections in 40px Inter Tight Light, with the full-width primary button pinned at the bottom. Escape closes it and returns focus.
 
 ### Accordion (FAQ)
 On ivory, the headline sits sticky in a narrow column while questions run in ruled rows (ivory rule). Questions are Inter Tight at 19–24px; a thin gold plus whose vertical stroke collapses to a minus marks state. Answers open by animating grid rows over 300ms on the arrival ease, with motion removed under reduced motion.
 
 ### Process timeline
-Five steps on a single strong-rule line. Each step carries a 64px light numeral, a 9px gold dot on the line, a title, its owner in stone and a short body in ash. The last step's numeral is gold, the culmination; the other numerals are ivory.
+Five steps on a single strong-rule line. Each step carries a 64px light numeral, a 9px gold dot on the line, a title, its owner in stone and a short body in ash. The last step's numeral is gold, the culmination; the other numerals are ivory. Motion (client, 2026-11-26: the markers should catch the eye): the first time the steps scroll into view, the line draws left to right in 1.5s and each step lands as the line reaches it (the dot springs up with one gold ring, the numeral rises through gold-light, the words follow); on phones each step lands as it enters. Only steps still below the fold are armed, so no JavaScript, an anchor jump to the section or reduced motion all show the finished state. On hover the numeral turns gold-light and the dot grows. `ProcessSteps.tsx`, styles at the end of `globals.css`.
+
+### Plates
+The client's heading lead lines sit on square plates (2026-11-26): gold plates with ink type on ivory sections ("Największy problem eventów", "Oferta"), ivory plates with deep-gold type on ink ("Zespół na event firmowy", "Jak pracujemy?", "Współpraca"). The plate's edge aligns with the column, padding 0.1em 0.38em, and a plate that wraps on a phone repeats its padding on every line (`box-decoration-break: clone`). `.plate-line` with `.plate-gold` or `.plate-ivory` in `globals.css`.
 
 ### Facts band (hero)
 Under the hero lead, the client's facts line ("11 muzyków, pełna sekcja dęta, własne aranżacje, oferta w 24 godziny") is split into four cells under a 2px gold rule and over a strong rule, divided by strong vertical rules: each cell a 32–36px gold line icon above the fact in Inter Tight Light at 21–30px. Four across from 768px, two by two below. The credits follow in ash at 15px. It exists because the client found the old one-line caption blended into the text around it (corrections, point 2).
@@ -262,7 +267,7 @@ Under the hero lead, the client's facts line ("11 muzyków, pełna sekcja dęta,
 Ten icons drawn for this site (`LineIcon` in `src/components/Icons.tsx`): a 32px grid, a 1.5 stroke, butt caps and mitre joins. muzycy is the 11 of the mark as a line; sekcja a trumpet; aranzacje two beamed notes; kontakt a vocal microphone; realizator three faders; sety a clock at forty past; wycena an envelope; umowa a signed contract; scenariusz a running order; produkcja a loudspeaker. Gold only in the hero facts band; ink in "Co dostajesz" (the user declined gold there). They always sit beside their words, aria-hidden.
 
 ### Ruled lists and "Co dostajesz"
-"Dla kogo" sets its items as ruled rows rather than cards: an ivory-rule hairline above each item, the item in Inter Tight Light at 22–28px, a gold check (or a dim dash on the ink side) before it. "Co dostajesz" splits its nine items into "Na scenie" and "Organizacja". "Na scenie" shows its four items with the client's own photographs (3 horns, 4 percussion, 5 vocalists, 6 the sound engineer at the desk; 4:5, held colour): four across from 1024px, two by two from 640px, and on phones a row each with the photo at 38% beside the text. Under each photo, the ink line icon beside the title (Inter Tight Light 21–26px) and the body in smoke. "Organizacja" stays a ruled list in two columns, each row led by its ink line icon. No card chrome anywhere: no boxes, fills or shadows.
+"Dla kogo" sets its items as ruled rows rather than cards: an ivory-rule hairline above each item, the item in Inter Tight Light at 22–28px, a gold check (or a dim dash on the ink side) before it. "Co dostajesz" splits its nine items into "Na scenie" and "Organizacja". The group titles are Inter Tight Light 28–38px (client, 2026-11-26, for "Na scenie"; "Organizacja" matches). "Na scenie" shows its four items with the client's own photographs (3 horns, 4 percussion, 5 vocalists, 6 the sound engineer at the desk; held colour) in fine frames (client, 2026-11-26): a 1px ivory-rule border around the photo, the ink line icon, the title (Inter Tight Light 21–26px) and the body in smoke, with no fill or shadow. Four across from 1024px, two by two from 640px, and on phones a row each with the photo at 38% beside the text. The card the visitor points at (or taps) opens like a line-up pillar: in the row of four it grows to 1.6 times the others' width, its photo (a 6:5 cut seen through a 4:5 window at rest) shows more of the stage and moves 4% closer, and the frame turns gold. The photo keeps its height and the words keep a closed card's width, so nothing below moves. `StageCards.tsx`. "Organizacja" stays a ruled list in two columns, each row led by its ink line icon.
 
 ### Line-up
 "Kto stoi na scenie" shows the eleven musicians as eleven pillars (`src/components/LineUp.tsx`), captioned with the instrument in 13px pebble. Each file (`public/media/lineup`, 960x1600, provenance in `docs/media-provenance.md`) is a 3:5 crop centred on one musician; the pillar shows its middle 3:10 at rest. Left to right: the rhythm section at the edges, the horns around the three vocals in the middle (Wokal 1 Zuzia, Wokal 2 the male vocalist, Wokal 3 Kama; guitar, percussion, trumpet, trombone and both women re-shot by the client on 2026-11-18). Every pillar carries the held colour. The pillar under the pointer opens (client corrections, point 9): it grows to about 1.7 times its width over 500ms on the arrival ease while its neighbours give way, revealing more of the frame at the same height, and the photograph moves 4% closer over 700ms; it also takes the 3px gold top edge (scaling in over 300ms) and its caption turns ink. From 1024px the pillars stand in one row of eleven; below that they become a sideways strip with snap, about a third of the screen wide each, where the pillar nearest the middle keeps the gold edge as the visitor scrolls, and a tap opens a pillar to about two thirds of the screen (a second tap closes it). Reduced motion removes the transitions, not the opening. Nothing moves on its own, and all eleven images load together once the strip nears the viewport.
@@ -291,5 +296,5 @@ The former hero stage (`src/components/StageCanvas.tsx`, still in the repository
 - **Don't** round buttons, inputs or image frames.
 - **Don't** add drop shadows or floating cards.
 - **Don't** use tracked uppercase outside the logotype, and don't add arrows to buttons.
-- **Don't** add a second unprompted animation; the showreel in the hero is the only one.
+- **Don't** add a second unprompted animation; the showreel in the hero is the only one. The process steps' entrance plays once, on scroll, and is the only scroll-triggered motion.
 - **Don't** introduce logo walls, stat counters, or dark washes over full-bleed party photos.

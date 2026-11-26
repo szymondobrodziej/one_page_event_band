@@ -24,9 +24,9 @@ export const site = {
   ],
 } as const;
 
-// Labels from the client's corrections (2026-11-18): "Jak gramy? — Oferta — Na żywo — O nas — Współpraca — FAQ".
+// Labels from the client's corrections (2026-11-18), with "Jak gramy?" renamed "Jak pracujemy?" (2026-11-26).
 export const nav = [
-  { label: "Jak gramy?", href: "#jak-gramy" },
+  { label: "Jak pracujemy?", href: "#jak-pracujemy" },
   { label: "Oferta", href: "#co-dostajesz" },
   { label: "Na żywo", href: "#na-zywo" },
   { label: "O nas", href: "#muzycy" },
@@ -37,7 +37,6 @@ export const nav = [
 export const cta = typeset({
   primary: "Zapytaj o dostępność terminu",
   short: "Zapytaj o termin",
-  heroNote: "Odpowiadamy z ofertą w ciągu 24 godzin od podania daty eventu.",
   recording: "Zobacz pełne nagranie",
 });
 
@@ -52,7 +51,8 @@ export const hero = typeset({
     { icon: "aranzacje", text: "własne aranżacje" },
     { icon: "wycena", text: "oferta w 24 godziny" },
   ] as { icon: IconName; text: string }[],
-  credits: "Muzycy grali z Adamem Sztabą, Justyną Steczkowską, Mrozem, Kwiatem Jabłoni. Wokaliści z The Voice of Poland.",
+  // Two lines: the vocalists start a line of their own (corrections, 2026-11-26).
+  credits: ["Muzycy grali z Adamem Sztabą, Justyną Steczkowską, Mrozem, Kwiatem Jabłoni.", "Wokaliści z The Voice of Poland."],
 });
 
 // The hero: the client's own showreel ("showreel www", 19.7 s, no sound) on a loop (corrections, point 1). A landscape
@@ -80,6 +80,9 @@ export const problem = typeset({
   turn: "Eventy z naszym udziałem przebiegają inaczej.",
 });
 
+// The section's heading, added by the client (2026-11-26); the nav's "Jak pracujemy?" lands on it.
+export const howWePlayTitle = typeset("Jak pracujemy?");
+
 export const howWePlay = typeset([
   {
     title: "Gramy pod gości",
@@ -87,11 +90,13 @@ export const howWePlay = typeset([
   },
   {
     title: "Liczba osób ma znaczenie",
-    body: "Jedenastu muzyków daje brzmienie, którego nie uzyska mały skład. Mamy ponad 60 utworów, każdy z własną aranżacją napisaną pod nasze instrumenty, więc kolejność możemy zmienić w każdej chwili.",
+    body: "Jedenastu muzyków daje brzmienie, którego nie uzyska mały skład. Mamy blisko 100 utworów, każdy z własną aranżacją napisaną pod nasze instrumenty, więc kolejność możemy zmienić w każdej chwili.",
   },
 ]);
 
-// "Co dostajesz" in two groups: what happens on stage, and what is organised around it.
+// "Co dostajesz" in two groups: what happens on stage, and what is organised around it. "Oferta" opens the heading
+// (corrections, 2026-11-26), as "Największy problem eventów" opens the problem's.
+export const offerLead = typeset("Oferta");
 export type BenefitGroup = "scena" | "organizacja";
 
 export const benefitGroups: { id: BenefitGroup; title: string }[] = [
@@ -100,8 +105,16 @@ export const benefitGroups: { id: BenefitGroup; title: string }[] = [
 ];
 
 // Each item has its own line icon (src/components/Icons.tsx). The four "Na scenie" items carry the client's
-// photos 3, 4, 5 and 6 from the first package (corrections, point 6), cut 4:5 in public/media/photos.
-export type Benefit = { group: BenefitGroup; icon: IconName; title: string; body: string; photo?: { src: string; alt: string } };
+// photos 3, 4, 5 and 6 from the first package (corrections, point 6), cut 6:5 in public/media/photos so a card that
+// opens shows more of the stage.
+export type Benefit = {
+  group: BenefitGroup;
+  icon: IconName;
+  title: string;
+  body: string;
+  // position: where the 4:5 window sits in the wider cut at rest (object-position), when not centred.
+  photo?: { src: string; alt: string; position?: string };
+};
 
 export const benefits: Benefit[] = typeset([
   {
@@ -109,21 +122,21 @@ export const benefits: Benefit[] = typeset([
     icon: "muzycy",
     title: "11 muzyków",
     body: "Sekcja dęta, perkusjonalia, perkusja, bas, klawisze, gitara i trzy wokale dają moc na dużej sali.",
-    photo: { src: "/media/photos/a11-foto-3-pion.jpg", alt: "Sekcja dęta Aurum Eleven: saksofonista i dwaj puzoniści, w głębi perkusja" },
+    photo: { src: "/media/photos/a11-foto-3-karta.jpg", alt: "Sekcja dęta Aurum Eleven: saksofonista i dwaj puzoniści, w głębi perkusja" },
   },
   {
     group: "scena",
     icon: "aranzacje",
     title: "Własne aranżacje znanych kawałków",
     body: "Znasz te piosenki, ale my gramy je w wersjach, których nikt inny nie ma.",
-    photo: { src: "/media/photos/a11-foto-4-pion.jpg", alt: "Perkusjonalista Aurum Eleven przy dzwonkach i kongach" },
+    photo: { src: "/media/photos/a11-foto-4-karta.jpg", alt: "Perkusjonalista Aurum Eleven przy dzwonkach i kongach", position: "75% 50%" },
   },
   {
     group: "scena",
     icon: "kontakt",
     title: "Kontakt z gośćmi podczas grania",
     body: "Wokaliści nawiązują kontakt z gośćmi, a cały zespół wymienia sceniczną energię z parkietem.",
-    photo: { src: "/media/photos/a11-foto-5-pion.jpg", alt: "Wokalistka i wokalista Aurum Eleven śpiewają w stronę publiczności" },
+    photo: { src: "/media/photos/a11-foto-5-karta.jpg", alt: "Wokalistka i wokalista Aurum Eleven śpiewają w stronę publiczności" },
   },
   { group: "organizacja", icon: "sety", title: "3 sety po 40 minut", body: "W przerwach gra DJ, więc muzyka nie milknie do końca wieczoru." },
   {
@@ -131,7 +144,7 @@ export const benefits: Benefit[] = typeset([
     icon: "realizator",
     title: "Własny realizator dźwięku",
     body: "Brzmienie jest ustawione pod nasz skład i powtarzalne na każdym evencie.",
-    photo: { src: "/media/photos/a11-foto-6-pion.jpg", alt: "Dłonie realizatora dźwięku na suwakach cyfrowej konsolety" },
+    photo: { src: "/media/photos/a11-foto-6-karta.jpg", alt: "Dłonie realizatora dźwięku na suwakach cyfrowej konsolety" },
   },
   { group: "organizacja", icon: "wycena", title: "Wycena w 24 godziny", body: "Dostajesz ofertę, gdy podasz datę, miejsce i orientacyjną liczbę gości." },
   { group: "organizacja", icon: "umowa", title: "Skład wpisany do umowy", body: "W sytuacjach losowych zapewniamy zastępstwo." },
@@ -194,6 +207,8 @@ export const lineup = [
 ] as const;
 
 export const workflow = typeset({
+  // Added by the client (2026-11-26) to open the heading; the nav's "Współpraca" lands on it.
+  lead: "Współpraca",
   headline: "Prosty i przewidywalny proces współpracy",
   steps: [
     { who: "Po Twojej stronie", title: "Kontakt", body: "Napisz do nas — wystarczy imię, adres e-mail i kilka słów o evencie. Jeśli znasz już datę, miejsce lub potrzeby techniczne, możesz je dopisać." },
@@ -220,9 +235,10 @@ export const faq = typeset({
   ],
 });
 
-// The footer line from the client's corrections (point 10). site.manifest stays for the hero-stage lettering.
+// The footer line from the client's corrections (point 10), shortened on 2026-11-26. site.manifest stays for the
+// hero-stage lettering.
 export const footer = typeset({
-  manifesto: ["11 muzyków.", "Jedna scena.", "Własne aranżacje."],
+  manifesto: ["11 muzyków.", "Jedno brzmienie."],
 });
 
 export const contact = typeset({

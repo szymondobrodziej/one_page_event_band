@@ -16,10 +16,10 @@ export function Problem() {
           />
         </figure>
         <div className="flex flex-[1.25_1_520px] flex-col justify-center px-[clamp(20px,6vw,120px)] py-[clamp(72px,9vw,144px)]">
-          {/* The client's line opens the heading, the way the hero's overline opens the H1: one heading in two sizes. */}
+          {/* The client's line opens the heading on a gold plate (2026-11-26), the way the hero's overline opens the H1. */}
           <h2 id="problem-title">
-            <span className="mb-[clamp(12px,1.4vw,20px)] block font-display text-[clamp(1.375rem,2.1vw,2rem)] font-light leading-[1.1] tracking-[-0.03em] text-pebble">
-              {problem.lead}
+            <span className="plate-line plate-gold mb-[clamp(16px,1.8vw,26px)]">
+              <span>{problem.lead}</span>
             </span>
             <span className="display-2 block max-w-[10.5em]">{problem.headline}</span>
           </h2>
