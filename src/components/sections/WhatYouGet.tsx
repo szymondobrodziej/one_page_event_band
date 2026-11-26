@@ -14,7 +14,7 @@ export function WhatYouGet() {
       <div className="shell">
         {/* "Oferta" heads the section on a gold plate, like "Największy problem eventów"; "Co dostajesz na scenie"
             follows as the first group's title, on one line where the width allows (client, 2026-11-26). */}
-        <h2 id="benefits-title" className="plate-line plate-gold mb-[clamp(40px,5vw,72px)]">
+        <h2 id="benefits-title" className="plate-line plate-gold mb-[clamp(16px,1.8vw,26px)]">
           <span>{offerLead}</span>
         </h2>
 
