@@ -9,7 +9,7 @@ export function Footer() {
   return (
     <footer className="border-t border-rule-ink bg-ink pt-[clamp(72px,8vw,120px)] pb-[calc(40px+env(safe-area-inset-bottom))] max-md:pb-32">
       <div className="shell">
-        <p className="font-display text-[clamp(2.375rem,5.2vw,5rem)] font-light leading-[0.98] tracking-[-0.04em]">
+        <p className="manifesto-glow font-display text-[clamp(2.375rem,5.2vw,5rem)] font-light leading-[0.98] tracking-[-0.04em]">
           {footer.manifesto.map((line) => (
             <span key={line} className="block">
               {line}

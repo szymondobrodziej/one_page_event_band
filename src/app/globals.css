@@ -247,130 +247,36 @@
   }
 }
 
-/* "Prosty i przewidywalny proces współpracy" (client, 2026-11-26: more life in the step markers). The first time the
-   steps scroll into view, the rule draws left to right and each step lands as the rule reaches it: the dot springs
-   up with one ring, the number rises through gold-light, the words follow. On phones, where the steps stack, each step
-   lands as it enters. Only steps still below the fold are armed (ProcessSteps), so a page opened at the section, a
-   page without JavaScript and reduced motion all show the steps as they are. Unlayered so the hover colour can beat
-   the number's colour utility. */
-.steps-rule {
-  transform-origin: left center;
-}
-
-.steps[data-state="armed"] .steps-rule {
-  transform: scaleX(0);
-}
-
-.steps[data-state="shown"] .steps-rule {
-  animation: steps-draw 1500ms linear 150ms backwards;
-}
-
-.step {
-  --d: 0ms;
-}
-
-@media (min-width: 48rem) {
-  .step {
-    --d: calc(150ms + var(--i) * 300ms);
-  }
-}
-
-.step[data-state="armed"] :is(.step-num, .step-dot, .step-text) {
+/* "Współpraca" (client, 2026-11-26, second round): the steps are a stack of cards (ProcessSteps). The first time they
+   scroll into view the cards deal in from the left, one after another. Only cards still below the fold are armed, so
+   a page opened at the section, a page without JavaScript and reduced motion all show the cards as they are. The
+   entrance moves `translate`, so it never fights the deck's own `transform`. */
+.step[data-state="armed"] {
   opacity: 0;
 }
 
-.step[data-state="shown"] .step-num {
-  animation: step-num-in 1200ms var(--ease-arrive) var(--d) backwards;
+.step[data-state="shown"] {
+  animation: step-deal 900ms var(--ease-arrive) calc(var(--i, 0) * 110ms) backwards;
 }
 
-.step[data-state="shown"] .step-dot {
-  animation: step-dot-in 650ms cubic-bezier(0.34, 1.56, 0.64, 1) var(--d) backwards;
-}
-
-.step[data-state="shown"] .step-dot::after {
-  animation: step-ring 1400ms var(--ease-arrive) calc(var(--d) + 120ms) backwards;
-}
-
-.step[data-state="shown"] .step-text {
-  animation: step-text-in 900ms var(--ease-arrive) calc(var(--d) + 160ms) backwards;
-}
-
-.step-num {
-  transition: color 220ms var(--ease-arrive);
-}
-
-.step-dot {
-  transition: transform 320ms var(--ease-arrive);
-}
-
-.step-dot::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid var(--color-gold);
-  border-radius: inherit;
-  opacity: 0;
-  pointer-events: none;
-}
-
-@media (hover: hover) {
-  .step:hover .step-num {
-    color: var(--color-gold-light);
-  }
-
-  .step:hover .step-dot {
-    transform: scale(1.6);
-  }
-}
-
-@keyframes steps-draw {
-  from {
-    transform: scaleX(0);
-  }
-}
-
-@keyframes step-num-in {
-  0% {
-    opacity: 0;
-    transform: translateY(0.32em);
-    color: var(--color-ivory);
-  }
-  45% {
-    color: var(--color-gold-light);
-  }
-}
-
-@keyframes step-dot-in {
-  from {
-    transform: scale(0);
-  }
-}
-
-@keyframes step-ring {
-  0% {
-    opacity: 0.9;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(3.6);
-  }
-}
-
-@keyframes step-text-in {
+@keyframes step-deal {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    translate: -48px 0;
   }
+}
+
+/* The footer manifesto glows gold behind its letters (client, 2026-11-26): two soft halos in the logo's gold, close
+   and wide, so the light letters keep their edge. */
+.manifesto-glow {
+  text-shadow:
+    0 0 0.16em rgb(176 141 87 / 0.6),
+    0 0 0.55em rgb(176 141 87 / 0.38),
+    0 0 1.2em rgb(176 141 87 / 0.18);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .steps-rule,
-  .step-num,
-  .step-dot,
-  .step-dot::after,
-  .step-text {
+  .step {
     animation: none !important;
-    transition: none !important;
   }
 }

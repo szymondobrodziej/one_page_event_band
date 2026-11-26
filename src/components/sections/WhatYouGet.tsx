@@ -12,20 +12,19 @@ export function WhatYouGet() {
   return (
     <section id="co-dostajesz" aria-labelledby="benefits-title" className="section bg-ivory text-ink">
       <div className="shell">
-        {/* "Oferta" opens the heading on a gold plate (client, 2026-11-26), like "Największy problem eventów". */}
-        <h2 id="benefits-title" className="mb-[clamp(48px,6vw,88px)]">
-          <span className="plate-line plate-gold mb-[clamp(16px,1.8vw,26px)]">
-            <span>{offerLead}</span>
-          </span>
-          <span className="display-2 block">Co dostajesz</span>
+        {/* "Oferta" heads the section on a gold plate, like "Największy problem eventów"; "Co dostajesz na scenie"
+            follows as the first group's title, on one line where the width allows (client, 2026-11-26). */}
+        <h2 id="benefits-title" className="plate-line plate-gold mb-[clamp(40px,5vw,72px)]">
+          <span>{offerLead}</span>
         </h2>
 
         {benefitGroups.map((group) => {
           const items = benefits.filter((b) => b.group === group.id);
           return (
             <div key={group.id} className="mt-[clamp(64px,7vw,104px)] first-of-type:mt-0">
-              {/* Larger at the client's request for "Na scenie" (2026-11-26); "Organizacja" matches it. */}
-              <h3 className="mb-[clamp(24px,2.6vw,36px)] font-display text-[clamp(1.75rem,2.6vw,2.375rem)] font-light leading-[1.05] tracking-[-0.03em]">
+              {/* Larger at the client's request (2026-11-26); "Organizacja" matches it. It wraps only when the line runs
+                  out, rather than balancing into two. */}
+              <h3 className="mb-[clamp(24px,2.6vw,36px)] text-wrap font-display text-[clamp(1.75rem,2.6vw,2.375rem)] font-light leading-[1.05] tracking-[-0.03em]">
                 {group.title}
               </h3>
               {group.id === "scena" ? (

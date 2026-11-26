@@ -99,10 +99,11 @@ export const howWePlay = typeset([
 export const offerLead = typeset("Oferta");
 export type BenefitGroup = "scena" | "organizacja";
 
-export const benefitGroups: { id: BenefitGroup; title: string }[] = [
-  { id: "scena", title: "Na scenie" },
+// "Co dostajesz" and "Na scenie" became one line (client, 2026-11-26), under the "Oferta" plate.
+export const benefitGroups: { id: BenefitGroup; title: string }[] = typeset([
+  { id: "scena", title: "Co dostajesz na scenie" },
   { id: "organizacja", title: "Organizacja" },
-];
+]);
 
 // Each item has its own line icon (src/components/Icons.tsx). The four "Na scenie" items carry the client's
 // photos 3, 4, 5 and 6 from the first package (corrections, point 6), cut 6:5 in public/media/photos so a card that
