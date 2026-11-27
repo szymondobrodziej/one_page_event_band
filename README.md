@@ -17,9 +17,12 @@ Skopiuj `.env.example` do `.env.local` i uzupełnij to, co już jest znane. Brak
 
 | Zmienna | Do czego |
 |---|---|
-| `RESEND_API_KEY` | klucz Resend; bez niego formularz uczciwie informuje, że wysyłka nie jest włączona |
-| `CONTACT_TO_EMAIL` | adres (lub adresy po przecinku), na który przychodzą zapytania |
-| `CONTACT_FROM_EMAIL` | nadawca w domenie zweryfikowanej w Resend, np. `Aurum Eleven <formularz@aurumeleven.pl>` |
+| `SMTP_HOST` | serwer poczty wychodzącej skrzynki zespołu (home.pl: `serwer2615779.hosting-home.pl`); bez `SMTP_HOST`, `SMTP_USER` i `SMTP_PASS` formularz uczciwie informuje, że wysyłka nie jest włączona |
+| `SMTP_PORT` | port SMTP, domyślnie `465` (SSL) |
+| `SMTP_USER` | adres skrzynki, z której strona wysyła zapytania, np. `kontakt@aurumeleven.pl` |
+| `SMTP_PASS` | hasło tej skrzynki (na Vercelu jako zmienna typu Sensitive) |
+| `CONTACT_TO_EMAIL` | adres (lub adresy po przecinku), na który przychodzą zapytania; domyślnie sama skrzynka |
+| `CONTACT_FROM_EMAIL` | nadawca, domyślnie `Aurum Eleven <SMTP_USER>`; „Odpowiedz” trafia do osoby z formularza |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | firmowy e-mail pokazywany przy formularzu i w stopce |
 | `NEXT_PUBLIC_CONTACT_PHONE` | telefon pokazywany przy formularzu i w stopce |
 | `NEXT_PUBLIC_COMPANY_LINE` | nazwa firmy i NIP do stopki i polityki prywatności |
@@ -36,7 +39,7 @@ Strona stoi na Vercelu w zespole Aurum Eleven, projekt `one-page-event-band` (ht
 - `src/content/site.ts` — wszystkie teksty (wiernie ze struktury od klienta) i zdjęcia.
 - `src/components/sections/` — sekcje strony w kolejności z `src/app/page.tsx`.
 - `src/components/StageCanvas.tsx` — hero: scena ze showreelu na pełną wysokość, w monochromie, z kolorem zapalanym pod kursorem (WebGL); `StageBand.tsx` to wersja awaryjna bez WebGL.
-- `src/app/api/enquiry/route.ts` — wysyłka formularza przez Resend.
+- `src/app/api/enquiry/route.ts` — wysyłka formularza ze skrzynki zespołu przez SMTP (nodemailer).
 - `public/media/` — zdjęcia (2400 px, Next.js serwuje AVIF/WebP) i wyrenderowane wideo.
 - `video/` — projekt Remotion (instrukcja w `video/README.md`).
 - `PRODUCT.md`, `.impeccable/` — kontekst produktu i kierunek projektu dla skilla Impeccable.
