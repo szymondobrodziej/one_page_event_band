@@ -40,6 +40,7 @@ Strona stoi na Vercelu w zespole Aurum Eleven, projekt `one-page-event-band` (ht
 - `src/components/sections/` — sekcje strony w kolejności z `src/app/page.tsx`.
 - `src/components/StageCanvas.tsx` — hero: scena ze showreelu na pełną wysokość, w monochromie, z kolorem zapalanym pod kursorem (WebGL); `StageBand.tsx` to wersja awaryjna bez WebGL.
 - `src/app/api/enquiry/route.ts` — wysyłka formularza ze skrzynki zespołu przez SMTP (nodemailer).
+- `src/lib/email/` — wygląd maila z zapytaniem (HTML w barwach strony, wersja ciemna, znak A11 dołączony w treści) i jego wersja tekstowa.
 - `public/media/` — zdjęcia (2400 px, Next.js serwuje AVIF/WebP) i wyrenderowane wideo.
 - `video/` — projekt Remotion (instrukcja w `video/README.md`).
 - `PRODUCT.md`, `.impeccable/` — kontekst produktu i kierunek projektu dla skilla Impeccable.

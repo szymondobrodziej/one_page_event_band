@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { createTransport } from "nodemailer";
 import { HONEYPOT_FIELD, parseEnquiry } from "@/lib/enquiry";
+import { MARK_CID, renderEnquiryEmail } from "@/lib/email/enquiryEmail";
+import { MARK_PNG_BASE64 } from "@/lib/email/mark";
 
 // SMTP needs a Node.js socket, not the edge runtime.
 export const runtime = "nodejs";
@@ -47,13 +49,7 @@ export async function POST(request: Request) {
   const to = (process.env.CONTACT_TO_EMAIL || user).split(",").map((s) => s.trim()).filter(Boolean);
   const from = process.env.CONTACT_FROM_EMAIL || { name: "Aurum Eleven", address: user };
   const name = data.name.replace(/\s+/g, " ");
-  const text = [
-    `Imię: ${name}`,
-    `E-mail: ${data.email}`,
-    `Telefon: ${data.phone || "nie podano"}`,
-    "",
-    data.message,
-  ].join("\n");
+  const { subject, text, html } = renderEnquiryEmail(data, { siteUrl: process.env.NEXT_PUBLIC_SITE_URL });
 
   const transport = createTransport({
     host,
@@ -71,8 +67,12 @@ export async function POST(request: Request) {
       from,
       to,
       replyTo: { name, address: data.email },
-      subject: `Zapytanie o termin: ${name}`,
+      subject,
       text,
+      html,
+      attachments: [
+        { filename: "aurum-eleven.png", content: Buffer.from(MARK_PNG_BASE64, "base64"), cid: MARK_CID, contentDisposition: "inline" },
+      ],
     });
   } catch (error) {
     console.error("enquiry: SMTP send failed", error instanceof Error ? error.message : error);
