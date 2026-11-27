@@ -27,6 +27,10 @@ Skopiuj `.env.example` do `.env.local` i uzupełnij to, co już jest znane. Brak
 | `NEXT_PUBLIC_SITE_URL` | docelowy adres strony (canonical, sitemap) |
 | `NEXT_PUBLIC_INDEXABLE` | `true` tylko na produkcyjnej domenie; inaczej strona ma `noindex` |
 
+## Wdrożenie
+
+Strona stoi na Vercelu w zespole Aurum Eleven, projekt `one-page-event-band` (https://one-page-event-band.vercel.app), podłączony do tego repozytorium. Każdy push na `main` sam wdraża produkcję, a inne gałęzie dostają podglądy. Zmienne środowiskowe z tabeli powyżej ustawia się w projekcie na Vercelu, nie w repozytorium.
+
 ## Struktura
 
 - `src/content/site.ts` — wszystkie teksty (wiernie ze struktury od klienta) i zdjęcia.
