@@ -216,7 +216,7 @@ export const workflow = typeset({
     { who: "Po naszej stronie", title: "Wycena", body: "Odpowiadamy w ciągu 24 godzin od otrzymania informacji potrzebnych do przygotowania oferty." },
     { who: "Wspólnie", title: "Warunki", body: "Potwierdzamy termin, zakres i zaplecze techniczne." },
     { who: "Wspólnie", title: "Scenariusz", body: "Ustalamy przebieg eventu, godziny wejścia na scenę, przerwy." },
-    { who: "Po naszej stronie", title: "Realizacja", body: "Gwarantujemy najlepszy event, na którym byłeś! Po wydarzeniu rozliczamy płatność zgodnie z umową." },
+    { who: "Po naszej stronie", title: "Realizacja", body: "Gramy swój występ. Po wydarzeniu rozliczamy płatność zgodnie z umową." },
   ],
 });
 
